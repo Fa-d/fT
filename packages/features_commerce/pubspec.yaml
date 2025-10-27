@@ -1,0 +1,41 @@
+name: features_commerce
+description: E-commerce feature with payments, purchases, and subscriptions
+version: 1.0.0
+publish_to: 'none'
+
+environment:
+  sdk: ^3.9.2
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  core:
+    path: ../core
+  design_system:
+    path: ../design_system
+
+  # State Management
+  flutter_bloc: ^8.1.6
+  hydrated_bloc: ^9.1.5
+
+  # Payment (using mocks for demo - real implementation would use actual SDKs)
+  in_app_purchase: ^3.1.13
+
+  # Utilities
+  equatable: ^2.0.5
+  freezed_annotation: ^2.4.1
+  json_annotation: ^4.8.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+  build_runner: ^2.4.8
+  freezed: ^2.4.7
+  json_serializable: ^6.7.1
+  mocktail: ^1.0.3
+  bloc_test: ^9.1.7
+
+flutter:
+  uses-material-design: true
