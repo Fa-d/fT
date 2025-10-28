@@ -299,8 +299,10 @@ class PlayerControls extends StatelessWidget {
 }
 
 /// Volume control widget with slider
-/// Following clean architecture - stateless widget relying on BLoC state
-class _VolumeControl extends StatelessWidget {
+/// Following clean architecture with local interaction state
+/// - Source of truth: PlaybackState from BLoC
+/// - Local state: Only for smooth slider dragging UX
+class _VolumeControl extends StatefulWidget {
   final PlaybackState playbackState;
   final Function(double) onVolumeChanged;
   final VoidCallback onMuteToggle;
@@ -312,14 +314,23 @@ class _VolumeControl extends StatelessWidget {
   });
 
   @override
+  State<_VolumeControl> createState() => _VolumeControlState();
+}
+
+class _VolumeControlState extends State<_VolumeControl> {
+  // Local state ONLY for tracking slider drag interaction
+  double? _dragVolume;
+
+  @override
   Widget build(BuildContext context) {
-    final displayVolume = playbackState.isMuted ? 0.0 : playbackState.volume;
+    // Use drag volume if dragging, otherwise use BLoC state (source of truth)
+    final volume = _dragVolume ?? widget.playbackState.volume;
 
     return PopupMenuButton(
       icon: Icon(
-        playbackState.isMuted
+        widget.playbackState.isMuted
             ? Icons.volume_off
-            : playbackState.volume > 0.5
+            : volume > 0.5
             ? Icons.volume_up
             : Icons.volume_down,
         color: Colors.white,
@@ -329,54 +340,81 @@ class _VolumeControl extends StatelessWidget {
       itemBuilder: (context) => [
         PopupMenuItem(
           enabled: false,
-          child: SizedBox(
-            width: 200,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Row(
+          child: StatefulBuilder(
+            builder: (context, setPopupState) {
+              // Use drag volume if dragging, otherwise use BLoC state
+              final currentVolume = _dragVolume ?? widget.playbackState.volume;
+              final currentDisplayVolume = widget.playbackState.isMuted ? 0.0 : currentVolume;
+
+              return SizedBox(
+                width: 200,
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
                   children: [
-                    const Icon(Icons.volume_down, size: 20),
-                    Expanded(
-                      child: SliderTheme(
-                        data: SliderTheme.of(context).copyWith(
-                          trackHeight: 3,
-                          thumbShape: const RoundSliderThumbShape(
-                            enabledThumbRadius: 6,
+                    Row(
+                      children: [
+                        const Icon(Icons.volume_down, size: 20),
+                        Expanded(
+                          child: SliderTheme(
+                            data: SliderTheme.of(context).copyWith(
+                              trackHeight: 3,
+                              thumbShape: const RoundSliderThumbShape(
+                                enabledThumbRadius: 6,
+                              ),
+                            ),
+                            child: Slider(
+                              value: currentDisplayVolume.clamp(0.0, 1.0),
+                              min: 0,
+                              max: 1,
+                              onChangeStart: (value) {
+                                // Start tracking local drag state
+                                setPopupState(() {
+                                  _dragVolume = value;
+                                });
+                              },
+                              onChanged: (value) {
+                                // Update local drag state for smooth UI in popup
+                                setPopupState(() {
+                                  _dragVolume = value;
+                                });
+
+                                // Send to BLoC (source of truth)
+                                widget.onVolumeChanged(value);
+
+                                // If unmuting by moving slider, toggle mute off
+                                if (value > 0 && widget.playbackState.isMuted) {
+                                  widget.onMuteToggle();
+                                }
+                              },
+                              onChangeEnd: (value) {
+                                // Clear local drag state, BLoC state is now the source
+                                setPopupState(() {
+                                  _dragVolume = null;
+                                });
+                              },
+                              activeColor: Colors.red,
+                              inactiveColor: Colors.grey,
+                            ),
                           ),
                         ),
-                        child: Slider(
-                          value: displayVolume.clamp(0.0, 1.0),
-                          min: 0,
-                          max: 1,
-                          onChanged: (value) {
-                            onVolumeChanged(value);
-                            // If unmuting by moving slider, toggle mute off
-                            if (value > 0 && playbackState.isMuted) {
-                              onMuteToggle();
-                            }
-                          },
-                          activeColor: Colors.red,
-                          inactiveColor: Colors.grey,
-                        ),
-                      ),
+                        const Icon(Icons.volume_up, size: 20),
+                      ],
                     ),
-                    const Icon(Icons.volume_up, size: 20),
+                    const SizedBox(height: 8),
+                    TextButton.icon(
+                      onPressed: widget.onMuteToggle,
+                      icon: Icon(
+                        widget.playbackState.isMuted
+                            ? Icons.volume_off
+                            : Icons.volume_up,
+                        size: 16,
+                      ),
+                      label: Text(widget.playbackState.isMuted ? 'Unmute' : 'Mute'),
+                    ),
                   ],
                 ),
-                const SizedBox(height: 8),
-                TextButton.icon(
-                  onPressed: onMuteToggle,
-                  icon: Icon(
-                    playbackState.isMuted
-                        ? Icons.volume_off
-                        : Icons.volume_up,
-                    size: 16,
-                  ),
-                  label: Text(playbackState.isMuted ? 'Unmute' : 'Mute'),
-                ),
-              ],
-            ),
+              );
+            },
           ),
         ),
       ],

@@ -27,9 +27,13 @@ class VideoPlayerPage extends StatefulWidget {
 class _VideoPlayerPageState extends State<VideoPlayerPage> {
   late PlayerBloc _playerBloc;
   bool _isInitialized = false;
+
+  // UI-specific ephemeral state (acceptable in presentation layer)
   bool _showControls = true;
   Timer? _hideControlsTimer;
-  bool _isFullscreen = false;
+
+  // Track previous fullscreen state for side effects (not source of truth)
+  bool _previousFullscreenState = false;
 
   @override
   void didChangeDependencies() {
@@ -51,6 +55,8 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
   }
 
   void _toggleControls() {
+    if (!mounted) return;
+
     setState(() {
       _showControls = !_showControls;
     });
@@ -76,15 +82,15 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
   }
 
   void _handleFullscreenChange(bool isFullscreen) {
-    if (isFullscreen == _isFullscreen) return;
+    // Check if fullscreen state actually changed (compare with previous)
+    if (isFullscreen == _previousFullscreenState) return;
 
-    // Schedule setState to happen after the current build completes
+    // Update tracking variable (no setState needed - not rendered)
+    _previousFullscreenState = isFullscreen;
+
+    // Schedule side effects to happen after the current build completes
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (mounted) {
-        setState(() {
-          _isFullscreen = isFullscreen;
-        });
-
         if (isFullscreen) {
           _enterFullscreen();
         } else {
@@ -122,25 +128,35 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
 
   @override
   Widget build(BuildContext context) {
-    return PopScope(
-      canPop: !_isFullscreen,
-      onPopInvokedWithResult: (didPop, result) {
-        if (!didPop && _isFullscreen) {
-          // Exit fullscreen when back button is pressed
-          context.read<PlayerBloc>().add(const PlayerEvent.toggleFullscreen());
-        }
-      },
-      child: Scaffold(
-        appBar: _isFullscreen
-            ? null
-            : AppBar(
-                title: Text(widget.mediaItem.title),
-                backgroundColor: Colors.black,
-              ),
-        backgroundColor: Colors.black,
-        body: BlocBuilder<PlayerBloc, PlayerState>(
-          builder: (context, state) {
-            return state.when(
+    return BlocBuilder<PlayerBloc, PlayerState>(
+      builder: (context, state) {
+        // Extract fullscreen state from BLoC (source of truth)
+        final isFullscreen = state.maybeWhen(
+          ready: (_, playbackState) => playbackState.isFullscreen,
+          playing: (_, playbackState) => playbackState.isFullscreen,
+          paused: (_, playbackState) => playbackState.isFullscreen,
+          buffering: (_, playbackState) => playbackState.isFullscreen,
+          completed: (_, playbackState) => playbackState.isFullscreen,
+          orElse: () => false,
+        );
+
+        return PopScope(
+          canPop: !isFullscreen,
+          onPopInvokedWithResult: (didPop, result) {
+            if (!didPop && isFullscreen) {
+              // Exit fullscreen when back button is pressed
+              context.read<PlayerBloc>().add(const PlayerEvent.toggleFullscreen());
+            }
+          },
+          child: Scaffold(
+            appBar: isFullscreen
+                ? null
+                : AppBar(
+                    title: Text(widget.mediaItem.title),
+                    backgroundColor: Colors.black,
+                  ),
+            backgroundColor: Colors.black,
+            body: state.when(
               initial: () => const Center(
                 child: LoadingIndicator(),
               ),
@@ -175,10 +191,10 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
                       .add(PlayerEvent.initialize(widget.mediaItem));
                 },
               ),
-            );
-          },
-        ),
-      ),
+            ),
+          ),
+        );
+      },
     );
   }
 
