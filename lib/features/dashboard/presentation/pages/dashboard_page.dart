@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:design_system/design_system.dart';
+import 'package:go_router/go_router.dart';
 import '../bloc/dashboard_bloc.dart';
 import '../bloc/dashboard_event.dart';
 import '../bloc/dashboard_state.dart';
@@ -97,6 +98,41 @@ class DashboardPage extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
+                          'Feature Demos',
+                          style: Theme.of(context).textTheme.titleLarge,
+                        ),
+                        const SizedBox(height: 12),
+                        _DemoButton(
+                          icon: Icons.video_library,
+                          title: 'Video Streaming',
+                          description: 'Watch videos with offline support',
+                          onTap: () => context.go('/media'),
+                        ),
+                        const SizedBox(height: 8),
+                        _DemoButton(
+                          icon: Icons.chat,
+                          title: 'Real-Time Chat',
+                          description: 'Coming soon...',
+                          onTap: null,
+                          isDisabled: true,
+                        ),
+                        const SizedBox(height: 8),
+                        _DemoButton(
+                          icon: Icons.feed,
+                          title: 'Social Feed',
+                          description: 'Coming soon...',
+                          onTap: null,
+                          isDisabled: true,
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 16),
+                  ContentCard(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
                           'Advanced Features',
                           style: Theme.of(context).textTheme.titleLarge,
                         ),
@@ -164,6 +200,88 @@ class DashboardPage extends StatelessWidget {
     } else {
       return '${difference.inDays}d ago';
     }
+  }
+}
+
+class _DemoButton extends StatelessWidget {
+  final IconData icon;
+  final String title;
+  final String description;
+  final VoidCallback? onTap;
+  final bool isDisabled;
+
+  const _DemoButton({
+    required this.icon,
+    required this.title,
+    required this.description,
+    this.onTap,
+    this.isDisabled = false,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Material(
+      color: isDisabled ? Colors.grey[100] : Colors.white,
+      borderRadius: BorderRadius.circular(8),
+      child: InkWell(
+        onTap: isDisabled ? null : onTap,
+        borderRadius: BorderRadius.circular(8),
+        child: Container(
+          padding: const EdgeInsets.all(12),
+          decoration: BoxDecoration(
+            border: Border.all(
+              color: isDisabled ? Colors.grey[300]! : AppColors.primary.withOpacity(0.3),
+            ),
+            borderRadius: BorderRadius.circular(8),
+          ),
+          child: Row(
+            children: [
+              Container(
+                padding: const EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                  color: isDisabled
+                      ? Colors.grey[300]
+                      : AppColors.primary.withOpacity(0.1),
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: Icon(
+                  icon,
+                  color: isDisabled ? Colors.grey[600] : AppColors.primary,
+                  size: 24,
+                ),
+              ),
+              const SizedBox(width: 12),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      title,
+                      style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                            color: isDisabled ? Colors.grey[600] : null,
+                          ),
+                    ),
+                    const SizedBox(height: 2),
+                    Text(
+                      description,
+                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                            color: isDisabled ? Colors.grey[500] : null,
+                          ),
+                    ),
+                  ],
+                ),
+              ),
+              if (!isDisabled)
+                Icon(
+                  Icons.arrow_forward_ios,
+                  size: 16,
+                  color: Colors.grey[400],
+                ),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }
 

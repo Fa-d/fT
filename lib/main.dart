@@ -6,7 +6,8 @@ import 'package:path_provider/path_provider.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 
 import 'app/app_router.dart';
-import 'app/injection_container.dart' as di;
+import 'app/injection_container.dart' as app_di;
+import 'injection_container.dart' as root_di;
 import 'features/dashboard/presentation/bloc/dashboard_bloc.dart';
 import 'features/dashboard/presentation/bloc/dashboard_event.dart';
 
@@ -35,7 +36,10 @@ void main() async {
   await core.initializeCore();
 
   // Initialize app-specific dependencies
-  await di.init();
+  await app_di.init();
+
+  // Initialize features_stream dependencies
+  await root_di.init();
 
   runApp(const AdvancedFlutterApp());
 }
@@ -48,7 +52,7 @@ class AdvancedFlutterApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (_) => di.getIt<DashboardBloc>()
+          create: (_) => app_di.getIt<DashboardBloc>()
             ..add(DashboardEvent.started()),
         ),
       ],

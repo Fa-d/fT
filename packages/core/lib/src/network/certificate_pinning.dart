@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'package:dio/dio.dart';
 import 'package:dio/io.dart';
 
 /// Certificate pinning adapter for Dio
@@ -11,7 +10,6 @@ class CertificatePinningAdapter extends IOHttpClientAdapter {
     required this.pinnedCertificates,
   });
 
-  @override
   void configure(HttpClient httpClient) {
     httpClient.badCertificateCallback = (X509Certificate cert, String host, int port) {
       // Check if we have a pinned certificate for this host

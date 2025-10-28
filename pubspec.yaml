@@ -36,6 +36,8 @@ dependencies:
     path: packages/core
   design_system:
     path: packages/design_system
+  features_stream:
+    path: packages/features_stream
 
   # UI
   cupertino_icons: ^1.0.8

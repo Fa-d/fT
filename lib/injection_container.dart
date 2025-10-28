@@ -1,26 +1,14 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 
 // Core
+import 'package:core/core.dart' as core;
 import 'core/network/api_client.dart';
 
-// Counter Feature
-import 'features/counter/data/datasources/counter_local_datasource.dart';
-import 'features/counter/data/repositories/counter_repository_impl.dart';
-import 'features/counter/domain/repositories/counter_repository.dart';
-import 'features/counter/domain/usecases/decrement_counter.dart';
-import 'features/counter/domain/usecases/get_counter.dart';
-import 'features/counter/domain/usecases/increment_counter.dart';
-import 'features/counter/domain/usecases/reset_counter.dart';
-import 'features/counter/presentation/bloc/counter_bloc.dart';
-
-// User Feature
-import 'features/user/data/datasources/user_remote_datasource.dart';
-import 'features/user/data/repositories/user_repository_impl.dart';
-import 'features/user/domain/repositories/user_repository.dart';
-import 'features/user/domain/usecases/get_users.dart';
-import 'features/user/presentation/bloc/user_bloc.dart';
+// Stream Feature
+import 'package:features_stream/features_stream.dart';
 
 /// Service Locator instance
 /// sl = Service Locator
@@ -30,56 +18,50 @@ final sl = GetIt.instance;
 /// This function should be called in main() before runApp()
 Future<void> init() async {
   // ========================================
-  // Features - Counter
+  // Features - Stream
   // ========================================
 
-  // BLoC
+  // BLoCs
   sl.registerFactory(
-    () => CounterBloc(
-      getCounter: sl(),
-      incrementCounter: sl(),
-      decrementCounter: sl(),
-      resetCounter: sl(),
+    () => PlayerBloc(savePlaybackStateUseCase: sl()),
+  );
+
+  sl.registerFactory(
+    () => DownloadBloc(
+      getDownloadsUseCase: sl(),
+      startDownloadUseCase: sl(),
+      downloadManager: sl(),
     ),
   );
 
   // Use Cases
-  sl.registerLazySingleton(() => GetCounter(sl()));
-  sl.registerLazySingleton(() => IncrementCounter(sl()));
-  sl.registerLazySingleton(() => DecrementCounter(sl()));
-  sl.registerLazySingleton(() => ResetCounter(sl()));
+  sl.registerLazySingleton(() => GetMediaItem(sl()));
+  sl.registerLazySingleton(() => GetMediaItems(sl()));
+  sl.registerLazySingleton(() => StartDownload(sl()));
+  sl.registerLazySingleton(() => GetDownloads(sl()));
+  sl.registerLazySingleton(() => SavePlaybackState(sl()));
+  sl.registerLazySingleton(() => GetPlaybackHistory(sl()));
 
   // Repository
-  sl.registerLazySingleton<CounterRepository>(
-    () => CounterRepositoryImpl(localDataSource: sl()),
+  sl.registerLazySingleton<StreamRepository>(
+    () => StreamRepositoryImpl(
+      remoteDataSource: sl(),
+      localDataSource: sl(),
+      networkInfo: sl(),
+    ),
   );
 
   // Data Sources
-  sl.registerLazySingleton<CounterLocalDataSource>(
-    () => CounterLocalDataSourceImpl(sharedPreferences: sl()),
+  sl.registerLazySingleton<StreamRemoteDataSource>(
+    () => StreamRemoteDataSourceImpl(apiClient: sl()),
   );
 
-  // ========================================
-  // Features - User
-  // ========================================
-
-  // BLoC
-  sl.registerFactory(
-    () => UserBloc(getUsers: sl()),
+  sl.registerLazySingleton<StreamLocalDataSource>(
+    () => StreamLocalDataSourceImpl(sharedPreferences: sl()),
   );
 
-  // Use Cases
-  sl.registerLazySingleton(() => GetUsers(sl()));
-
-  // Repository
-  sl.registerLazySingleton<UserRepository>(
-    () => UserRepositoryImpl(remoteDataSource: sl()),
-  );
-
-  // Data Sources
-  sl.registerLazySingleton<UserRemoteDataSource>(
-    () => UserRemoteDataSourceImpl(apiClient: sl()),
-  );
+  // Services
+  sl.registerLazySingleton(() => DownloadManager());
 
   // ========================================
   // Core
@@ -90,12 +72,20 @@ Future<void> init() async {
     () => ApiClient(dio: sl()),
   );
 
+  // Network Info
+  sl.registerLazySingleton<core.NetworkInfo>(
+    () => core.NetworkInfoImpl(sl()),
+  );
+
   // ========================================
   // External Dependencies
   // ========================================
 
   // Dio
   sl.registerLazySingleton(() => Dio());
+
+  // Connectivity
+  sl.registerLazySingleton(() => Connectivity());
 
   // SharedPreferences (async initialization)
   final sharedPreferences = await SharedPreferences.getInstance();

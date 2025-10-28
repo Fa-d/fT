@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import '../../features/counter/presentation/pages/counter_page.dart';
-import '../../features/user/domain/entities/user_entity.dart';
-import '../../features/user/presentation/pages/user_detail_page.dart';
-import '../../features/user/presentation/pages/user_list_page.dart';
+import '../../features/dashboard/presentation/pages/dashboard_page.dart';
+import '../../features/media/presentation/pages/media_list_page.dart';
 
 /// App Router using go_router
 /// Centralized routing configuration
@@ -11,29 +9,17 @@ class AppRouter {
   static final GoRouter router = GoRouter(
     initialLocation: '/',
     routes: [
-      // Counter page route (home)
+      // Dashboard page route (home)
       GoRoute(
         path: '/',
-        name: 'counter',
-        builder: (context, state) => const CounterPage(),
+        name: 'dashboard',
+        builder: (context, state) => const DashboardPage(),
       ),
-      // User list page route
+      // Media list page route
       GoRoute(
-        path: '/users',
-        name: 'users',
-        builder: (context, state) => const UserListPage(),
-        routes: [
-          // User detail page (nested route)
-          GoRoute(
-            path: 'detail',
-            name: 'user-detail',
-            builder: (context, state) {
-              final user = state.extra as UserEntity;
-              // Use classic Material Design version
-              return UserDetailPage(user: user);
-            },
-          ),
-        ],
+        path: '/media',
+        name: 'media',
+        builder: (context, state) => const MediaListPage(),
       ),
     ],
     // Error page
