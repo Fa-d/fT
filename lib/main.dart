@@ -4,6 +4,7 @@ import 'package:core/core.dart' as core;
 import 'package:design_system/design_system.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
+import 'package:features_stream/features_stream.dart';
 
 import 'app/app_router.dart';
 import 'injection_container.dart' as di;
@@ -30,6 +31,9 @@ void main() async {
   HydratedBloc.storage = await HydratedStorage.build(
     storageDirectory: await getApplicationDocumentsDirectory(),
   );
+
+  // Initialize Hive for features_stream local storage
+  await HiveInitializer.initialize();
 
   // Initialize core dependencies (event store, sync manager, etc.)
   await core.initializeCore();

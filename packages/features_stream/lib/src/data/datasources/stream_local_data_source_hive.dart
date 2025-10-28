@@ -17,7 +17,8 @@ class StreamLocalDataSourceHive implements StreamLocalDataSource {
   bool _isInitialized = false;
 
   /// Initialize Hive boxes
-  Future<void> init() async {
+  /// Assumes HiveInitializer.initialize() has already been called in main.dart
+  void init() {
     if (_isInitialized) {
       Logger.warning('StreamLocalDataSourceHive: Already initialized');
       return;
@@ -26,29 +27,39 @@ class StreamLocalDataSourceHive implements StreamLocalDataSource {
     try {
       Logger.info('StreamLocalDataSourceHive: Initializing Hive boxes');
 
-      // Initialize Hive (should be done in main.dart, but ensure it's called)
-      if (!Hive.isBoxOpen(StreamConstants.mediaItemsBox)) {
-        _mediaItemsBox = await Hive.openBox(StreamConstants.mediaItemsBox);
-      } else {
+      // Get already opened boxes (opened by HiveInitializer in main.dart)
+      if (Hive.isBoxOpen(StreamConstants.mediaItemsBox)) {
         _mediaItemsBox = Hive.box(StreamConstants.mediaItemsBox);
+      } else {
+        throw const StorageException(
+          'init',
+          'Media items box not open. Call HiveInitializer.initialize() in main.dart first',
+        );
       }
 
-      if (!Hive.isBoxOpen(StreamConstants.playbackStatesBox)) {
-        _playbackStatesBox = await Hive.openBox(StreamConstants.playbackStatesBox);
-      } else {
+      if (Hive.isBoxOpen(StreamConstants.playbackStatesBox)) {
         _playbackStatesBox = Hive.box(StreamConstants.playbackStatesBox);
+      } else {
+        throw const StorageException(
+          'init',
+          'Playback states box not open. Call HiveInitializer.initialize() in main.dart first',
+        );
       }
 
-      if (!Hive.isBoxOpen(StreamConstants.downloadTasksBox)) {
-        _downloadTasksBox = await Hive.openBox(StreamConstants.downloadTasksBox);
-      } else {
+      if (Hive.isBoxOpen(StreamConstants.downloadTasksBox)) {
         _downloadTasksBox = Hive.box(StreamConstants.downloadTasksBox);
+      } else {
+        throw const StorageException(
+          'init',
+          'Download tasks box not open. Call HiveInitializer.initialize() in main.dart first',
+        );
       }
 
       _isInitialized = true;
       Logger.info('StreamLocalDataSourceHive: Initialization complete');
     } catch (e, stackTrace) {
       Logger.error('StreamLocalDataSourceHive: Initialization failed', e, stackTrace);
+      if (e is StorageException) rethrow;
       throw StorageException('init', 'Failed to initialize Hive boxes', e);
     }
   }
@@ -247,7 +258,14 @@ class StreamLocalDataSourceHive implements StreamLocalDataSource {
   }
 
   /// Close all Hive boxes
+  /// Note: Boxes are typically closed when the app terminates
+  /// Usually you don't need to call this manually
   Future<void> close() async {
+    if (!_isInitialized) {
+      Logger.warning('StreamLocalDataSourceHive: Not initialized, nothing to close');
+      return;
+    }
+
     try {
       Logger.info('StreamLocalDataSourceHive: Closing Hive boxes');
 
@@ -256,6 +274,7 @@ class StreamLocalDataSourceHive implements StreamLocalDataSource {
       await _downloadTasksBox.close();
 
       _isInitialized = false;
+      Logger.info('StreamLocalDataSourceHive: Boxes closed successfully');
     } catch (e) {
       Logger.warning('StreamLocalDataSourceHive: Error closing boxes: $e');
     }

@@ -85,9 +85,14 @@ Future<void> init() async {
   );
 
   // Use Hive-based data source for better performance
-  sl.registerLazySingleton<StreamLocalDataSource>(
-    () => StreamLocalDataSourceHive(),
-  );
+  // Note: HiveInitializer.initialize() must be called in main.dart before di.init()
+  sl.registerLazySingleton<StreamLocalDataSource>(() {
+    final dataSource = StreamLocalDataSourceHive();
+    // Hive boxes are already initialized by HiveInitializer in main.dart
+    // The data source will use existing opened boxes
+    dataSource.init(); // This will be synchronous since boxes are already open
+    return dataSource;
+  });
 
   // For backward compatibility with SharedPreferences
   // Uncomment this if you want to use SharedPreferences instead of Hive
