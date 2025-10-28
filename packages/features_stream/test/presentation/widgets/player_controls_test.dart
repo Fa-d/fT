@@ -13,6 +13,7 @@ void main() {
       required Function(String) onQualityChanged,
       required Function(double) onVolumeChanged,
       required VoidCallback onMuteToggle,
+      required VoidCallback onFullscreenToggle,
       Map<String, String>? qualityOptions,
     }) {
       return MaterialApp(
@@ -25,6 +26,7 @@ void main() {
             onQualityChanged: onQualityChanged,
             onVolumeChanged: onVolumeChanged,
             onMuteToggle: onMuteToggle,
+            onFullscreenToggle: onFullscreenToggle,
             qualityOptions: qualityOptions ?? {},
           ),
         ),
@@ -57,6 +59,7 @@ void main() {
           onQualityChanged: (_) {},
           onVolumeChanged: (_) {},
           onMuteToggle: () {},
+          onFullscreenToggle: () {},
         ),
       );
 
@@ -97,6 +100,7 @@ void main() {
           onQualityChanged: (_) {},
           onVolumeChanged: (_) {},
           onMuteToggle: () {},
+          onFullscreenToggle: () {},
         ),
       );
 
@@ -137,6 +141,7 @@ void main() {
           onQualityChanged: (_) {},
           onVolumeChanged: (_) {},
           onMuteToggle: () {},
+          onFullscreenToggle: () {},
         ),
       );
 
@@ -178,6 +183,7 @@ void main() {
           onQualityChanged: (_) {},
           onVolumeChanged: (_) {},
           onMuteToggle: () {},
+          onFullscreenToggle: () {},
         ),
       );
 
@@ -217,6 +223,7 @@ void main() {
           onQualityChanged: (_) {},
           onVolumeChanged: (_) {},
           onMuteToggle: () {},
+          onFullscreenToggle: () {},
         ),
       );
 
@@ -248,6 +255,7 @@ void main() {
           onQualityChanged: (_) {},
           onVolumeChanged: (_) {},
           onMuteToggle: () {},
+          onFullscreenToggle: () {},
         ),
       );
 
@@ -279,6 +287,7 @@ void main() {
           onQualityChanged: (_) {},
           onVolumeChanged: (_) {},
           onMuteToggle: () {},
+          onFullscreenToggle: () {},
         ),
       );
 
@@ -312,6 +321,7 @@ void main() {
           onQualityChanged: (_) {},
           onVolumeChanged: (_) {},
           onMuteToggle: () => muteToggled = true,
+          onFullscreenToggle: () {},
         ),
       );
 
@@ -350,6 +360,7 @@ void main() {
           onQualityChanged: (_) {},
           onVolumeChanged: (_) {},
           onMuteToggle: () {},
+          onFullscreenToggle: () {},
         ),
       );
 
@@ -387,6 +398,7 @@ void main() {
           onQualityChanged: (_) {},
           onVolumeChanged: (_) {},
           onMuteToggle: () {},
+          onFullscreenToggle: () {},
         ),
       );
 

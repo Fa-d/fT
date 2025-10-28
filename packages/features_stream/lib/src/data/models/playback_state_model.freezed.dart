@@ -12,8 +12,7 @@ part of 'playback_state_model.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
-);
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 PlaybackStateModel _$PlaybackStateModelFromJson(Map<String, dynamic> json) {
   return _PlaybackStateModel.fromJson(json);
@@ -32,12 +31,8 @@ mixin _$PlaybackStateModel {
   bool get isMuted => throw _privateConstructorUsedError;
   String get lastUpdated => throw _privateConstructorUsedError;
 
-  /// Serializes this PlaybackStateModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of PlaybackStateModel
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $PlaybackStateModelCopyWith<PlaybackStateModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -45,22 +40,20 @@ mixin _$PlaybackStateModel {
 /// @nodoc
 abstract class $PlaybackStateModelCopyWith<$Res> {
   factory $PlaybackStateModelCopyWith(
-    PlaybackStateModel value,
-    $Res Function(PlaybackStateModel) then,
-  ) = _$PlaybackStateModelCopyWithImpl<$Res, PlaybackStateModel>;
+          PlaybackStateModel value, $Res Function(PlaybackStateModel) then) =
+      _$PlaybackStateModelCopyWithImpl<$Res, PlaybackStateModel>;
   @useResult
-  $Res call({
-    String mediaItemId,
-    int positionInMilliseconds,
-    int durationInMilliseconds,
-    bool isPlaying,
-    bool isBuffering,
-    double playbackSpeed,
-    String? currentQuality,
-    double volume,
-    bool isMuted,
-    String lastUpdated,
-  });
+  $Res call(
+      {String mediaItemId,
+      int positionInMilliseconds,
+      int durationInMilliseconds,
+      bool isPlaying,
+      bool isBuffering,
+      double playbackSpeed,
+      String? currentQuality,
+      double volume,
+      bool isMuted,
+      String lastUpdated});
 }
 
 /// @nodoc
@@ -73,8 +66,6 @@ class _$PlaybackStateModelCopyWithImpl<$Res, $Val extends PlaybackStateModel>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of PlaybackStateModel
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -89,88 +80,80 @@ class _$PlaybackStateModelCopyWithImpl<$Res, $Val extends PlaybackStateModel>
     Object? isMuted = null,
     Object? lastUpdated = null,
   }) {
-    return _then(
-      _value.copyWith(
-            mediaItemId: null == mediaItemId
-                ? _value.mediaItemId
-                : mediaItemId // ignore: cast_nullable_to_non_nullable
-                      as String,
-            positionInMilliseconds: null == positionInMilliseconds
-                ? _value.positionInMilliseconds
-                : positionInMilliseconds // ignore: cast_nullable_to_non_nullable
-                      as int,
-            durationInMilliseconds: null == durationInMilliseconds
-                ? _value.durationInMilliseconds
-                : durationInMilliseconds // ignore: cast_nullable_to_non_nullable
-                      as int,
-            isPlaying: null == isPlaying
-                ? _value.isPlaying
-                : isPlaying // ignore: cast_nullable_to_non_nullable
-                      as bool,
-            isBuffering: null == isBuffering
-                ? _value.isBuffering
-                : isBuffering // ignore: cast_nullable_to_non_nullable
-                      as bool,
-            playbackSpeed: null == playbackSpeed
-                ? _value.playbackSpeed
-                : playbackSpeed // ignore: cast_nullable_to_non_nullable
-                      as double,
-            currentQuality: freezed == currentQuality
-                ? _value.currentQuality
-                : currentQuality // ignore: cast_nullable_to_non_nullable
-                      as String?,
-            volume: null == volume
-                ? _value.volume
-                : volume // ignore: cast_nullable_to_non_nullable
-                      as double,
-            isMuted: null == isMuted
-                ? _value.isMuted
-                : isMuted // ignore: cast_nullable_to_non_nullable
-                      as bool,
-            lastUpdated: null == lastUpdated
-                ? _value.lastUpdated
-                : lastUpdated // ignore: cast_nullable_to_non_nullable
-                      as String,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      mediaItemId: null == mediaItemId
+          ? _value.mediaItemId
+          : mediaItemId // ignore: cast_nullable_to_non_nullable
+              as String,
+      positionInMilliseconds: null == positionInMilliseconds
+          ? _value.positionInMilliseconds
+          : positionInMilliseconds // ignore: cast_nullable_to_non_nullable
+              as int,
+      durationInMilliseconds: null == durationInMilliseconds
+          ? _value.durationInMilliseconds
+          : durationInMilliseconds // ignore: cast_nullable_to_non_nullable
+              as int,
+      isPlaying: null == isPlaying
+          ? _value.isPlaying
+          : isPlaying // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isBuffering: null == isBuffering
+          ? _value.isBuffering
+          : isBuffering // ignore: cast_nullable_to_non_nullable
+              as bool,
+      playbackSpeed: null == playbackSpeed
+          ? _value.playbackSpeed
+          : playbackSpeed // ignore: cast_nullable_to_non_nullable
+              as double,
+      currentQuality: freezed == currentQuality
+          ? _value.currentQuality
+          : currentQuality // ignore: cast_nullable_to_non_nullable
+              as String?,
+      volume: null == volume
+          ? _value.volume
+          : volume // ignore: cast_nullable_to_non_nullable
+              as double,
+      isMuted: null == isMuted
+          ? _value.isMuted
+          : isMuted // ignore: cast_nullable_to_non_nullable
+              as bool,
+      lastUpdated: null == lastUpdated
+          ? _value.lastUpdated
+          : lastUpdated // ignore: cast_nullable_to_non_nullable
+              as String,
+    ) as $Val);
   }
 }
 
 /// @nodoc
 abstract class _$$PlaybackStateModelImplCopyWith<$Res>
     implements $PlaybackStateModelCopyWith<$Res> {
-  factory _$$PlaybackStateModelImplCopyWith(
-    _$PlaybackStateModelImpl value,
-    $Res Function(_$PlaybackStateModelImpl) then,
-  ) = __$$PlaybackStateModelImplCopyWithImpl<$Res>;
+  factory _$$PlaybackStateModelImplCopyWith(_$PlaybackStateModelImpl value,
+          $Res Function(_$PlaybackStateModelImpl) then) =
+      __$$PlaybackStateModelImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({
-    String mediaItemId,
-    int positionInMilliseconds,
-    int durationInMilliseconds,
-    bool isPlaying,
-    bool isBuffering,
-    double playbackSpeed,
-    String? currentQuality,
-    double volume,
-    bool isMuted,
-    String lastUpdated,
-  });
+  $Res call(
+      {String mediaItemId,
+      int positionInMilliseconds,
+      int durationInMilliseconds,
+      bool isPlaying,
+      bool isBuffering,
+      double playbackSpeed,
+      String? currentQuality,
+      double volume,
+      bool isMuted,
+      String lastUpdated});
 }
 
 /// @nodoc
 class __$$PlaybackStateModelImplCopyWithImpl<$Res>
     extends _$PlaybackStateModelCopyWithImpl<$Res, _$PlaybackStateModelImpl>
     implements _$$PlaybackStateModelImplCopyWith<$Res> {
-  __$$PlaybackStateModelImplCopyWithImpl(
-    _$PlaybackStateModelImpl _value,
-    $Res Function(_$PlaybackStateModelImpl) _then,
-  ) : super(_value, _then);
+  __$$PlaybackStateModelImplCopyWithImpl(_$PlaybackStateModelImpl _value,
+      $Res Function(_$PlaybackStateModelImpl) _then)
+      : super(_value, _then);
 
-  /// Create a copy of PlaybackStateModel
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -185,68 +168,66 @@ class __$$PlaybackStateModelImplCopyWithImpl<$Res>
     Object? isMuted = null,
     Object? lastUpdated = null,
   }) {
-    return _then(
-      _$PlaybackStateModelImpl(
-        mediaItemId: null == mediaItemId
-            ? _value.mediaItemId
-            : mediaItemId // ignore: cast_nullable_to_non_nullable
-                  as String,
-        positionInMilliseconds: null == positionInMilliseconds
-            ? _value.positionInMilliseconds
-            : positionInMilliseconds // ignore: cast_nullable_to_non_nullable
-                  as int,
-        durationInMilliseconds: null == durationInMilliseconds
-            ? _value.durationInMilliseconds
-            : durationInMilliseconds // ignore: cast_nullable_to_non_nullable
-                  as int,
-        isPlaying: null == isPlaying
-            ? _value.isPlaying
-            : isPlaying // ignore: cast_nullable_to_non_nullable
-                  as bool,
-        isBuffering: null == isBuffering
-            ? _value.isBuffering
-            : isBuffering // ignore: cast_nullable_to_non_nullable
-                  as bool,
-        playbackSpeed: null == playbackSpeed
-            ? _value.playbackSpeed
-            : playbackSpeed // ignore: cast_nullable_to_non_nullable
-                  as double,
-        currentQuality: freezed == currentQuality
-            ? _value.currentQuality
-            : currentQuality // ignore: cast_nullable_to_non_nullable
-                  as String?,
-        volume: null == volume
-            ? _value.volume
-            : volume // ignore: cast_nullable_to_non_nullable
-                  as double,
-        isMuted: null == isMuted
-            ? _value.isMuted
-            : isMuted // ignore: cast_nullable_to_non_nullable
-                  as bool,
-        lastUpdated: null == lastUpdated
-            ? _value.lastUpdated
-            : lastUpdated // ignore: cast_nullable_to_non_nullable
-                  as String,
-      ),
-    );
+    return _then(_$PlaybackStateModelImpl(
+      mediaItemId: null == mediaItemId
+          ? _value.mediaItemId
+          : mediaItemId // ignore: cast_nullable_to_non_nullable
+              as String,
+      positionInMilliseconds: null == positionInMilliseconds
+          ? _value.positionInMilliseconds
+          : positionInMilliseconds // ignore: cast_nullable_to_non_nullable
+              as int,
+      durationInMilliseconds: null == durationInMilliseconds
+          ? _value.durationInMilliseconds
+          : durationInMilliseconds // ignore: cast_nullable_to_non_nullable
+              as int,
+      isPlaying: null == isPlaying
+          ? _value.isPlaying
+          : isPlaying // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isBuffering: null == isBuffering
+          ? _value.isBuffering
+          : isBuffering // ignore: cast_nullable_to_non_nullable
+              as bool,
+      playbackSpeed: null == playbackSpeed
+          ? _value.playbackSpeed
+          : playbackSpeed // ignore: cast_nullable_to_non_nullable
+              as double,
+      currentQuality: freezed == currentQuality
+          ? _value.currentQuality
+          : currentQuality // ignore: cast_nullable_to_non_nullable
+              as String?,
+      volume: null == volume
+          ? _value.volume
+          : volume // ignore: cast_nullable_to_non_nullable
+              as double,
+      isMuted: null == isMuted
+          ? _value.isMuted
+          : isMuted // ignore: cast_nullable_to_non_nullable
+              as bool,
+      lastUpdated: null == lastUpdated
+          ? _value.lastUpdated
+          : lastUpdated // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$PlaybackStateModelImpl extends _PlaybackStateModel {
-  const _$PlaybackStateModelImpl({
-    required this.mediaItemId,
-    required this.positionInMilliseconds,
-    required this.durationInMilliseconds,
-    required this.isPlaying,
-    required this.isBuffering,
-    this.playbackSpeed = 1.0,
-    this.currentQuality,
-    this.volume = 1.0,
-    this.isMuted = false,
-    required this.lastUpdated,
-  }) : super._();
+  const _$PlaybackStateModelImpl(
+      {required this.mediaItemId,
+      required this.positionInMilliseconds,
+      required this.durationInMilliseconds,
+      required this.isPlaying,
+      required this.isBuffering,
+      this.playbackSpeed = 1.0,
+      this.currentQuality,
+      this.volume = 1.0,
+      this.isMuted = false,
+      required this.lastUpdated})
+      : super._();
 
   factory _$PlaybackStateModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$PlaybackStateModelImplFromJson(json);
@@ -305,52 +286,48 @@ class _$PlaybackStateModelImpl extends _PlaybackStateModel {
                 other.lastUpdated == lastUpdated));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-    runtimeType,
-    mediaItemId,
-    positionInMilliseconds,
-    durationInMilliseconds,
-    isPlaying,
-    isBuffering,
-    playbackSpeed,
-    currentQuality,
-    volume,
-    isMuted,
-    lastUpdated,
-  );
+      runtimeType,
+      mediaItemId,
+      positionInMilliseconds,
+      durationInMilliseconds,
+      isPlaying,
+      isBuffering,
+      playbackSpeed,
+      currentQuality,
+      volume,
+      isMuted,
+      lastUpdated);
 
-  /// Create a copy of PlaybackStateModel
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$PlaybackStateModelImplCopyWith<_$PlaybackStateModelImpl> get copyWith =>
       __$$PlaybackStateModelImplCopyWithImpl<_$PlaybackStateModelImpl>(
-        this,
-        _$identity,
-      );
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$PlaybackStateModelImplToJson(this);
+    return _$$PlaybackStateModelImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _PlaybackStateModel extends PlaybackStateModel {
-  const factory _PlaybackStateModel({
-    required final String mediaItemId,
-    required final int positionInMilliseconds,
-    required final int durationInMilliseconds,
-    required final bool isPlaying,
-    required final bool isBuffering,
-    final double playbackSpeed,
-    final String? currentQuality,
-    final double volume,
-    final bool isMuted,
-    required final String lastUpdated,
-  }) = _$PlaybackStateModelImpl;
+  const factory _PlaybackStateModel(
+      {required final String mediaItemId,
+      required final int positionInMilliseconds,
+      required final int durationInMilliseconds,
+      required final bool isPlaying,
+      required final bool isBuffering,
+      final double playbackSpeed,
+      final String? currentQuality,
+      final double volume,
+      final bool isMuted,
+      required final String lastUpdated}) = _$PlaybackStateModelImpl;
   const _PlaybackStateModel._() : super._();
 
   factory _PlaybackStateModel.fromJson(Map<String, dynamic> json) =
@@ -376,11 +353,8 @@ abstract class _PlaybackStateModel extends PlaybackStateModel {
   bool get isMuted;
   @override
   String get lastUpdated;
-
-  /// Create a copy of PlaybackStateModel
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$PlaybackStateModelImplCopyWith<_$PlaybackStateModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

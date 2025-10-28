@@ -12,8 +12,7 @@ part of 'download_task_model.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
-);
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 DownloadTaskModel _$DownloadTaskModelFromJson(Map<String, dynamic> json) {
   return _DownloadTaskModel.fromJson(json);
@@ -33,12 +32,8 @@ mixin _$DownloadTaskModel {
   String? get errorMessage => throw _privateConstructorUsedError;
   String get quality => throw _privateConstructorUsedError;
 
-  /// Serializes this DownloadTaskModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of DownloadTaskModel
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $DownloadTaskModelCopyWith<DownloadTaskModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -46,23 +41,21 @@ mixin _$DownloadTaskModel {
 /// @nodoc
 abstract class $DownloadTaskModelCopyWith<$Res> {
   factory $DownloadTaskModelCopyWith(
-    DownloadTaskModel value,
-    $Res Function(DownloadTaskModel) then,
-  ) = _$DownloadTaskModelCopyWithImpl<$Res, DownloadTaskModel>;
+          DownloadTaskModel value, $Res Function(DownloadTaskModel) then) =
+      _$DownloadTaskModelCopyWithImpl<$Res, DownloadTaskModel>;
   @useResult
-  $Res call({
-    String id,
-    MediaItemModel mediaItem,
-    String status,
-    double progress,
-    String? localPath,
-    int? totalBytes,
-    int? downloadedBytes,
-    String createdAt,
-    String? completedAt,
-    String? errorMessage,
-    String quality,
-  });
+  $Res call(
+      {String id,
+      MediaItemModel mediaItem,
+      String status,
+      double progress,
+      String? localPath,
+      int? totalBytes,
+      int? downloadedBytes,
+      String createdAt,
+      String? completedAt,
+      String? errorMessage,
+      String quality});
 
   $MediaItemModelCopyWith<$Res> get mediaItem;
 }
@@ -77,8 +70,6 @@ class _$DownloadTaskModelCopyWithImpl<$Res, $Val extends DownloadTaskModel>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of DownloadTaskModel
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -94,59 +85,54 @@ class _$DownloadTaskModelCopyWithImpl<$Res, $Val extends DownloadTaskModel>
     Object? errorMessage = freezed,
     Object? quality = null,
   }) {
-    return _then(
-      _value.copyWith(
-            id: null == id
-                ? _value.id
-                : id // ignore: cast_nullable_to_non_nullable
-                      as String,
-            mediaItem: null == mediaItem
-                ? _value.mediaItem
-                : mediaItem // ignore: cast_nullable_to_non_nullable
-                      as MediaItemModel,
-            status: null == status
-                ? _value.status
-                : status // ignore: cast_nullable_to_non_nullable
-                      as String,
-            progress: null == progress
-                ? _value.progress
-                : progress // ignore: cast_nullable_to_non_nullable
-                      as double,
-            localPath: freezed == localPath
-                ? _value.localPath
-                : localPath // ignore: cast_nullable_to_non_nullable
-                      as String?,
-            totalBytes: freezed == totalBytes
-                ? _value.totalBytes
-                : totalBytes // ignore: cast_nullable_to_non_nullable
-                      as int?,
-            downloadedBytes: freezed == downloadedBytes
-                ? _value.downloadedBytes
-                : downloadedBytes // ignore: cast_nullable_to_non_nullable
-                      as int?,
-            createdAt: null == createdAt
-                ? _value.createdAt
-                : createdAt // ignore: cast_nullable_to_non_nullable
-                      as String,
-            completedAt: freezed == completedAt
-                ? _value.completedAt
-                : completedAt // ignore: cast_nullable_to_non_nullable
-                      as String?,
-            errorMessage: freezed == errorMessage
-                ? _value.errorMessage
-                : errorMessage // ignore: cast_nullable_to_non_nullable
-                      as String?,
-            quality: null == quality
-                ? _value.quality
-                : quality // ignore: cast_nullable_to_non_nullable
-                      as String,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      mediaItem: null == mediaItem
+          ? _value.mediaItem
+          : mediaItem // ignore: cast_nullable_to_non_nullable
+              as MediaItemModel,
+      status: null == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as String,
+      progress: null == progress
+          ? _value.progress
+          : progress // ignore: cast_nullable_to_non_nullable
+              as double,
+      localPath: freezed == localPath
+          ? _value.localPath
+          : localPath // ignore: cast_nullable_to_non_nullable
+              as String?,
+      totalBytes: freezed == totalBytes
+          ? _value.totalBytes
+          : totalBytes // ignore: cast_nullable_to_non_nullable
+              as int?,
+      downloadedBytes: freezed == downloadedBytes
+          ? _value.downloadedBytes
+          : downloadedBytes // ignore: cast_nullable_to_non_nullable
+              as int?,
+      createdAt: null == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as String,
+      completedAt: freezed == completedAt
+          ? _value.completedAt
+          : completedAt // ignore: cast_nullable_to_non_nullable
+              as String?,
+      errorMessage: freezed == errorMessage
+          ? _value.errorMessage
+          : errorMessage // ignore: cast_nullable_to_non_nullable
+              as String?,
+      quality: null == quality
+          ? _value.quality
+          : quality // ignore: cast_nullable_to_non_nullable
+              as String,
+    ) as $Val);
   }
 
-  /// Create a copy of DownloadTaskModel
-  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $MediaItemModelCopyWith<$Res> get mediaItem {
@@ -159,25 +145,23 @@ class _$DownloadTaskModelCopyWithImpl<$Res, $Val extends DownloadTaskModel>
 /// @nodoc
 abstract class _$$DownloadTaskModelImplCopyWith<$Res>
     implements $DownloadTaskModelCopyWith<$Res> {
-  factory _$$DownloadTaskModelImplCopyWith(
-    _$DownloadTaskModelImpl value,
-    $Res Function(_$DownloadTaskModelImpl) then,
-  ) = __$$DownloadTaskModelImplCopyWithImpl<$Res>;
+  factory _$$DownloadTaskModelImplCopyWith(_$DownloadTaskModelImpl value,
+          $Res Function(_$DownloadTaskModelImpl) then) =
+      __$$DownloadTaskModelImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({
-    String id,
-    MediaItemModel mediaItem,
-    String status,
-    double progress,
-    String? localPath,
-    int? totalBytes,
-    int? downloadedBytes,
-    String createdAt,
-    String? completedAt,
-    String? errorMessage,
-    String quality,
-  });
+  $Res call(
+      {String id,
+      MediaItemModel mediaItem,
+      String status,
+      double progress,
+      String? localPath,
+      int? totalBytes,
+      int? downloadedBytes,
+      String createdAt,
+      String? completedAt,
+      String? errorMessage,
+      String quality});
 
   @override
   $MediaItemModelCopyWith<$Res> get mediaItem;
@@ -187,13 +171,10 @@ abstract class _$$DownloadTaskModelImplCopyWith<$Res>
 class __$$DownloadTaskModelImplCopyWithImpl<$Res>
     extends _$DownloadTaskModelCopyWithImpl<$Res, _$DownloadTaskModelImpl>
     implements _$$DownloadTaskModelImplCopyWith<$Res> {
-  __$$DownloadTaskModelImplCopyWithImpl(
-    _$DownloadTaskModelImpl _value,
-    $Res Function(_$DownloadTaskModelImpl) _then,
-  ) : super(_value, _then);
+  __$$DownloadTaskModelImplCopyWithImpl(_$DownloadTaskModelImpl _value,
+      $Res Function(_$DownloadTaskModelImpl) _then)
+      : super(_value, _then);
 
-  /// Create a copy of DownloadTaskModel
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -209,73 +190,71 @@ class __$$DownloadTaskModelImplCopyWithImpl<$Res>
     Object? errorMessage = freezed,
     Object? quality = null,
   }) {
-    return _then(
-      _$DownloadTaskModelImpl(
-        id: null == id
-            ? _value.id
-            : id // ignore: cast_nullable_to_non_nullable
-                  as String,
-        mediaItem: null == mediaItem
-            ? _value.mediaItem
-            : mediaItem // ignore: cast_nullable_to_non_nullable
-                  as MediaItemModel,
-        status: null == status
-            ? _value.status
-            : status // ignore: cast_nullable_to_non_nullable
-                  as String,
-        progress: null == progress
-            ? _value.progress
-            : progress // ignore: cast_nullable_to_non_nullable
-                  as double,
-        localPath: freezed == localPath
-            ? _value.localPath
-            : localPath // ignore: cast_nullable_to_non_nullable
-                  as String?,
-        totalBytes: freezed == totalBytes
-            ? _value.totalBytes
-            : totalBytes // ignore: cast_nullable_to_non_nullable
-                  as int?,
-        downloadedBytes: freezed == downloadedBytes
-            ? _value.downloadedBytes
-            : downloadedBytes // ignore: cast_nullable_to_non_nullable
-                  as int?,
-        createdAt: null == createdAt
-            ? _value.createdAt
-            : createdAt // ignore: cast_nullable_to_non_nullable
-                  as String,
-        completedAt: freezed == completedAt
-            ? _value.completedAt
-            : completedAt // ignore: cast_nullable_to_non_nullable
-                  as String?,
-        errorMessage: freezed == errorMessage
-            ? _value.errorMessage
-            : errorMessage // ignore: cast_nullable_to_non_nullable
-                  as String?,
-        quality: null == quality
-            ? _value.quality
-            : quality // ignore: cast_nullable_to_non_nullable
-                  as String,
-      ),
-    );
+    return _then(_$DownloadTaskModelImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      mediaItem: null == mediaItem
+          ? _value.mediaItem
+          : mediaItem // ignore: cast_nullable_to_non_nullable
+              as MediaItemModel,
+      status: null == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as String,
+      progress: null == progress
+          ? _value.progress
+          : progress // ignore: cast_nullable_to_non_nullable
+              as double,
+      localPath: freezed == localPath
+          ? _value.localPath
+          : localPath // ignore: cast_nullable_to_non_nullable
+              as String?,
+      totalBytes: freezed == totalBytes
+          ? _value.totalBytes
+          : totalBytes // ignore: cast_nullable_to_non_nullable
+              as int?,
+      downloadedBytes: freezed == downloadedBytes
+          ? _value.downloadedBytes
+          : downloadedBytes // ignore: cast_nullable_to_non_nullable
+              as int?,
+      createdAt: null == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as String,
+      completedAt: freezed == completedAt
+          ? _value.completedAt
+          : completedAt // ignore: cast_nullable_to_non_nullable
+              as String?,
+      errorMessage: freezed == errorMessage
+          ? _value.errorMessage
+          : errorMessage // ignore: cast_nullable_to_non_nullable
+              as String?,
+      quality: null == quality
+          ? _value.quality
+          : quality // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$DownloadTaskModelImpl extends _DownloadTaskModel {
-  const _$DownloadTaskModelImpl({
-    required this.id,
-    required this.mediaItem,
-    required this.status,
-    this.progress = 0.0,
-    this.localPath,
-    this.totalBytes,
-    this.downloadedBytes,
-    required this.createdAt,
-    this.completedAt,
-    this.errorMessage,
-    required this.quality,
-  }) : super._();
+  const _$DownloadTaskModelImpl(
+      {required this.id,
+      required this.mediaItem,
+      required this.status,
+      this.progress = 0.0,
+      this.localPath,
+      this.totalBytes,
+      this.downloadedBytes,
+      required this.createdAt,
+      this.completedAt,
+      this.errorMessage,
+      required this.quality})
+      : super._();
 
   factory _$DownloadTaskModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$DownloadTaskModelImplFromJson(json);
@@ -335,54 +314,50 @@ class _$DownloadTaskModelImpl extends _DownloadTaskModel {
             (identical(other.quality, quality) || other.quality == quality));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-    runtimeType,
-    id,
-    mediaItem,
-    status,
-    progress,
-    localPath,
-    totalBytes,
-    downloadedBytes,
-    createdAt,
-    completedAt,
-    errorMessage,
-    quality,
-  );
+      runtimeType,
+      id,
+      mediaItem,
+      status,
+      progress,
+      localPath,
+      totalBytes,
+      downloadedBytes,
+      createdAt,
+      completedAt,
+      errorMessage,
+      quality);
 
-  /// Create a copy of DownloadTaskModel
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$DownloadTaskModelImplCopyWith<_$DownloadTaskModelImpl> get copyWith =>
       __$$DownloadTaskModelImplCopyWithImpl<_$DownloadTaskModelImpl>(
-        this,
-        _$identity,
-      );
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$DownloadTaskModelImplToJson(this);
+    return _$$DownloadTaskModelImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _DownloadTaskModel extends DownloadTaskModel {
-  const factory _DownloadTaskModel({
-    required final String id,
-    required final MediaItemModel mediaItem,
-    required final String status,
-    final double progress,
-    final String? localPath,
-    final int? totalBytes,
-    final int? downloadedBytes,
-    required final String createdAt,
-    final String? completedAt,
-    final String? errorMessage,
-    required final String quality,
-  }) = _$DownloadTaskModelImpl;
+  const factory _DownloadTaskModel(
+      {required final String id,
+      required final MediaItemModel mediaItem,
+      required final String status,
+      final double progress,
+      final String? localPath,
+      final int? totalBytes,
+      final int? downloadedBytes,
+      required final String createdAt,
+      final String? completedAt,
+      final String? errorMessage,
+      required final String quality}) = _$DownloadTaskModelImpl;
   const _DownloadTaskModel._() : super._();
 
   factory _DownloadTaskModel.fromJson(Map<String, dynamic> json) =
@@ -410,11 +385,8 @@ abstract class _DownloadTaskModel extends DownloadTaskModel {
   String? get errorMessage;
   @override
   String get quality;
-
-  /// Create a copy of DownloadTaskModel
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$DownloadTaskModelImplCopyWith<_$DownloadTaskModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

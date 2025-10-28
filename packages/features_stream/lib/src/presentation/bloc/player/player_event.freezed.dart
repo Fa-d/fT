@@ -12,8 +12,7 @@ part of 'player_event.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
-);
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$PlayerEvent {
@@ -27,11 +26,13 @@ mixin _$PlayerEvent {
     required TResult Function(String quality) setQuality,
     required TResult Function(double volume) setVolume,
     required TResult Function() toggleMute,
+    required TResult Function() toggleFullscreen,
     required TResult Function(Duration position) updatePosition,
     required TResult Function(bool isBuffering) updateBuffering,
     required TResult Function() videoCompleted,
     required TResult Function() dispose,
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(MediaItem mediaItem)? initialize,
@@ -42,11 +43,13 @@ mixin _$PlayerEvent {
     TResult? Function(String quality)? setQuality,
     TResult? Function(double volume)? setVolume,
     TResult? Function()? toggleMute,
+    TResult? Function()? toggleFullscreen,
     TResult? Function(Duration position)? updatePosition,
     TResult? Function(bool isBuffering)? updateBuffering,
     TResult? Function()? videoCompleted,
     TResult? Function()? dispose,
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(MediaItem mediaItem)? initialize,
@@ -57,12 +60,14 @@ mixin _$PlayerEvent {
     TResult Function(String quality)? setQuality,
     TResult Function(double volume)? setVolume,
     TResult Function()? toggleMute,
+    TResult Function()? toggleFullscreen,
     TResult Function(Duration position)? updatePosition,
     TResult Function(bool isBuffering)? updateBuffering,
     TResult Function()? videoCompleted,
     TResult Function()? dispose,
     required TResult orElse(),
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialize value) initialize,
@@ -73,11 +78,13 @@ mixin _$PlayerEvent {
     required TResult Function(_SetQuality value) setQuality,
     required TResult Function(_SetVolume value) setVolume,
     required TResult Function(_ToggleMute value) toggleMute,
+    required TResult Function(_ToggleFullscreen value) toggleFullscreen,
     required TResult Function(_UpdatePosition value) updatePosition,
     required TResult Function(_UpdateBuffering value) updateBuffering,
     required TResult Function(_VideoCompleted value) videoCompleted,
     required TResult Function(_Dispose value) dispose,
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialize value)? initialize,
@@ -88,11 +95,13 @@ mixin _$PlayerEvent {
     TResult? Function(_SetQuality value)? setQuality,
     TResult? Function(_SetVolume value)? setVolume,
     TResult? Function(_ToggleMute value)? toggleMute,
+    TResult? Function(_ToggleFullscreen value)? toggleFullscreen,
     TResult? Function(_UpdatePosition value)? updatePosition,
     TResult? Function(_UpdateBuffering value)? updateBuffering,
     TResult? Function(_VideoCompleted value)? videoCompleted,
     TResult? Function(_Dispose value)? dispose,
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialize value)? initialize,
@@ -103,20 +112,21 @@ mixin _$PlayerEvent {
     TResult Function(_SetQuality value)? setQuality,
     TResult Function(_SetVolume value)? setVolume,
     TResult Function(_ToggleMute value)? toggleMute,
+    TResult Function(_ToggleFullscreen value)? toggleFullscreen,
     TResult Function(_UpdatePosition value)? updatePosition,
     TResult Function(_UpdateBuffering value)? updateBuffering,
     TResult Function(_VideoCompleted value)? videoCompleted,
     TResult Function(_Dispose value)? dispose,
     required TResult orElse(),
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $PlayerEventCopyWith<$Res> {
   factory $PlayerEventCopyWith(
-    PlayerEvent value,
-    $Res Function(PlayerEvent) then,
-  ) = _$PlayerEventCopyWithImpl<$Res, PlayerEvent>;
+          PlayerEvent value, $Res Function(PlayerEvent) then) =
+      _$PlayerEventCopyWithImpl<$Res, PlayerEvent>;
 }
 
 /// @nodoc
@@ -128,17 +138,13 @@ class _$PlayerEventCopyWithImpl<$Res, $Val extends PlayerEvent>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
-
-  /// Create a copy of PlayerEvent
-  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
 abstract class _$$InitializeImplCopyWith<$Res> {
   factory _$$InitializeImplCopyWith(
-    _$InitializeImpl value,
-    $Res Function(_$InitializeImpl) then,
-  ) = __$$InitializeImplCopyWithImpl<$Res>;
+          _$InitializeImpl value, $Res Function(_$InitializeImpl) then) =
+      __$$InitializeImplCopyWithImpl<$Res>;
   @useResult
   $Res call({MediaItem mediaItem});
 }
@@ -148,23 +154,20 @@ class __$$InitializeImplCopyWithImpl<$Res>
     extends _$PlayerEventCopyWithImpl<$Res, _$InitializeImpl>
     implements _$$InitializeImplCopyWith<$Res> {
   __$$InitializeImplCopyWithImpl(
-    _$InitializeImpl _value,
-    $Res Function(_$InitializeImpl) _then,
-  ) : super(_value, _then);
+      _$InitializeImpl _value, $Res Function(_$InitializeImpl) _then)
+      : super(_value, _then);
 
-  /// Create a copy of PlayerEvent
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? mediaItem = null}) {
-    return _then(
-      _$InitializeImpl(
-        null == mediaItem
-            ? _value.mediaItem
-            : mediaItem // ignore: cast_nullable_to_non_nullable
-                  as MediaItem,
-      ),
-    );
+  $Res call({
+    Object? mediaItem = null,
+  }) {
+    return _then(_$InitializeImpl(
+      null == mediaItem
+          ? _value.mediaItem
+          : mediaItem // ignore: cast_nullable_to_non_nullable
+              as MediaItem,
+    ));
   }
 }
 
@@ -193,9 +196,7 @@ class _$InitializeImpl implements _Initialize {
   @override
   int get hashCode => Object.hash(runtimeType, mediaItem);
 
-  /// Create a copy of PlayerEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$InitializeImplCopyWith<_$InitializeImpl> get copyWith =>
@@ -212,6 +213,7 @@ class _$InitializeImpl implements _Initialize {
     required TResult Function(String quality) setQuality,
     required TResult Function(double volume) setVolume,
     required TResult Function() toggleMute,
+    required TResult Function() toggleFullscreen,
     required TResult Function(Duration position) updatePosition,
     required TResult Function(bool isBuffering) updateBuffering,
     required TResult Function() videoCompleted,
@@ -231,6 +233,7 @@ class _$InitializeImpl implements _Initialize {
     TResult? Function(String quality)? setQuality,
     TResult? Function(double volume)? setVolume,
     TResult? Function()? toggleMute,
+    TResult? Function()? toggleFullscreen,
     TResult? Function(Duration position)? updatePosition,
     TResult? Function(bool isBuffering)? updateBuffering,
     TResult? Function()? videoCompleted,
@@ -250,6 +253,7 @@ class _$InitializeImpl implements _Initialize {
     TResult Function(String quality)? setQuality,
     TResult Function(double volume)? setVolume,
     TResult Function()? toggleMute,
+    TResult Function()? toggleFullscreen,
     TResult Function(Duration position)? updatePosition,
     TResult Function(bool isBuffering)? updateBuffering,
     TResult Function()? videoCompleted,
@@ -273,6 +277,7 @@ class _$InitializeImpl implements _Initialize {
     required TResult Function(_SetQuality value) setQuality,
     required TResult Function(_SetVolume value) setVolume,
     required TResult Function(_ToggleMute value) toggleMute,
+    required TResult Function(_ToggleFullscreen value) toggleFullscreen,
     required TResult Function(_UpdatePosition value) updatePosition,
     required TResult Function(_UpdateBuffering value) updateBuffering,
     required TResult Function(_VideoCompleted value) videoCompleted,
@@ -292,6 +297,7 @@ class _$InitializeImpl implements _Initialize {
     TResult? Function(_SetQuality value)? setQuality,
     TResult? Function(_SetVolume value)? setVolume,
     TResult? Function(_ToggleMute value)? toggleMute,
+    TResult? Function(_ToggleFullscreen value)? toggleFullscreen,
     TResult? Function(_UpdatePosition value)? updatePosition,
     TResult? Function(_UpdateBuffering value)? updateBuffering,
     TResult? Function(_VideoCompleted value)? videoCompleted,
@@ -311,6 +317,7 @@ class _$InitializeImpl implements _Initialize {
     TResult Function(_SetQuality value)? setQuality,
     TResult Function(_SetVolume value)? setVolume,
     TResult Function(_ToggleMute value)? toggleMute,
+    TResult Function(_ToggleFullscreen value)? toggleFullscreen,
     TResult Function(_UpdatePosition value)? updatePosition,
     TResult Function(_UpdateBuffering value)? updateBuffering,
     TResult Function(_VideoCompleted value)? videoCompleted,
@@ -328,10 +335,7 @@ abstract class _Initialize implements PlayerEvent {
   const factory _Initialize(final MediaItem mediaItem) = _$InitializeImpl;
 
   MediaItem get mediaItem;
-
-  /// Create a copy of PlayerEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$InitializeImplCopyWith<_$InitializeImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -339,9 +343,8 @@ abstract class _Initialize implements PlayerEvent {
 /// @nodoc
 abstract class _$$PlayImplCopyWith<$Res> {
   factory _$$PlayImplCopyWith(
-    _$PlayImpl value,
-    $Res Function(_$PlayImpl) then,
-  ) = __$$PlayImplCopyWithImpl<$Res>;
+          _$PlayImpl value, $Res Function(_$PlayImpl) then) =
+      __$$PlayImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
@@ -349,10 +352,7 @@ class __$$PlayImplCopyWithImpl<$Res>
     extends _$PlayerEventCopyWithImpl<$Res, _$PlayImpl>
     implements _$$PlayImplCopyWith<$Res> {
   __$$PlayImplCopyWithImpl(_$PlayImpl _value, $Res Function(_$PlayImpl) _then)
-    : super(_value, _then);
-
-  /// Create a copy of PlayerEvent
-  /// with the given fields replaced by the non-null parameter values.
+      : super(_value, _then);
 }
 
 /// @nodoc
@@ -385,6 +385,7 @@ class _$PlayImpl implements _Play {
     required TResult Function(String quality) setQuality,
     required TResult Function(double volume) setVolume,
     required TResult Function() toggleMute,
+    required TResult Function() toggleFullscreen,
     required TResult Function(Duration position) updatePosition,
     required TResult Function(bool isBuffering) updateBuffering,
     required TResult Function() videoCompleted,
@@ -404,6 +405,7 @@ class _$PlayImpl implements _Play {
     TResult? Function(String quality)? setQuality,
     TResult? Function(double volume)? setVolume,
     TResult? Function()? toggleMute,
+    TResult? Function()? toggleFullscreen,
     TResult? Function(Duration position)? updatePosition,
     TResult? Function(bool isBuffering)? updateBuffering,
     TResult? Function()? videoCompleted,
@@ -423,6 +425,7 @@ class _$PlayImpl implements _Play {
     TResult Function(String quality)? setQuality,
     TResult Function(double volume)? setVolume,
     TResult Function()? toggleMute,
+    TResult Function()? toggleFullscreen,
     TResult Function(Duration position)? updatePosition,
     TResult Function(bool isBuffering)? updateBuffering,
     TResult Function()? videoCompleted,
@@ -446,6 +449,7 @@ class _$PlayImpl implements _Play {
     required TResult Function(_SetQuality value) setQuality,
     required TResult Function(_SetVolume value) setVolume,
     required TResult Function(_ToggleMute value) toggleMute,
+    required TResult Function(_ToggleFullscreen value) toggleFullscreen,
     required TResult Function(_UpdatePosition value) updatePosition,
     required TResult Function(_UpdateBuffering value) updateBuffering,
     required TResult Function(_VideoCompleted value) videoCompleted,
@@ -465,6 +469,7 @@ class _$PlayImpl implements _Play {
     TResult? Function(_SetQuality value)? setQuality,
     TResult? Function(_SetVolume value)? setVolume,
     TResult? Function(_ToggleMute value)? toggleMute,
+    TResult? Function(_ToggleFullscreen value)? toggleFullscreen,
     TResult? Function(_UpdatePosition value)? updatePosition,
     TResult? Function(_UpdateBuffering value)? updateBuffering,
     TResult? Function(_VideoCompleted value)? videoCompleted,
@@ -484,6 +489,7 @@ class _$PlayImpl implements _Play {
     TResult Function(_SetQuality value)? setQuality,
     TResult Function(_SetVolume value)? setVolume,
     TResult Function(_ToggleMute value)? toggleMute,
+    TResult Function(_ToggleFullscreen value)? toggleFullscreen,
     TResult Function(_UpdatePosition value)? updatePosition,
     TResult Function(_UpdateBuffering value)? updateBuffering,
     TResult Function(_VideoCompleted value)? videoCompleted,
@@ -504,9 +510,8 @@ abstract class _Play implements PlayerEvent {
 /// @nodoc
 abstract class _$$PauseImplCopyWith<$Res> {
   factory _$$PauseImplCopyWith(
-    _$PauseImpl value,
-    $Res Function(_$PauseImpl) then,
-  ) = __$$PauseImplCopyWithImpl<$Res>;
+          _$PauseImpl value, $Res Function(_$PauseImpl) then) =
+      __$$PauseImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
@@ -514,12 +519,8 @@ class __$$PauseImplCopyWithImpl<$Res>
     extends _$PlayerEventCopyWithImpl<$Res, _$PauseImpl>
     implements _$$PauseImplCopyWith<$Res> {
   __$$PauseImplCopyWithImpl(
-    _$PauseImpl _value,
-    $Res Function(_$PauseImpl) _then,
-  ) : super(_value, _then);
-
-  /// Create a copy of PlayerEvent
-  /// with the given fields replaced by the non-null parameter values.
+      _$PauseImpl _value, $Res Function(_$PauseImpl) _then)
+      : super(_value, _then);
 }
 
 /// @nodoc
@@ -552,6 +553,7 @@ class _$PauseImpl implements _Pause {
     required TResult Function(String quality) setQuality,
     required TResult Function(double volume) setVolume,
     required TResult Function() toggleMute,
+    required TResult Function() toggleFullscreen,
     required TResult Function(Duration position) updatePosition,
     required TResult Function(bool isBuffering) updateBuffering,
     required TResult Function() videoCompleted,
@@ -571,6 +573,7 @@ class _$PauseImpl implements _Pause {
     TResult? Function(String quality)? setQuality,
     TResult? Function(double volume)? setVolume,
     TResult? Function()? toggleMute,
+    TResult? Function()? toggleFullscreen,
     TResult? Function(Duration position)? updatePosition,
     TResult? Function(bool isBuffering)? updateBuffering,
     TResult? Function()? videoCompleted,
@@ -590,6 +593,7 @@ class _$PauseImpl implements _Pause {
     TResult Function(String quality)? setQuality,
     TResult Function(double volume)? setVolume,
     TResult Function()? toggleMute,
+    TResult Function()? toggleFullscreen,
     TResult Function(Duration position)? updatePosition,
     TResult Function(bool isBuffering)? updateBuffering,
     TResult Function()? videoCompleted,
@@ -613,6 +617,7 @@ class _$PauseImpl implements _Pause {
     required TResult Function(_SetQuality value) setQuality,
     required TResult Function(_SetVolume value) setVolume,
     required TResult Function(_ToggleMute value) toggleMute,
+    required TResult Function(_ToggleFullscreen value) toggleFullscreen,
     required TResult Function(_UpdatePosition value) updatePosition,
     required TResult Function(_UpdateBuffering value) updateBuffering,
     required TResult Function(_VideoCompleted value) videoCompleted,
@@ -632,6 +637,7 @@ class _$PauseImpl implements _Pause {
     TResult? Function(_SetQuality value)? setQuality,
     TResult? Function(_SetVolume value)? setVolume,
     TResult? Function(_ToggleMute value)? toggleMute,
+    TResult? Function(_ToggleFullscreen value)? toggleFullscreen,
     TResult? Function(_UpdatePosition value)? updatePosition,
     TResult? Function(_UpdateBuffering value)? updateBuffering,
     TResult? Function(_VideoCompleted value)? videoCompleted,
@@ -651,6 +657,7 @@ class _$PauseImpl implements _Pause {
     TResult Function(_SetQuality value)? setQuality,
     TResult Function(_SetVolume value)? setVolume,
     TResult Function(_ToggleMute value)? toggleMute,
+    TResult Function(_ToggleFullscreen value)? toggleFullscreen,
     TResult Function(_UpdatePosition value)? updatePosition,
     TResult Function(_UpdateBuffering value)? updateBuffering,
     TResult Function(_VideoCompleted value)? videoCompleted,
@@ -671,9 +678,8 @@ abstract class _Pause implements PlayerEvent {
 /// @nodoc
 abstract class _$$SeekToImplCopyWith<$Res> {
   factory _$$SeekToImplCopyWith(
-    _$SeekToImpl value,
-    $Res Function(_$SeekToImpl) then,
-  ) = __$$SeekToImplCopyWithImpl<$Res>;
+          _$SeekToImpl value, $Res Function(_$SeekToImpl) then) =
+      __$$SeekToImplCopyWithImpl<$Res>;
   @useResult
   $Res call({Duration position});
 }
@@ -683,23 +689,20 @@ class __$$SeekToImplCopyWithImpl<$Res>
     extends _$PlayerEventCopyWithImpl<$Res, _$SeekToImpl>
     implements _$$SeekToImplCopyWith<$Res> {
   __$$SeekToImplCopyWithImpl(
-    _$SeekToImpl _value,
-    $Res Function(_$SeekToImpl) _then,
-  ) : super(_value, _then);
+      _$SeekToImpl _value, $Res Function(_$SeekToImpl) _then)
+      : super(_value, _then);
 
-  /// Create a copy of PlayerEvent
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? position = null}) {
-    return _then(
-      _$SeekToImpl(
-        null == position
-            ? _value.position
-            : position // ignore: cast_nullable_to_non_nullable
-                  as Duration,
-      ),
-    );
+  $Res call({
+    Object? position = null,
+  }) {
+    return _then(_$SeekToImpl(
+      null == position
+          ? _value.position
+          : position // ignore: cast_nullable_to_non_nullable
+              as Duration,
+    ));
   }
 }
 
@@ -728,9 +731,7 @@ class _$SeekToImpl implements _SeekTo {
   @override
   int get hashCode => Object.hash(runtimeType, position);
 
-  /// Create a copy of PlayerEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$SeekToImplCopyWith<_$SeekToImpl> get copyWith =>
@@ -747,6 +748,7 @@ class _$SeekToImpl implements _SeekTo {
     required TResult Function(String quality) setQuality,
     required TResult Function(double volume) setVolume,
     required TResult Function() toggleMute,
+    required TResult Function() toggleFullscreen,
     required TResult Function(Duration position) updatePosition,
     required TResult Function(bool isBuffering) updateBuffering,
     required TResult Function() videoCompleted,
@@ -766,6 +768,7 @@ class _$SeekToImpl implements _SeekTo {
     TResult? Function(String quality)? setQuality,
     TResult? Function(double volume)? setVolume,
     TResult? Function()? toggleMute,
+    TResult? Function()? toggleFullscreen,
     TResult? Function(Duration position)? updatePosition,
     TResult? Function(bool isBuffering)? updateBuffering,
     TResult? Function()? videoCompleted,
@@ -785,6 +788,7 @@ class _$SeekToImpl implements _SeekTo {
     TResult Function(String quality)? setQuality,
     TResult Function(double volume)? setVolume,
     TResult Function()? toggleMute,
+    TResult Function()? toggleFullscreen,
     TResult Function(Duration position)? updatePosition,
     TResult Function(bool isBuffering)? updateBuffering,
     TResult Function()? videoCompleted,
@@ -808,6 +812,7 @@ class _$SeekToImpl implements _SeekTo {
     required TResult Function(_SetQuality value) setQuality,
     required TResult Function(_SetVolume value) setVolume,
     required TResult Function(_ToggleMute value) toggleMute,
+    required TResult Function(_ToggleFullscreen value) toggleFullscreen,
     required TResult Function(_UpdatePosition value) updatePosition,
     required TResult Function(_UpdateBuffering value) updateBuffering,
     required TResult Function(_VideoCompleted value) videoCompleted,
@@ -827,6 +832,7 @@ class _$SeekToImpl implements _SeekTo {
     TResult? Function(_SetQuality value)? setQuality,
     TResult? Function(_SetVolume value)? setVolume,
     TResult? Function(_ToggleMute value)? toggleMute,
+    TResult? Function(_ToggleFullscreen value)? toggleFullscreen,
     TResult? Function(_UpdatePosition value)? updatePosition,
     TResult? Function(_UpdateBuffering value)? updateBuffering,
     TResult? Function(_VideoCompleted value)? videoCompleted,
@@ -846,6 +852,7 @@ class _$SeekToImpl implements _SeekTo {
     TResult Function(_SetQuality value)? setQuality,
     TResult Function(_SetVolume value)? setVolume,
     TResult Function(_ToggleMute value)? toggleMute,
+    TResult Function(_ToggleFullscreen value)? toggleFullscreen,
     TResult Function(_UpdatePosition value)? updatePosition,
     TResult Function(_UpdateBuffering value)? updateBuffering,
     TResult Function(_VideoCompleted value)? videoCompleted,
@@ -863,10 +870,7 @@ abstract class _SeekTo implements PlayerEvent {
   const factory _SeekTo(final Duration position) = _$SeekToImpl;
 
   Duration get position;
-
-  /// Create a copy of PlayerEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$SeekToImplCopyWith<_$SeekToImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -874,9 +878,8 @@ abstract class _SeekTo implements PlayerEvent {
 /// @nodoc
 abstract class _$$SetSpeedImplCopyWith<$Res> {
   factory _$$SetSpeedImplCopyWith(
-    _$SetSpeedImpl value,
-    $Res Function(_$SetSpeedImpl) then,
-  ) = __$$SetSpeedImplCopyWithImpl<$Res>;
+          _$SetSpeedImpl value, $Res Function(_$SetSpeedImpl) then) =
+      __$$SetSpeedImplCopyWithImpl<$Res>;
   @useResult
   $Res call({double speed});
 }
@@ -886,23 +889,20 @@ class __$$SetSpeedImplCopyWithImpl<$Res>
     extends _$PlayerEventCopyWithImpl<$Res, _$SetSpeedImpl>
     implements _$$SetSpeedImplCopyWith<$Res> {
   __$$SetSpeedImplCopyWithImpl(
-    _$SetSpeedImpl _value,
-    $Res Function(_$SetSpeedImpl) _then,
-  ) : super(_value, _then);
+      _$SetSpeedImpl _value, $Res Function(_$SetSpeedImpl) _then)
+      : super(_value, _then);
 
-  /// Create a copy of PlayerEvent
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? speed = null}) {
-    return _then(
-      _$SetSpeedImpl(
-        null == speed
-            ? _value.speed
-            : speed // ignore: cast_nullable_to_non_nullable
-                  as double,
-      ),
-    );
+  $Res call({
+    Object? speed = null,
+  }) {
+    return _then(_$SetSpeedImpl(
+      null == speed
+          ? _value.speed
+          : speed // ignore: cast_nullable_to_non_nullable
+              as double,
+    ));
   }
 }
 
@@ -930,9 +930,7 @@ class _$SetSpeedImpl implements _SetSpeed {
   @override
   int get hashCode => Object.hash(runtimeType, speed);
 
-  /// Create a copy of PlayerEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$SetSpeedImplCopyWith<_$SetSpeedImpl> get copyWith =>
@@ -949,6 +947,7 @@ class _$SetSpeedImpl implements _SetSpeed {
     required TResult Function(String quality) setQuality,
     required TResult Function(double volume) setVolume,
     required TResult Function() toggleMute,
+    required TResult Function() toggleFullscreen,
     required TResult Function(Duration position) updatePosition,
     required TResult Function(bool isBuffering) updateBuffering,
     required TResult Function() videoCompleted,
@@ -968,6 +967,7 @@ class _$SetSpeedImpl implements _SetSpeed {
     TResult? Function(String quality)? setQuality,
     TResult? Function(double volume)? setVolume,
     TResult? Function()? toggleMute,
+    TResult? Function()? toggleFullscreen,
     TResult? Function(Duration position)? updatePosition,
     TResult? Function(bool isBuffering)? updateBuffering,
     TResult? Function()? videoCompleted,
@@ -987,6 +987,7 @@ class _$SetSpeedImpl implements _SetSpeed {
     TResult Function(String quality)? setQuality,
     TResult Function(double volume)? setVolume,
     TResult Function()? toggleMute,
+    TResult Function()? toggleFullscreen,
     TResult Function(Duration position)? updatePosition,
     TResult Function(bool isBuffering)? updateBuffering,
     TResult Function()? videoCompleted,
@@ -1010,6 +1011,7 @@ class _$SetSpeedImpl implements _SetSpeed {
     required TResult Function(_SetQuality value) setQuality,
     required TResult Function(_SetVolume value) setVolume,
     required TResult Function(_ToggleMute value) toggleMute,
+    required TResult Function(_ToggleFullscreen value) toggleFullscreen,
     required TResult Function(_UpdatePosition value) updatePosition,
     required TResult Function(_UpdateBuffering value) updateBuffering,
     required TResult Function(_VideoCompleted value) videoCompleted,
@@ -1029,6 +1031,7 @@ class _$SetSpeedImpl implements _SetSpeed {
     TResult? Function(_SetQuality value)? setQuality,
     TResult? Function(_SetVolume value)? setVolume,
     TResult? Function(_ToggleMute value)? toggleMute,
+    TResult? Function(_ToggleFullscreen value)? toggleFullscreen,
     TResult? Function(_UpdatePosition value)? updatePosition,
     TResult? Function(_UpdateBuffering value)? updateBuffering,
     TResult? Function(_VideoCompleted value)? videoCompleted,
@@ -1048,6 +1051,7 @@ class _$SetSpeedImpl implements _SetSpeed {
     TResult Function(_SetQuality value)? setQuality,
     TResult Function(_SetVolume value)? setVolume,
     TResult Function(_ToggleMute value)? toggleMute,
+    TResult Function(_ToggleFullscreen value)? toggleFullscreen,
     TResult Function(_UpdatePosition value)? updatePosition,
     TResult Function(_UpdateBuffering value)? updateBuffering,
     TResult Function(_VideoCompleted value)? videoCompleted,
@@ -1065,10 +1069,7 @@ abstract class _SetSpeed implements PlayerEvent {
   const factory _SetSpeed(final double speed) = _$SetSpeedImpl;
 
   double get speed;
-
-  /// Create a copy of PlayerEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$SetSpeedImplCopyWith<_$SetSpeedImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -1076,9 +1077,8 @@ abstract class _SetSpeed implements PlayerEvent {
 /// @nodoc
 abstract class _$$SetQualityImplCopyWith<$Res> {
   factory _$$SetQualityImplCopyWith(
-    _$SetQualityImpl value,
-    $Res Function(_$SetQualityImpl) then,
-  ) = __$$SetQualityImplCopyWithImpl<$Res>;
+          _$SetQualityImpl value, $Res Function(_$SetQualityImpl) then) =
+      __$$SetQualityImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String quality});
 }
@@ -1088,23 +1088,20 @@ class __$$SetQualityImplCopyWithImpl<$Res>
     extends _$PlayerEventCopyWithImpl<$Res, _$SetQualityImpl>
     implements _$$SetQualityImplCopyWith<$Res> {
   __$$SetQualityImplCopyWithImpl(
-    _$SetQualityImpl _value,
-    $Res Function(_$SetQualityImpl) _then,
-  ) : super(_value, _then);
+      _$SetQualityImpl _value, $Res Function(_$SetQualityImpl) _then)
+      : super(_value, _then);
 
-  /// Create a copy of PlayerEvent
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? quality = null}) {
-    return _then(
-      _$SetQualityImpl(
-        null == quality
-            ? _value.quality
-            : quality // ignore: cast_nullable_to_non_nullable
-                  as String,
-      ),
-    );
+  $Res call({
+    Object? quality = null,
+  }) {
+    return _then(_$SetQualityImpl(
+      null == quality
+          ? _value.quality
+          : quality // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
   }
 }
 
@@ -1132,9 +1129,7 @@ class _$SetQualityImpl implements _SetQuality {
   @override
   int get hashCode => Object.hash(runtimeType, quality);
 
-  /// Create a copy of PlayerEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$SetQualityImplCopyWith<_$SetQualityImpl> get copyWith =>
@@ -1151,6 +1146,7 @@ class _$SetQualityImpl implements _SetQuality {
     required TResult Function(String quality) setQuality,
     required TResult Function(double volume) setVolume,
     required TResult Function() toggleMute,
+    required TResult Function() toggleFullscreen,
     required TResult Function(Duration position) updatePosition,
     required TResult Function(bool isBuffering) updateBuffering,
     required TResult Function() videoCompleted,
@@ -1170,6 +1166,7 @@ class _$SetQualityImpl implements _SetQuality {
     TResult? Function(String quality)? setQuality,
     TResult? Function(double volume)? setVolume,
     TResult? Function()? toggleMute,
+    TResult? Function()? toggleFullscreen,
     TResult? Function(Duration position)? updatePosition,
     TResult? Function(bool isBuffering)? updateBuffering,
     TResult? Function()? videoCompleted,
@@ -1189,6 +1186,7 @@ class _$SetQualityImpl implements _SetQuality {
     TResult Function(String quality)? setQuality,
     TResult Function(double volume)? setVolume,
     TResult Function()? toggleMute,
+    TResult Function()? toggleFullscreen,
     TResult Function(Duration position)? updatePosition,
     TResult Function(bool isBuffering)? updateBuffering,
     TResult Function()? videoCompleted,
@@ -1212,6 +1210,7 @@ class _$SetQualityImpl implements _SetQuality {
     required TResult Function(_SetQuality value) setQuality,
     required TResult Function(_SetVolume value) setVolume,
     required TResult Function(_ToggleMute value) toggleMute,
+    required TResult Function(_ToggleFullscreen value) toggleFullscreen,
     required TResult Function(_UpdatePosition value) updatePosition,
     required TResult Function(_UpdateBuffering value) updateBuffering,
     required TResult Function(_VideoCompleted value) videoCompleted,
@@ -1231,6 +1230,7 @@ class _$SetQualityImpl implements _SetQuality {
     TResult? Function(_SetQuality value)? setQuality,
     TResult? Function(_SetVolume value)? setVolume,
     TResult? Function(_ToggleMute value)? toggleMute,
+    TResult? Function(_ToggleFullscreen value)? toggleFullscreen,
     TResult? Function(_UpdatePosition value)? updatePosition,
     TResult? Function(_UpdateBuffering value)? updateBuffering,
     TResult? Function(_VideoCompleted value)? videoCompleted,
@@ -1250,6 +1250,7 @@ class _$SetQualityImpl implements _SetQuality {
     TResult Function(_SetQuality value)? setQuality,
     TResult Function(_SetVolume value)? setVolume,
     TResult Function(_ToggleMute value)? toggleMute,
+    TResult Function(_ToggleFullscreen value)? toggleFullscreen,
     TResult Function(_UpdatePosition value)? updatePosition,
     TResult Function(_UpdateBuffering value)? updateBuffering,
     TResult Function(_VideoCompleted value)? videoCompleted,
@@ -1267,10 +1268,7 @@ abstract class _SetQuality implements PlayerEvent {
   const factory _SetQuality(final String quality) = _$SetQualityImpl;
 
   String get quality;
-
-  /// Create a copy of PlayerEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$SetQualityImplCopyWith<_$SetQualityImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -1278,9 +1276,8 @@ abstract class _SetQuality implements PlayerEvent {
 /// @nodoc
 abstract class _$$SetVolumeImplCopyWith<$Res> {
   factory _$$SetVolumeImplCopyWith(
-    _$SetVolumeImpl value,
-    $Res Function(_$SetVolumeImpl) then,
-  ) = __$$SetVolumeImplCopyWithImpl<$Res>;
+          _$SetVolumeImpl value, $Res Function(_$SetVolumeImpl) then) =
+      __$$SetVolumeImplCopyWithImpl<$Res>;
   @useResult
   $Res call({double volume});
 }
@@ -1290,23 +1287,20 @@ class __$$SetVolumeImplCopyWithImpl<$Res>
     extends _$PlayerEventCopyWithImpl<$Res, _$SetVolumeImpl>
     implements _$$SetVolumeImplCopyWith<$Res> {
   __$$SetVolumeImplCopyWithImpl(
-    _$SetVolumeImpl _value,
-    $Res Function(_$SetVolumeImpl) _then,
-  ) : super(_value, _then);
+      _$SetVolumeImpl _value, $Res Function(_$SetVolumeImpl) _then)
+      : super(_value, _then);
 
-  /// Create a copy of PlayerEvent
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? volume = null}) {
-    return _then(
-      _$SetVolumeImpl(
-        null == volume
-            ? _value.volume
-            : volume // ignore: cast_nullable_to_non_nullable
-                  as double,
-      ),
-    );
+  $Res call({
+    Object? volume = null,
+  }) {
+    return _then(_$SetVolumeImpl(
+      null == volume
+          ? _value.volume
+          : volume // ignore: cast_nullable_to_non_nullable
+              as double,
+    ));
   }
 }
 
@@ -1334,9 +1328,7 @@ class _$SetVolumeImpl implements _SetVolume {
   @override
   int get hashCode => Object.hash(runtimeType, volume);
 
-  /// Create a copy of PlayerEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$SetVolumeImplCopyWith<_$SetVolumeImpl> get copyWith =>
@@ -1353,6 +1345,7 @@ class _$SetVolumeImpl implements _SetVolume {
     required TResult Function(String quality) setQuality,
     required TResult Function(double volume) setVolume,
     required TResult Function() toggleMute,
+    required TResult Function() toggleFullscreen,
     required TResult Function(Duration position) updatePosition,
     required TResult Function(bool isBuffering) updateBuffering,
     required TResult Function() videoCompleted,
@@ -1372,6 +1365,7 @@ class _$SetVolumeImpl implements _SetVolume {
     TResult? Function(String quality)? setQuality,
     TResult? Function(double volume)? setVolume,
     TResult? Function()? toggleMute,
+    TResult? Function()? toggleFullscreen,
     TResult? Function(Duration position)? updatePosition,
     TResult? Function(bool isBuffering)? updateBuffering,
     TResult? Function()? videoCompleted,
@@ -1391,6 +1385,7 @@ class _$SetVolumeImpl implements _SetVolume {
     TResult Function(String quality)? setQuality,
     TResult Function(double volume)? setVolume,
     TResult Function()? toggleMute,
+    TResult Function()? toggleFullscreen,
     TResult Function(Duration position)? updatePosition,
     TResult Function(bool isBuffering)? updateBuffering,
     TResult Function()? videoCompleted,
@@ -1414,6 +1409,7 @@ class _$SetVolumeImpl implements _SetVolume {
     required TResult Function(_SetQuality value) setQuality,
     required TResult Function(_SetVolume value) setVolume,
     required TResult Function(_ToggleMute value) toggleMute,
+    required TResult Function(_ToggleFullscreen value) toggleFullscreen,
     required TResult Function(_UpdatePosition value) updatePosition,
     required TResult Function(_UpdateBuffering value) updateBuffering,
     required TResult Function(_VideoCompleted value) videoCompleted,
@@ -1433,6 +1429,7 @@ class _$SetVolumeImpl implements _SetVolume {
     TResult? Function(_SetQuality value)? setQuality,
     TResult? Function(_SetVolume value)? setVolume,
     TResult? Function(_ToggleMute value)? toggleMute,
+    TResult? Function(_ToggleFullscreen value)? toggleFullscreen,
     TResult? Function(_UpdatePosition value)? updatePosition,
     TResult? Function(_UpdateBuffering value)? updateBuffering,
     TResult? Function(_VideoCompleted value)? videoCompleted,
@@ -1452,6 +1449,7 @@ class _$SetVolumeImpl implements _SetVolume {
     TResult Function(_SetQuality value)? setQuality,
     TResult Function(_SetVolume value)? setVolume,
     TResult Function(_ToggleMute value)? toggleMute,
+    TResult Function(_ToggleFullscreen value)? toggleFullscreen,
     TResult Function(_UpdatePosition value)? updatePosition,
     TResult Function(_UpdateBuffering value)? updateBuffering,
     TResult Function(_VideoCompleted value)? videoCompleted,
@@ -1469,10 +1467,7 @@ abstract class _SetVolume implements PlayerEvent {
   const factory _SetVolume(final double volume) = _$SetVolumeImpl;
 
   double get volume;
-
-  /// Create a copy of PlayerEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$SetVolumeImplCopyWith<_$SetVolumeImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -1480,9 +1475,8 @@ abstract class _SetVolume implements PlayerEvent {
 /// @nodoc
 abstract class _$$ToggleMuteImplCopyWith<$Res> {
   factory _$$ToggleMuteImplCopyWith(
-    _$ToggleMuteImpl value,
-    $Res Function(_$ToggleMuteImpl) then,
-  ) = __$$ToggleMuteImplCopyWithImpl<$Res>;
+          _$ToggleMuteImpl value, $Res Function(_$ToggleMuteImpl) then) =
+      __$$ToggleMuteImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
@@ -1490,12 +1484,8 @@ class __$$ToggleMuteImplCopyWithImpl<$Res>
     extends _$PlayerEventCopyWithImpl<$Res, _$ToggleMuteImpl>
     implements _$$ToggleMuteImplCopyWith<$Res> {
   __$$ToggleMuteImplCopyWithImpl(
-    _$ToggleMuteImpl _value,
-    $Res Function(_$ToggleMuteImpl) _then,
-  ) : super(_value, _then);
-
-  /// Create a copy of PlayerEvent
-  /// with the given fields replaced by the non-null parameter values.
+      _$ToggleMuteImpl _value, $Res Function(_$ToggleMuteImpl) _then)
+      : super(_value, _then);
 }
 
 /// @nodoc
@@ -1528,6 +1518,7 @@ class _$ToggleMuteImpl implements _ToggleMute {
     required TResult Function(String quality) setQuality,
     required TResult Function(double volume) setVolume,
     required TResult Function() toggleMute,
+    required TResult Function() toggleFullscreen,
     required TResult Function(Duration position) updatePosition,
     required TResult Function(bool isBuffering) updateBuffering,
     required TResult Function() videoCompleted,
@@ -1547,6 +1538,7 @@ class _$ToggleMuteImpl implements _ToggleMute {
     TResult? Function(String quality)? setQuality,
     TResult? Function(double volume)? setVolume,
     TResult? Function()? toggleMute,
+    TResult? Function()? toggleFullscreen,
     TResult? Function(Duration position)? updatePosition,
     TResult? Function(bool isBuffering)? updateBuffering,
     TResult? Function()? videoCompleted,
@@ -1566,6 +1558,7 @@ class _$ToggleMuteImpl implements _ToggleMute {
     TResult Function(String quality)? setQuality,
     TResult Function(double volume)? setVolume,
     TResult Function()? toggleMute,
+    TResult Function()? toggleFullscreen,
     TResult Function(Duration position)? updatePosition,
     TResult Function(bool isBuffering)? updateBuffering,
     TResult Function()? videoCompleted,
@@ -1589,6 +1582,7 @@ class _$ToggleMuteImpl implements _ToggleMute {
     required TResult Function(_SetQuality value) setQuality,
     required TResult Function(_SetVolume value) setVolume,
     required TResult Function(_ToggleMute value) toggleMute,
+    required TResult Function(_ToggleFullscreen value) toggleFullscreen,
     required TResult Function(_UpdatePosition value) updatePosition,
     required TResult Function(_UpdateBuffering value) updateBuffering,
     required TResult Function(_VideoCompleted value) videoCompleted,
@@ -1608,6 +1602,7 @@ class _$ToggleMuteImpl implements _ToggleMute {
     TResult? Function(_SetQuality value)? setQuality,
     TResult? Function(_SetVolume value)? setVolume,
     TResult? Function(_ToggleMute value)? toggleMute,
+    TResult? Function(_ToggleFullscreen value)? toggleFullscreen,
     TResult? Function(_UpdatePosition value)? updatePosition,
     TResult? Function(_UpdateBuffering value)? updateBuffering,
     TResult? Function(_VideoCompleted value)? videoCompleted,
@@ -1627,6 +1622,7 @@ class _$ToggleMuteImpl implements _ToggleMute {
     TResult Function(_SetQuality value)? setQuality,
     TResult Function(_SetVolume value)? setVolume,
     TResult Function(_ToggleMute value)? toggleMute,
+    TResult Function(_ToggleFullscreen value)? toggleFullscreen,
     TResult Function(_UpdatePosition value)? updatePosition,
     TResult Function(_UpdateBuffering value)? updateBuffering,
     TResult Function(_VideoCompleted value)? videoCompleted,
@@ -1645,11 +1641,178 @@ abstract class _ToggleMute implements PlayerEvent {
 }
 
 /// @nodoc
+abstract class _$$ToggleFullscreenImplCopyWith<$Res> {
+  factory _$$ToggleFullscreenImplCopyWith(_$ToggleFullscreenImpl value,
+          $Res Function(_$ToggleFullscreenImpl) then) =
+      __$$ToggleFullscreenImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$ToggleFullscreenImplCopyWithImpl<$Res>
+    extends _$PlayerEventCopyWithImpl<$Res, _$ToggleFullscreenImpl>
+    implements _$$ToggleFullscreenImplCopyWith<$Res> {
+  __$$ToggleFullscreenImplCopyWithImpl(_$ToggleFullscreenImpl _value,
+      $Res Function(_$ToggleFullscreenImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$ToggleFullscreenImpl implements _ToggleFullscreen {
+  const _$ToggleFullscreenImpl();
+
+  @override
+  String toString() {
+    return 'PlayerEvent.toggleFullscreen()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$ToggleFullscreenImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(MediaItem mediaItem) initialize,
+    required TResult Function() play,
+    required TResult Function() pause,
+    required TResult Function(Duration position) seekTo,
+    required TResult Function(double speed) setSpeed,
+    required TResult Function(String quality) setQuality,
+    required TResult Function(double volume) setVolume,
+    required TResult Function() toggleMute,
+    required TResult Function() toggleFullscreen,
+    required TResult Function(Duration position) updatePosition,
+    required TResult Function(bool isBuffering) updateBuffering,
+    required TResult Function() videoCompleted,
+    required TResult Function() dispose,
+  }) {
+    return toggleFullscreen();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(MediaItem mediaItem)? initialize,
+    TResult? Function()? play,
+    TResult? Function()? pause,
+    TResult? Function(Duration position)? seekTo,
+    TResult? Function(double speed)? setSpeed,
+    TResult? Function(String quality)? setQuality,
+    TResult? Function(double volume)? setVolume,
+    TResult? Function()? toggleMute,
+    TResult? Function()? toggleFullscreen,
+    TResult? Function(Duration position)? updatePosition,
+    TResult? Function(bool isBuffering)? updateBuffering,
+    TResult? Function()? videoCompleted,
+    TResult? Function()? dispose,
+  }) {
+    return toggleFullscreen?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(MediaItem mediaItem)? initialize,
+    TResult Function()? play,
+    TResult Function()? pause,
+    TResult Function(Duration position)? seekTo,
+    TResult Function(double speed)? setSpeed,
+    TResult Function(String quality)? setQuality,
+    TResult Function(double volume)? setVolume,
+    TResult Function()? toggleMute,
+    TResult Function()? toggleFullscreen,
+    TResult Function(Duration position)? updatePosition,
+    TResult Function(bool isBuffering)? updateBuffering,
+    TResult Function()? videoCompleted,
+    TResult Function()? dispose,
+    required TResult orElse(),
+  }) {
+    if (toggleFullscreen != null) {
+      return toggleFullscreen();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialize value) initialize,
+    required TResult Function(_Play value) play,
+    required TResult Function(_Pause value) pause,
+    required TResult Function(_SeekTo value) seekTo,
+    required TResult Function(_SetSpeed value) setSpeed,
+    required TResult Function(_SetQuality value) setQuality,
+    required TResult Function(_SetVolume value) setVolume,
+    required TResult Function(_ToggleMute value) toggleMute,
+    required TResult Function(_ToggleFullscreen value) toggleFullscreen,
+    required TResult Function(_UpdatePosition value) updatePosition,
+    required TResult Function(_UpdateBuffering value) updateBuffering,
+    required TResult Function(_VideoCompleted value) videoCompleted,
+    required TResult Function(_Dispose value) dispose,
+  }) {
+    return toggleFullscreen(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialize value)? initialize,
+    TResult? Function(_Play value)? play,
+    TResult? Function(_Pause value)? pause,
+    TResult? Function(_SeekTo value)? seekTo,
+    TResult? Function(_SetSpeed value)? setSpeed,
+    TResult? Function(_SetQuality value)? setQuality,
+    TResult? Function(_SetVolume value)? setVolume,
+    TResult? Function(_ToggleMute value)? toggleMute,
+    TResult? Function(_ToggleFullscreen value)? toggleFullscreen,
+    TResult? Function(_UpdatePosition value)? updatePosition,
+    TResult? Function(_UpdateBuffering value)? updateBuffering,
+    TResult? Function(_VideoCompleted value)? videoCompleted,
+    TResult? Function(_Dispose value)? dispose,
+  }) {
+    return toggleFullscreen?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialize value)? initialize,
+    TResult Function(_Play value)? play,
+    TResult Function(_Pause value)? pause,
+    TResult Function(_SeekTo value)? seekTo,
+    TResult Function(_SetSpeed value)? setSpeed,
+    TResult Function(_SetQuality value)? setQuality,
+    TResult Function(_SetVolume value)? setVolume,
+    TResult Function(_ToggleMute value)? toggleMute,
+    TResult Function(_ToggleFullscreen value)? toggleFullscreen,
+    TResult Function(_UpdatePosition value)? updatePosition,
+    TResult Function(_UpdateBuffering value)? updateBuffering,
+    TResult Function(_VideoCompleted value)? videoCompleted,
+    TResult Function(_Dispose value)? dispose,
+    required TResult orElse(),
+  }) {
+    if (toggleFullscreen != null) {
+      return toggleFullscreen(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _ToggleFullscreen implements PlayerEvent {
+  const factory _ToggleFullscreen() = _$ToggleFullscreenImpl;
+}
+
+/// @nodoc
 abstract class _$$UpdatePositionImplCopyWith<$Res> {
-  factory _$$UpdatePositionImplCopyWith(
-    _$UpdatePositionImpl value,
-    $Res Function(_$UpdatePositionImpl) then,
-  ) = __$$UpdatePositionImplCopyWithImpl<$Res>;
+  factory _$$UpdatePositionImplCopyWith(_$UpdatePositionImpl value,
+          $Res Function(_$UpdatePositionImpl) then) =
+      __$$UpdatePositionImplCopyWithImpl<$Res>;
   @useResult
   $Res call({Duration position});
 }
@@ -1659,23 +1822,20 @@ class __$$UpdatePositionImplCopyWithImpl<$Res>
     extends _$PlayerEventCopyWithImpl<$Res, _$UpdatePositionImpl>
     implements _$$UpdatePositionImplCopyWith<$Res> {
   __$$UpdatePositionImplCopyWithImpl(
-    _$UpdatePositionImpl _value,
-    $Res Function(_$UpdatePositionImpl) _then,
-  ) : super(_value, _then);
+      _$UpdatePositionImpl _value, $Res Function(_$UpdatePositionImpl) _then)
+      : super(_value, _then);
 
-  /// Create a copy of PlayerEvent
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? position = null}) {
-    return _then(
-      _$UpdatePositionImpl(
-        null == position
-            ? _value.position
-            : position // ignore: cast_nullable_to_non_nullable
-                  as Duration,
-      ),
-    );
+  $Res call({
+    Object? position = null,
+  }) {
+    return _then(_$UpdatePositionImpl(
+      null == position
+          ? _value.position
+          : position // ignore: cast_nullable_to_non_nullable
+              as Duration,
+    ));
   }
 }
 
@@ -1704,16 +1864,12 @@ class _$UpdatePositionImpl implements _UpdatePosition {
   @override
   int get hashCode => Object.hash(runtimeType, position);
 
-  /// Create a copy of PlayerEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$UpdatePositionImplCopyWith<_$UpdatePositionImpl> get copyWith =>
       __$$UpdatePositionImplCopyWithImpl<_$UpdatePositionImpl>(
-        this,
-        _$identity,
-      );
+          this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -1726,6 +1882,7 @@ class _$UpdatePositionImpl implements _UpdatePosition {
     required TResult Function(String quality) setQuality,
     required TResult Function(double volume) setVolume,
     required TResult Function() toggleMute,
+    required TResult Function() toggleFullscreen,
     required TResult Function(Duration position) updatePosition,
     required TResult Function(bool isBuffering) updateBuffering,
     required TResult Function() videoCompleted,
@@ -1745,6 +1902,7 @@ class _$UpdatePositionImpl implements _UpdatePosition {
     TResult? Function(String quality)? setQuality,
     TResult? Function(double volume)? setVolume,
     TResult? Function()? toggleMute,
+    TResult? Function()? toggleFullscreen,
     TResult? Function(Duration position)? updatePosition,
     TResult? Function(bool isBuffering)? updateBuffering,
     TResult? Function()? videoCompleted,
@@ -1764,6 +1922,7 @@ class _$UpdatePositionImpl implements _UpdatePosition {
     TResult Function(String quality)? setQuality,
     TResult Function(double volume)? setVolume,
     TResult Function()? toggleMute,
+    TResult Function()? toggleFullscreen,
     TResult Function(Duration position)? updatePosition,
     TResult Function(bool isBuffering)? updateBuffering,
     TResult Function()? videoCompleted,
@@ -1787,6 +1946,7 @@ class _$UpdatePositionImpl implements _UpdatePosition {
     required TResult Function(_SetQuality value) setQuality,
     required TResult Function(_SetVolume value) setVolume,
     required TResult Function(_ToggleMute value) toggleMute,
+    required TResult Function(_ToggleFullscreen value) toggleFullscreen,
     required TResult Function(_UpdatePosition value) updatePosition,
     required TResult Function(_UpdateBuffering value) updateBuffering,
     required TResult Function(_VideoCompleted value) videoCompleted,
@@ -1806,6 +1966,7 @@ class _$UpdatePositionImpl implements _UpdatePosition {
     TResult? Function(_SetQuality value)? setQuality,
     TResult? Function(_SetVolume value)? setVolume,
     TResult? Function(_ToggleMute value)? toggleMute,
+    TResult? Function(_ToggleFullscreen value)? toggleFullscreen,
     TResult? Function(_UpdatePosition value)? updatePosition,
     TResult? Function(_UpdateBuffering value)? updateBuffering,
     TResult? Function(_VideoCompleted value)? videoCompleted,
@@ -1825,6 +1986,7 @@ class _$UpdatePositionImpl implements _UpdatePosition {
     TResult Function(_SetQuality value)? setQuality,
     TResult Function(_SetVolume value)? setVolume,
     TResult Function(_ToggleMute value)? toggleMute,
+    TResult Function(_ToggleFullscreen value)? toggleFullscreen,
     TResult Function(_UpdatePosition value)? updatePosition,
     TResult Function(_UpdateBuffering value)? updateBuffering,
     TResult Function(_VideoCompleted value)? videoCompleted,
@@ -1842,20 +2004,16 @@ abstract class _UpdatePosition implements PlayerEvent {
   const factory _UpdatePosition(final Duration position) = _$UpdatePositionImpl;
 
   Duration get position;
-
-  /// Create a copy of PlayerEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$UpdatePositionImplCopyWith<_$UpdatePositionImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class _$$UpdateBufferingImplCopyWith<$Res> {
-  factory _$$UpdateBufferingImplCopyWith(
-    _$UpdateBufferingImpl value,
-    $Res Function(_$UpdateBufferingImpl) then,
-  ) = __$$UpdateBufferingImplCopyWithImpl<$Res>;
+  factory _$$UpdateBufferingImplCopyWith(_$UpdateBufferingImpl value,
+          $Res Function(_$UpdateBufferingImpl) then) =
+      __$$UpdateBufferingImplCopyWithImpl<$Res>;
   @useResult
   $Res call({bool isBuffering});
 }
@@ -1865,23 +2023,20 @@ class __$$UpdateBufferingImplCopyWithImpl<$Res>
     extends _$PlayerEventCopyWithImpl<$Res, _$UpdateBufferingImpl>
     implements _$$UpdateBufferingImplCopyWith<$Res> {
   __$$UpdateBufferingImplCopyWithImpl(
-    _$UpdateBufferingImpl _value,
-    $Res Function(_$UpdateBufferingImpl) _then,
-  ) : super(_value, _then);
+      _$UpdateBufferingImpl _value, $Res Function(_$UpdateBufferingImpl) _then)
+      : super(_value, _then);
 
-  /// Create a copy of PlayerEvent
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? isBuffering = null}) {
-    return _then(
-      _$UpdateBufferingImpl(
-        null == isBuffering
-            ? _value.isBuffering
-            : isBuffering // ignore: cast_nullable_to_non_nullable
-                  as bool,
-      ),
-    );
+  $Res call({
+    Object? isBuffering = null,
+  }) {
+    return _then(_$UpdateBufferingImpl(
+      null == isBuffering
+          ? _value.isBuffering
+          : isBuffering // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
   }
 }
 
@@ -1910,16 +2065,12 @@ class _$UpdateBufferingImpl implements _UpdateBuffering {
   @override
   int get hashCode => Object.hash(runtimeType, isBuffering);
 
-  /// Create a copy of PlayerEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$UpdateBufferingImplCopyWith<_$UpdateBufferingImpl> get copyWith =>
       __$$UpdateBufferingImplCopyWithImpl<_$UpdateBufferingImpl>(
-        this,
-        _$identity,
-      );
+          this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -1932,6 +2083,7 @@ class _$UpdateBufferingImpl implements _UpdateBuffering {
     required TResult Function(String quality) setQuality,
     required TResult Function(double volume) setVolume,
     required TResult Function() toggleMute,
+    required TResult Function() toggleFullscreen,
     required TResult Function(Duration position) updatePosition,
     required TResult Function(bool isBuffering) updateBuffering,
     required TResult Function() videoCompleted,
@@ -1951,6 +2103,7 @@ class _$UpdateBufferingImpl implements _UpdateBuffering {
     TResult? Function(String quality)? setQuality,
     TResult? Function(double volume)? setVolume,
     TResult? Function()? toggleMute,
+    TResult? Function()? toggleFullscreen,
     TResult? Function(Duration position)? updatePosition,
     TResult? Function(bool isBuffering)? updateBuffering,
     TResult? Function()? videoCompleted,
@@ -1970,6 +2123,7 @@ class _$UpdateBufferingImpl implements _UpdateBuffering {
     TResult Function(String quality)? setQuality,
     TResult Function(double volume)? setVolume,
     TResult Function()? toggleMute,
+    TResult Function()? toggleFullscreen,
     TResult Function(Duration position)? updatePosition,
     TResult Function(bool isBuffering)? updateBuffering,
     TResult Function()? videoCompleted,
@@ -1993,6 +2147,7 @@ class _$UpdateBufferingImpl implements _UpdateBuffering {
     required TResult Function(_SetQuality value) setQuality,
     required TResult Function(_SetVolume value) setVolume,
     required TResult Function(_ToggleMute value) toggleMute,
+    required TResult Function(_ToggleFullscreen value) toggleFullscreen,
     required TResult Function(_UpdatePosition value) updatePosition,
     required TResult Function(_UpdateBuffering value) updateBuffering,
     required TResult Function(_VideoCompleted value) videoCompleted,
@@ -2012,6 +2167,7 @@ class _$UpdateBufferingImpl implements _UpdateBuffering {
     TResult? Function(_SetQuality value)? setQuality,
     TResult? Function(_SetVolume value)? setVolume,
     TResult? Function(_ToggleMute value)? toggleMute,
+    TResult? Function(_ToggleFullscreen value)? toggleFullscreen,
     TResult? Function(_UpdatePosition value)? updatePosition,
     TResult? Function(_UpdateBuffering value)? updateBuffering,
     TResult? Function(_VideoCompleted value)? videoCompleted,
@@ -2031,6 +2187,7 @@ class _$UpdateBufferingImpl implements _UpdateBuffering {
     TResult Function(_SetQuality value)? setQuality,
     TResult Function(_SetVolume value)? setVolume,
     TResult Function(_ToggleMute value)? toggleMute,
+    TResult Function(_ToggleFullscreen value)? toggleFullscreen,
     TResult Function(_UpdatePosition value)? updatePosition,
     TResult Function(_UpdateBuffering value)? updateBuffering,
     TResult Function(_VideoCompleted value)? videoCompleted,
@@ -2049,20 +2206,16 @@ abstract class _UpdateBuffering implements PlayerEvent {
       _$UpdateBufferingImpl;
 
   bool get isBuffering;
-
-  /// Create a copy of PlayerEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$UpdateBufferingImplCopyWith<_$UpdateBufferingImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class _$$VideoCompletedImplCopyWith<$Res> {
-  factory _$$VideoCompletedImplCopyWith(
-    _$VideoCompletedImpl value,
-    $Res Function(_$VideoCompletedImpl) then,
-  ) = __$$VideoCompletedImplCopyWithImpl<$Res>;
+  factory _$$VideoCompletedImplCopyWith(_$VideoCompletedImpl value,
+          $Res Function(_$VideoCompletedImpl) then) =
+      __$$VideoCompletedImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
@@ -2070,12 +2223,8 @@ class __$$VideoCompletedImplCopyWithImpl<$Res>
     extends _$PlayerEventCopyWithImpl<$Res, _$VideoCompletedImpl>
     implements _$$VideoCompletedImplCopyWith<$Res> {
   __$$VideoCompletedImplCopyWithImpl(
-    _$VideoCompletedImpl _value,
-    $Res Function(_$VideoCompletedImpl) _then,
-  ) : super(_value, _then);
-
-  /// Create a copy of PlayerEvent
-  /// with the given fields replaced by the non-null parameter values.
+      _$VideoCompletedImpl _value, $Res Function(_$VideoCompletedImpl) _then)
+      : super(_value, _then);
 }
 
 /// @nodoc
@@ -2108,6 +2257,7 @@ class _$VideoCompletedImpl implements _VideoCompleted {
     required TResult Function(String quality) setQuality,
     required TResult Function(double volume) setVolume,
     required TResult Function() toggleMute,
+    required TResult Function() toggleFullscreen,
     required TResult Function(Duration position) updatePosition,
     required TResult Function(bool isBuffering) updateBuffering,
     required TResult Function() videoCompleted,
@@ -2127,6 +2277,7 @@ class _$VideoCompletedImpl implements _VideoCompleted {
     TResult? Function(String quality)? setQuality,
     TResult? Function(double volume)? setVolume,
     TResult? Function()? toggleMute,
+    TResult? Function()? toggleFullscreen,
     TResult? Function(Duration position)? updatePosition,
     TResult? Function(bool isBuffering)? updateBuffering,
     TResult? Function()? videoCompleted,
@@ -2146,6 +2297,7 @@ class _$VideoCompletedImpl implements _VideoCompleted {
     TResult Function(String quality)? setQuality,
     TResult Function(double volume)? setVolume,
     TResult Function()? toggleMute,
+    TResult Function()? toggleFullscreen,
     TResult Function(Duration position)? updatePosition,
     TResult Function(bool isBuffering)? updateBuffering,
     TResult Function()? videoCompleted,
@@ -2169,6 +2321,7 @@ class _$VideoCompletedImpl implements _VideoCompleted {
     required TResult Function(_SetQuality value) setQuality,
     required TResult Function(_SetVolume value) setVolume,
     required TResult Function(_ToggleMute value) toggleMute,
+    required TResult Function(_ToggleFullscreen value) toggleFullscreen,
     required TResult Function(_UpdatePosition value) updatePosition,
     required TResult Function(_UpdateBuffering value) updateBuffering,
     required TResult Function(_VideoCompleted value) videoCompleted,
@@ -2188,6 +2341,7 @@ class _$VideoCompletedImpl implements _VideoCompleted {
     TResult? Function(_SetQuality value)? setQuality,
     TResult? Function(_SetVolume value)? setVolume,
     TResult? Function(_ToggleMute value)? toggleMute,
+    TResult? Function(_ToggleFullscreen value)? toggleFullscreen,
     TResult? Function(_UpdatePosition value)? updatePosition,
     TResult? Function(_UpdateBuffering value)? updateBuffering,
     TResult? Function(_VideoCompleted value)? videoCompleted,
@@ -2207,6 +2361,7 @@ class _$VideoCompletedImpl implements _VideoCompleted {
     TResult Function(_SetQuality value)? setQuality,
     TResult Function(_SetVolume value)? setVolume,
     TResult Function(_ToggleMute value)? toggleMute,
+    TResult Function(_ToggleFullscreen value)? toggleFullscreen,
     TResult Function(_UpdatePosition value)? updatePosition,
     TResult Function(_UpdateBuffering value)? updateBuffering,
     TResult Function(_VideoCompleted value)? videoCompleted,
@@ -2227,9 +2382,8 @@ abstract class _VideoCompleted implements PlayerEvent {
 /// @nodoc
 abstract class _$$DisposeImplCopyWith<$Res> {
   factory _$$DisposeImplCopyWith(
-    _$DisposeImpl value,
-    $Res Function(_$DisposeImpl) then,
-  ) = __$$DisposeImplCopyWithImpl<$Res>;
+          _$DisposeImpl value, $Res Function(_$DisposeImpl) then) =
+      __$$DisposeImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
@@ -2237,12 +2391,8 @@ class __$$DisposeImplCopyWithImpl<$Res>
     extends _$PlayerEventCopyWithImpl<$Res, _$DisposeImpl>
     implements _$$DisposeImplCopyWith<$Res> {
   __$$DisposeImplCopyWithImpl(
-    _$DisposeImpl _value,
-    $Res Function(_$DisposeImpl) _then,
-  ) : super(_value, _then);
-
-  /// Create a copy of PlayerEvent
-  /// with the given fields replaced by the non-null parameter values.
+      _$DisposeImpl _value, $Res Function(_$DisposeImpl) _then)
+      : super(_value, _then);
 }
 
 /// @nodoc
@@ -2275,6 +2425,7 @@ class _$DisposeImpl implements _Dispose {
     required TResult Function(String quality) setQuality,
     required TResult Function(double volume) setVolume,
     required TResult Function() toggleMute,
+    required TResult Function() toggleFullscreen,
     required TResult Function(Duration position) updatePosition,
     required TResult Function(bool isBuffering) updateBuffering,
     required TResult Function() videoCompleted,
@@ -2294,6 +2445,7 @@ class _$DisposeImpl implements _Dispose {
     TResult? Function(String quality)? setQuality,
     TResult? Function(double volume)? setVolume,
     TResult? Function()? toggleMute,
+    TResult? Function()? toggleFullscreen,
     TResult? Function(Duration position)? updatePosition,
     TResult? Function(bool isBuffering)? updateBuffering,
     TResult? Function()? videoCompleted,
@@ -2313,6 +2465,7 @@ class _$DisposeImpl implements _Dispose {
     TResult Function(String quality)? setQuality,
     TResult Function(double volume)? setVolume,
     TResult Function()? toggleMute,
+    TResult Function()? toggleFullscreen,
     TResult Function(Duration position)? updatePosition,
     TResult Function(bool isBuffering)? updateBuffering,
     TResult Function()? videoCompleted,
@@ -2336,6 +2489,7 @@ class _$DisposeImpl implements _Dispose {
     required TResult Function(_SetQuality value) setQuality,
     required TResult Function(_SetVolume value) setVolume,
     required TResult Function(_ToggleMute value) toggleMute,
+    required TResult Function(_ToggleFullscreen value) toggleFullscreen,
     required TResult Function(_UpdatePosition value) updatePosition,
     required TResult Function(_UpdateBuffering value) updateBuffering,
     required TResult Function(_VideoCompleted value) videoCompleted,
@@ -2355,6 +2509,7 @@ class _$DisposeImpl implements _Dispose {
     TResult? Function(_SetQuality value)? setQuality,
     TResult? Function(_SetVolume value)? setVolume,
     TResult? Function(_ToggleMute value)? toggleMute,
+    TResult? Function(_ToggleFullscreen value)? toggleFullscreen,
     TResult? Function(_UpdatePosition value)? updatePosition,
     TResult? Function(_UpdateBuffering value)? updateBuffering,
     TResult? Function(_VideoCompleted value)? videoCompleted,
@@ -2374,6 +2529,7 @@ class _$DisposeImpl implements _Dispose {
     TResult Function(_SetQuality value)? setQuality,
     TResult Function(_SetVolume value)? setVolume,
     TResult Function(_ToggleMute value)? toggleMute,
+    TResult Function(_ToggleFullscreen value)? toggleFullscreen,
     TResult Function(_UpdatePosition value)? updatePosition,
     TResult Function(_UpdateBuffering value)? updateBuffering,
     TResult Function(_VideoCompleted value)? videoCompleted,

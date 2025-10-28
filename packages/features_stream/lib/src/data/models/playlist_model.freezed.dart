@@ -12,8 +12,7 @@ part of 'playlist_model.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
-);
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 PlaylistModel _$PlaylistModelFromJson(Map<String, dynamic> json) {
   return _PlaylistModel.fromJson(json);
@@ -31,12 +30,8 @@ mixin _$PlaylistModel {
   int get totalDuration => throw _privateConstructorUsedError;
   bool get isPublic => throw _privateConstructorUsedError;
 
-  /// Serializes this PlaylistModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of PlaylistModel
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $PlaylistModelCopyWith<PlaylistModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -44,21 +39,19 @@ mixin _$PlaylistModel {
 /// @nodoc
 abstract class $PlaylistModelCopyWith<$Res> {
   factory $PlaylistModelCopyWith(
-    PlaylistModel value,
-    $Res Function(PlaylistModel) then,
-  ) = _$PlaylistModelCopyWithImpl<$Res, PlaylistModel>;
+          PlaylistModel value, $Res Function(PlaylistModel) then) =
+      _$PlaylistModelCopyWithImpl<$Res, PlaylistModel>;
   @useResult
-  $Res call({
-    String id,
-    String name,
-    String description,
-    List<MediaItemModel> items,
-    String? thumbnailUrl,
-    String createdAt,
-    String updatedAt,
-    int totalDuration,
-    bool isPublic,
-  });
+  $Res call(
+      {String id,
+      String name,
+      String description,
+      List<MediaItemModel> items,
+      String? thumbnailUrl,
+      String createdAt,
+      String updatedAt,
+      int totalDuration,
+      bool isPublic});
 }
 
 /// @nodoc
@@ -71,8 +64,6 @@ class _$PlaylistModelCopyWithImpl<$Res, $Val extends PlaylistModel>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of PlaylistModel
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -86,47 +77,44 @@ class _$PlaylistModelCopyWithImpl<$Res, $Val extends PlaylistModel>
     Object? totalDuration = null,
     Object? isPublic = null,
   }) {
-    return _then(
-      _value.copyWith(
-            id: null == id
-                ? _value.id
-                : id // ignore: cast_nullable_to_non_nullable
-                      as String,
-            name: null == name
-                ? _value.name
-                : name // ignore: cast_nullable_to_non_nullable
-                      as String,
-            description: null == description
-                ? _value.description
-                : description // ignore: cast_nullable_to_non_nullable
-                      as String,
-            items: null == items
-                ? _value.items
-                : items // ignore: cast_nullable_to_non_nullable
-                      as List<MediaItemModel>,
-            thumbnailUrl: freezed == thumbnailUrl
-                ? _value.thumbnailUrl
-                : thumbnailUrl // ignore: cast_nullable_to_non_nullable
-                      as String?,
-            createdAt: null == createdAt
-                ? _value.createdAt
-                : createdAt // ignore: cast_nullable_to_non_nullable
-                      as String,
-            updatedAt: null == updatedAt
-                ? _value.updatedAt
-                : updatedAt // ignore: cast_nullable_to_non_nullable
-                      as String,
-            totalDuration: null == totalDuration
-                ? _value.totalDuration
-                : totalDuration // ignore: cast_nullable_to_non_nullable
-                      as int,
-            isPublic: null == isPublic
-                ? _value.isPublic
-                : isPublic // ignore: cast_nullable_to_non_nullable
-                      as bool,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      description: null == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String,
+      items: null == items
+          ? _value.items
+          : items // ignore: cast_nullable_to_non_nullable
+              as List<MediaItemModel>,
+      thumbnailUrl: freezed == thumbnailUrl
+          ? _value.thumbnailUrl
+          : thumbnailUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
+      createdAt: null == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as String,
+      updatedAt: null == updatedAt
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as String,
+      totalDuration: null == totalDuration
+          ? _value.totalDuration
+          : totalDuration // ignore: cast_nullable_to_non_nullable
+              as int,
+      isPublic: null == isPublic
+          ? _value.isPublic
+          : isPublic // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ) as $Val);
   }
 }
 
@@ -134,22 +122,20 @@ class _$PlaylistModelCopyWithImpl<$Res, $Val extends PlaylistModel>
 abstract class _$$PlaylistModelImplCopyWith<$Res>
     implements $PlaylistModelCopyWith<$Res> {
   factory _$$PlaylistModelImplCopyWith(
-    _$PlaylistModelImpl value,
-    $Res Function(_$PlaylistModelImpl) then,
-  ) = __$$PlaylistModelImplCopyWithImpl<$Res>;
+          _$PlaylistModelImpl value, $Res Function(_$PlaylistModelImpl) then) =
+      __$$PlaylistModelImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({
-    String id,
-    String name,
-    String description,
-    List<MediaItemModel> items,
-    String? thumbnailUrl,
-    String createdAt,
-    String updatedAt,
-    int totalDuration,
-    bool isPublic,
-  });
+  $Res call(
+      {String id,
+      String name,
+      String description,
+      List<MediaItemModel> items,
+      String? thumbnailUrl,
+      String createdAt,
+      String updatedAt,
+      int totalDuration,
+      bool isPublic});
 }
 
 /// @nodoc
@@ -157,12 +143,9 @@ class __$$PlaylistModelImplCopyWithImpl<$Res>
     extends _$PlaylistModelCopyWithImpl<$Res, _$PlaylistModelImpl>
     implements _$$PlaylistModelImplCopyWith<$Res> {
   __$$PlaylistModelImplCopyWithImpl(
-    _$PlaylistModelImpl _value,
-    $Res Function(_$PlaylistModelImpl) _then,
-  ) : super(_value, _then);
+      _$PlaylistModelImpl _value, $Res Function(_$PlaylistModelImpl) _then)
+      : super(_value, _then);
 
-  /// Create a copy of PlaylistModel
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -176,64 +159,62 @@ class __$$PlaylistModelImplCopyWithImpl<$Res>
     Object? totalDuration = null,
     Object? isPublic = null,
   }) {
-    return _then(
-      _$PlaylistModelImpl(
-        id: null == id
-            ? _value.id
-            : id // ignore: cast_nullable_to_non_nullable
-                  as String,
-        name: null == name
-            ? _value.name
-            : name // ignore: cast_nullable_to_non_nullable
-                  as String,
-        description: null == description
-            ? _value.description
-            : description // ignore: cast_nullable_to_non_nullable
-                  as String,
-        items: null == items
-            ? _value._items
-            : items // ignore: cast_nullable_to_non_nullable
-                  as List<MediaItemModel>,
-        thumbnailUrl: freezed == thumbnailUrl
-            ? _value.thumbnailUrl
-            : thumbnailUrl // ignore: cast_nullable_to_non_nullable
-                  as String?,
-        createdAt: null == createdAt
-            ? _value.createdAt
-            : createdAt // ignore: cast_nullable_to_non_nullable
-                  as String,
-        updatedAt: null == updatedAt
-            ? _value.updatedAt
-            : updatedAt // ignore: cast_nullable_to_non_nullable
-                  as String,
-        totalDuration: null == totalDuration
-            ? _value.totalDuration
-            : totalDuration // ignore: cast_nullable_to_non_nullable
-                  as int,
-        isPublic: null == isPublic
-            ? _value.isPublic
-            : isPublic // ignore: cast_nullable_to_non_nullable
-                  as bool,
-      ),
-    );
+    return _then(_$PlaylistModelImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      description: null == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String,
+      items: null == items
+          ? _value._items
+          : items // ignore: cast_nullable_to_non_nullable
+              as List<MediaItemModel>,
+      thumbnailUrl: freezed == thumbnailUrl
+          ? _value.thumbnailUrl
+          : thumbnailUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
+      createdAt: null == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as String,
+      updatedAt: null == updatedAt
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as String,
+      totalDuration: null == totalDuration
+          ? _value.totalDuration
+          : totalDuration // ignore: cast_nullable_to_non_nullable
+              as int,
+      isPublic: null == isPublic
+          ? _value.isPublic
+          : isPublic // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$PlaylistModelImpl extends _PlaylistModel {
-  const _$PlaylistModelImpl({
-    required this.id,
-    required this.name,
-    required this.description,
-    required final List<MediaItemModel> items,
-    this.thumbnailUrl,
-    required this.createdAt,
-    required this.updatedAt,
-    required this.totalDuration,
-    this.isPublic = true,
-  }) : _items = items,
-       super._();
+  const _$PlaylistModelImpl(
+      {required this.id,
+      required this.name,
+      required this.description,
+      required final List<MediaItemModel> items,
+      this.thumbnailUrl,
+      required this.createdAt,
+      required this.updatedAt,
+      required this.totalDuration,
+      this.isPublic = true})
+      : _items = items,
+        super._();
 
   factory _$PlaylistModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$PlaylistModelImplFromJson(json);
@@ -291,24 +272,21 @@ class _$PlaylistModelImpl extends _PlaylistModel {
                 other.isPublic == isPublic));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-    runtimeType,
-    id,
-    name,
-    description,
-    const DeepCollectionEquality().hash(_items),
-    thumbnailUrl,
-    createdAt,
-    updatedAt,
-    totalDuration,
-    isPublic,
-  );
+      runtimeType,
+      id,
+      name,
+      description,
+      const DeepCollectionEquality().hash(_items),
+      thumbnailUrl,
+      createdAt,
+      updatedAt,
+      totalDuration,
+      isPublic);
 
-  /// Create a copy of PlaylistModel
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$PlaylistModelImplCopyWith<_$PlaylistModelImpl> get copyWith =>
@@ -316,22 +294,23 @@ class _$PlaylistModelImpl extends _PlaylistModel {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$PlaylistModelImplToJson(this);
+    return _$$PlaylistModelImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _PlaylistModel extends PlaylistModel {
-  const factory _PlaylistModel({
-    required final String id,
-    required final String name,
-    required final String description,
-    required final List<MediaItemModel> items,
-    final String? thumbnailUrl,
-    required final String createdAt,
-    required final String updatedAt,
-    required final int totalDuration,
-    final bool isPublic,
-  }) = _$PlaylistModelImpl;
+  const factory _PlaylistModel(
+      {required final String id,
+      required final String name,
+      required final String description,
+      required final List<MediaItemModel> items,
+      final String? thumbnailUrl,
+      required final String createdAt,
+      required final String updatedAt,
+      required final int totalDuration,
+      final bool isPublic}) = _$PlaylistModelImpl;
   const _PlaylistModel._() : super._();
 
   factory _PlaylistModel.fromJson(Map<String, dynamic> json) =
@@ -355,11 +334,8 @@ abstract class _PlaylistModel extends PlaylistModel {
   int get totalDuration;
   @override
   bool get isPublic;
-
-  /// Create a copy of PlaylistModel
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$PlaylistModelImplCopyWith<_$PlaylistModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

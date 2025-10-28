@@ -12,8 +12,7 @@ part of 'media_item_model.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
-);
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 MediaItemModel _$MediaItemModelFromJson(Map<String, dynamic> json) {
   return _MediaItemModel.fromJson(json);
@@ -33,12 +32,8 @@ mixin _$MediaItemModel {
   String? get author => throw _privateConstructorUsedError;
   int get viewCount => throw _privateConstructorUsedError;
 
-  /// Serializes this MediaItemModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of MediaItemModel
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $MediaItemModelCopyWith<MediaItemModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -46,23 +41,21 @@ mixin _$MediaItemModel {
 /// @nodoc
 abstract class $MediaItemModelCopyWith<$Res> {
   factory $MediaItemModelCopyWith(
-    MediaItemModel value,
-    $Res Function(MediaItemModel) then,
-  ) = _$MediaItemModelCopyWithImpl<$Res, MediaItemModel>;
+          MediaItemModel value, $Res Function(MediaItemModel) then) =
+      _$MediaItemModelCopyWithImpl<$Res, MediaItemModel>;
   @useResult
-  $Res call({
-    String id,
-    String title,
-    String description,
-    String thumbnailUrl,
-    int durationInSeconds,
-    String streamUrl,
-    String type,
-    Map<String, String> qualityOptions,
-    String publishedAt,
-    String? author,
-    int viewCount,
-  });
+  $Res call(
+      {String id,
+      String title,
+      String description,
+      String thumbnailUrl,
+      int durationInSeconds,
+      String streamUrl,
+      String type,
+      Map<String, String> qualityOptions,
+      String publishedAt,
+      String? author,
+      int viewCount});
 }
 
 /// @nodoc
@@ -75,8 +68,6 @@ class _$MediaItemModelCopyWithImpl<$Res, $Val extends MediaItemModel>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of MediaItemModel
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -92,80 +83,75 @@ class _$MediaItemModelCopyWithImpl<$Res, $Val extends MediaItemModel>
     Object? author = freezed,
     Object? viewCount = null,
   }) {
-    return _then(
-      _value.copyWith(
-            id: null == id
-                ? _value.id
-                : id // ignore: cast_nullable_to_non_nullable
-                      as String,
-            title: null == title
-                ? _value.title
-                : title // ignore: cast_nullable_to_non_nullable
-                      as String,
-            description: null == description
-                ? _value.description
-                : description // ignore: cast_nullable_to_non_nullable
-                      as String,
-            thumbnailUrl: null == thumbnailUrl
-                ? _value.thumbnailUrl
-                : thumbnailUrl // ignore: cast_nullable_to_non_nullable
-                      as String,
-            durationInSeconds: null == durationInSeconds
-                ? _value.durationInSeconds
-                : durationInSeconds // ignore: cast_nullable_to_non_nullable
-                      as int,
-            streamUrl: null == streamUrl
-                ? _value.streamUrl
-                : streamUrl // ignore: cast_nullable_to_non_nullable
-                      as String,
-            type: null == type
-                ? _value.type
-                : type // ignore: cast_nullable_to_non_nullable
-                      as String,
-            qualityOptions: null == qualityOptions
-                ? _value.qualityOptions
-                : qualityOptions // ignore: cast_nullable_to_non_nullable
-                      as Map<String, String>,
-            publishedAt: null == publishedAt
-                ? _value.publishedAt
-                : publishedAt // ignore: cast_nullable_to_non_nullable
-                      as String,
-            author: freezed == author
-                ? _value.author
-                : author // ignore: cast_nullable_to_non_nullable
-                      as String?,
-            viewCount: null == viewCount
-                ? _value.viewCount
-                : viewCount // ignore: cast_nullable_to_non_nullable
-                      as int,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      title: null == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as String,
+      description: null == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String,
+      thumbnailUrl: null == thumbnailUrl
+          ? _value.thumbnailUrl
+          : thumbnailUrl // ignore: cast_nullable_to_non_nullable
+              as String,
+      durationInSeconds: null == durationInSeconds
+          ? _value.durationInSeconds
+          : durationInSeconds // ignore: cast_nullable_to_non_nullable
+              as int,
+      streamUrl: null == streamUrl
+          ? _value.streamUrl
+          : streamUrl // ignore: cast_nullable_to_non_nullable
+              as String,
+      type: null == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as String,
+      qualityOptions: null == qualityOptions
+          ? _value.qualityOptions
+          : qualityOptions // ignore: cast_nullable_to_non_nullable
+              as Map<String, String>,
+      publishedAt: null == publishedAt
+          ? _value.publishedAt
+          : publishedAt // ignore: cast_nullable_to_non_nullable
+              as String,
+      author: freezed == author
+          ? _value.author
+          : author // ignore: cast_nullable_to_non_nullable
+              as String?,
+      viewCount: null == viewCount
+          ? _value.viewCount
+          : viewCount // ignore: cast_nullable_to_non_nullable
+              as int,
+    ) as $Val);
   }
 }
 
 /// @nodoc
 abstract class _$$MediaItemModelImplCopyWith<$Res>
     implements $MediaItemModelCopyWith<$Res> {
-  factory _$$MediaItemModelImplCopyWith(
-    _$MediaItemModelImpl value,
-    $Res Function(_$MediaItemModelImpl) then,
-  ) = __$$MediaItemModelImplCopyWithImpl<$Res>;
+  factory _$$MediaItemModelImplCopyWith(_$MediaItemModelImpl value,
+          $Res Function(_$MediaItemModelImpl) then) =
+      __$$MediaItemModelImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({
-    String id,
-    String title,
-    String description,
-    String thumbnailUrl,
-    int durationInSeconds,
-    String streamUrl,
-    String type,
-    Map<String, String> qualityOptions,
-    String publishedAt,
-    String? author,
-    int viewCount,
-  });
+  $Res call(
+      {String id,
+      String title,
+      String description,
+      String thumbnailUrl,
+      int durationInSeconds,
+      String streamUrl,
+      String type,
+      Map<String, String> qualityOptions,
+      String publishedAt,
+      String? author,
+      int viewCount});
 }
 
 /// @nodoc
@@ -173,12 +159,9 @@ class __$$MediaItemModelImplCopyWithImpl<$Res>
     extends _$MediaItemModelCopyWithImpl<$Res, _$MediaItemModelImpl>
     implements _$$MediaItemModelImplCopyWith<$Res> {
   __$$MediaItemModelImplCopyWithImpl(
-    _$MediaItemModelImpl _value,
-    $Res Function(_$MediaItemModelImpl) _then,
-  ) : super(_value, _then);
+      _$MediaItemModelImpl _value, $Res Function(_$MediaItemModelImpl) _then)
+      : super(_value, _then);
 
-  /// Create a copy of MediaItemModel
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -194,74 +177,72 @@ class __$$MediaItemModelImplCopyWithImpl<$Res>
     Object? author = freezed,
     Object? viewCount = null,
   }) {
-    return _then(
-      _$MediaItemModelImpl(
-        id: null == id
-            ? _value.id
-            : id // ignore: cast_nullable_to_non_nullable
-                  as String,
-        title: null == title
-            ? _value.title
-            : title // ignore: cast_nullable_to_non_nullable
-                  as String,
-        description: null == description
-            ? _value.description
-            : description // ignore: cast_nullable_to_non_nullable
-                  as String,
-        thumbnailUrl: null == thumbnailUrl
-            ? _value.thumbnailUrl
-            : thumbnailUrl // ignore: cast_nullable_to_non_nullable
-                  as String,
-        durationInSeconds: null == durationInSeconds
-            ? _value.durationInSeconds
-            : durationInSeconds // ignore: cast_nullable_to_non_nullable
-                  as int,
-        streamUrl: null == streamUrl
-            ? _value.streamUrl
-            : streamUrl // ignore: cast_nullable_to_non_nullable
-                  as String,
-        type: null == type
-            ? _value.type
-            : type // ignore: cast_nullable_to_non_nullable
-                  as String,
-        qualityOptions: null == qualityOptions
-            ? _value._qualityOptions
-            : qualityOptions // ignore: cast_nullable_to_non_nullable
-                  as Map<String, String>,
-        publishedAt: null == publishedAt
-            ? _value.publishedAt
-            : publishedAt // ignore: cast_nullable_to_non_nullable
-                  as String,
-        author: freezed == author
-            ? _value.author
-            : author // ignore: cast_nullable_to_non_nullable
-                  as String?,
-        viewCount: null == viewCount
-            ? _value.viewCount
-            : viewCount // ignore: cast_nullable_to_non_nullable
-                  as int,
-      ),
-    );
+    return _then(_$MediaItemModelImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      title: null == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as String,
+      description: null == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String,
+      thumbnailUrl: null == thumbnailUrl
+          ? _value.thumbnailUrl
+          : thumbnailUrl // ignore: cast_nullable_to_non_nullable
+              as String,
+      durationInSeconds: null == durationInSeconds
+          ? _value.durationInSeconds
+          : durationInSeconds // ignore: cast_nullable_to_non_nullable
+              as int,
+      streamUrl: null == streamUrl
+          ? _value.streamUrl
+          : streamUrl // ignore: cast_nullable_to_non_nullable
+              as String,
+      type: null == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as String,
+      qualityOptions: null == qualityOptions
+          ? _value._qualityOptions
+          : qualityOptions // ignore: cast_nullable_to_non_nullable
+              as Map<String, String>,
+      publishedAt: null == publishedAt
+          ? _value.publishedAt
+          : publishedAt // ignore: cast_nullable_to_non_nullable
+              as String,
+      author: freezed == author
+          ? _value.author
+          : author // ignore: cast_nullable_to_non_nullable
+              as String?,
+      viewCount: null == viewCount
+          ? _value.viewCount
+          : viewCount // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$MediaItemModelImpl extends _MediaItemModel {
-  const _$MediaItemModelImpl({
-    required this.id,
-    required this.title,
-    required this.description,
-    required this.thumbnailUrl,
-    required this.durationInSeconds,
-    required this.streamUrl,
-    required this.type,
-    required final Map<String, String> qualityOptions,
-    required this.publishedAt,
-    this.author,
-    this.viewCount = 0,
-  }) : _qualityOptions = qualityOptions,
-       super._();
+  const _$MediaItemModelImpl(
+      {required this.id,
+      required this.title,
+      required this.description,
+      required this.thumbnailUrl,
+      required this.durationInSeconds,
+      required this.streamUrl,
+      required this.type,
+      required final Map<String, String> qualityOptions,
+      required this.publishedAt,
+      this.author,
+      this.viewCount = 0})
+      : _qualityOptions = qualityOptions,
+        super._();
 
   factory _$MediaItemModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$MediaItemModelImplFromJson(json);
@@ -317,10 +298,8 @@ class _$MediaItemModelImpl extends _MediaItemModel {
             (identical(other.streamUrl, streamUrl) ||
                 other.streamUrl == streamUrl) &&
             (identical(other.type, type) || other.type == type) &&
-            const DeepCollectionEquality().equals(
-              other._qualityOptions,
-              _qualityOptions,
-            ) &&
+            const DeepCollectionEquality()
+                .equals(other._qualityOptions, _qualityOptions) &&
             (identical(other.publishedAt, publishedAt) ||
                 other.publishedAt == publishedAt) &&
             (identical(other.author, author) || other.author == author) &&
@@ -328,54 +307,50 @@ class _$MediaItemModelImpl extends _MediaItemModel {
                 other.viewCount == viewCount));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-    runtimeType,
-    id,
-    title,
-    description,
-    thumbnailUrl,
-    durationInSeconds,
-    streamUrl,
-    type,
-    const DeepCollectionEquality().hash(_qualityOptions),
-    publishedAt,
-    author,
-    viewCount,
-  );
+      runtimeType,
+      id,
+      title,
+      description,
+      thumbnailUrl,
+      durationInSeconds,
+      streamUrl,
+      type,
+      const DeepCollectionEquality().hash(_qualityOptions),
+      publishedAt,
+      author,
+      viewCount);
 
-  /// Create a copy of MediaItemModel
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$MediaItemModelImplCopyWith<_$MediaItemModelImpl> get copyWith =>
       __$$MediaItemModelImplCopyWithImpl<_$MediaItemModelImpl>(
-        this,
-        _$identity,
-      );
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$MediaItemModelImplToJson(this);
+    return _$$MediaItemModelImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _MediaItemModel extends MediaItemModel {
-  const factory _MediaItemModel({
-    required final String id,
-    required final String title,
-    required final String description,
-    required final String thumbnailUrl,
-    required final int durationInSeconds,
-    required final String streamUrl,
-    required final String type,
-    required final Map<String, String> qualityOptions,
-    required final String publishedAt,
-    final String? author,
-    final int viewCount,
-  }) = _$MediaItemModelImpl;
+  const factory _MediaItemModel(
+      {required final String id,
+      required final String title,
+      required final String description,
+      required final String thumbnailUrl,
+      required final int durationInSeconds,
+      required final String streamUrl,
+      required final String type,
+      required final Map<String, String> qualityOptions,
+      required final String publishedAt,
+      final String? author,
+      final int viewCount}) = _$MediaItemModelImpl;
   const _MediaItemModel._() : super._();
 
   factory _MediaItemModel.fromJson(Map<String, dynamic> json) =
@@ -403,11 +378,8 @@ abstract class _MediaItemModel extends MediaItemModel {
   String? get author;
   @override
   int get viewCount;
-
-  /// Create a copy of MediaItemModel
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$MediaItemModelImplCopyWith<_$MediaItemModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

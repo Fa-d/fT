@@ -22,17 +22,17 @@ _$MediaItemModelImpl _$$MediaItemModelImplFromJson(Map<String, dynamic> json) =>
     );
 
 Map<String, dynamic> _$$MediaItemModelImplToJson(
-  _$MediaItemModelImpl instance,
-) => <String, dynamic>{
-  'id': instance.id,
-  'title': instance.title,
-  'description': instance.description,
-  'thumbnailUrl': instance.thumbnailUrl,
-  'durationInSeconds': instance.durationInSeconds,
-  'streamUrl': instance.streamUrl,
-  'type': instance.type,
-  'qualityOptions': instance.qualityOptions,
-  'publishedAt': instance.publishedAt,
-  'author': instance.author,
-  'viewCount': instance.viewCount,
-};
+        _$MediaItemModelImpl instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'title': instance.title,
+      'description': instance.description,
+      'thumbnailUrl': instance.thumbnailUrl,
+      'durationInSeconds': instance.durationInSeconds,
+      'streamUrl': instance.streamUrl,
+      'type': instance.type,
+      'qualityOptions': instance.qualityOptions,
+      'publishedAt': instance.publishedAt,
+      'author': instance.author,
+      'viewCount': instance.viewCount,
+    };

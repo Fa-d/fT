@@ -12,6 +12,7 @@ class PlaybackState extends Equatable {
   final String? currentQuality;
   final double volume;
   final bool isMuted;
+  final bool isFullscreen;
   final DateTime lastUpdated;
 
   const PlaybackState({
@@ -24,6 +25,7 @@ class PlaybackState extends Equatable {
     this.currentQuality,
     this.volume = 1.0,
     this.isMuted = false,
+    this.isFullscreen = false,
     required this.lastUpdated,
   });
 
@@ -64,6 +66,7 @@ class PlaybackState extends Equatable {
         currentQuality,
         volume,
         isMuted,
+        isFullscreen,
         lastUpdated,
       ];
 }

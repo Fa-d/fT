@@ -12,6 +12,7 @@ class VideoPlayerServiceImpl implements VideoPlayerService {
       StreamController<VideoPlayerServiceState>.broadcast();
 
   VideoPlayerServiceState _currentState = const VideoPlayerServiceState();
+  bool _isDisposed = false;
 
   @override
   Stream<VideoPlayerServiceState> get stateStream => _stateController.stream;
@@ -20,10 +21,18 @@ class VideoPlayerServiceImpl implements VideoPlayerService {
   VideoPlayerServiceState get currentState => _currentState;
 
   @override
-  bool get isInitialized => _controller?.value.isInitialized ?? false;
+  bool get isInitialized {
+    if (_isDisposed || _controller == null) return false;
+    try {
+      return _controller!.value.isInitialized;
+    } catch (e) {
+      // Controller was disposed, return false
+      return false;
+    }
+  }
 
   @override
-  dynamic get nativeController => _controller;
+  dynamic get nativeController => _isDisposed ? null : _controller;
 
   @override
   Future<void> initialize(String videoUrl) async {
@@ -41,7 +50,13 @@ class VideoPlayerServiceImpl implements VideoPlayerService {
       }
 
       // Dispose previous controller if exists
-      await _controller?.dispose();
+      if (_controller != null) {
+        _controller!.removeListener(_onControllerUpdate);
+        await _controller!.dispose();
+      }
+
+      // Reset disposal flag for reinitialization
+      _isDisposed = false;
 
       // Create new controller
       _controller = VideoPlayerController.networkUrl(uri);
@@ -78,6 +93,11 @@ class VideoPlayerServiceImpl implements VideoPlayerService {
   @override
   Future<void> play() async {
     try {
+      if (_isDisposed) {
+        Logger.debug('VideoPlayerService: Cannot play, service disposed');
+        return;
+      }
+
       if (_controller == null || !_controller!.value.isInitialized) {
         throw const PlayerInitializationException('Player not initialized');
       }
@@ -98,6 +118,11 @@ class VideoPlayerServiceImpl implements VideoPlayerService {
   @override
   Future<void> pause() async {
     try {
+      if (_isDisposed) {
+        Logger.debug('VideoPlayerService: Cannot pause, service disposed');
+        return;
+      }
+
       if (_controller == null || !_controller!.value.isInitialized) {
         throw const PlayerInitializationException('Player not initialized');
       }
@@ -119,6 +144,11 @@ class VideoPlayerServiceImpl implements VideoPlayerService {
   @override
   Future<void> seekTo(Duration position) async {
     try {
+      if (_isDisposed) {
+        Logger.debug('VideoPlayerService: Cannot seek, service disposed');
+        return;
+      }
+
       if (_controller == null || !_controller!.value.isInitialized) {
         throw const PlayerInitializationException('Player not initialized');
       }
@@ -148,6 +178,11 @@ class VideoPlayerServiceImpl implements VideoPlayerService {
   @override
   Future<void> setPlaybackSpeed(double speed) async {
     try {
+      if (_isDisposed) {
+        Logger.debug('VideoPlayerService: Cannot set playback speed, service disposed');
+        return;
+      }
+
       if (_controller == null || !_controller!.value.isInitialized) {
         throw const PlayerInitializationException('Player not initialized');
       }
@@ -172,6 +207,11 @@ class VideoPlayerServiceImpl implements VideoPlayerService {
   @override
   Future<void> setVolume(double volume) async {
     try {
+      if (_isDisposed) {
+        Logger.debug('VideoPlayerService: Cannot set volume, service disposed');
+        return;
+      }
+
       if (_controller == null || !_controller!.value.isInitialized) {
         throw const PlayerInitializationException('Player not initialized');
       }
@@ -195,26 +235,47 @@ class VideoPlayerServiceImpl implements VideoPlayerService {
 
   @override
   Future<void> dispose() async {
+    if (_isDisposed) {
+      Logger.debug('VideoPlayerService: Already disposed');
+      return;
+    }
+
     Logger.info('VideoPlayerService: Disposing');
+    _isDisposed = true;
+
+    // Remove listener before disposing to prevent callback after disposal
+    _controller?.removeListener(_onControllerUpdate);
     await _controller?.dispose();
     _controller = null;
-    await _stateController.close();
+
+    if (!_stateController.isClosed) {
+      await _stateController.close();
+    }
   }
 
   /// Handle controller updates
   void _onControllerUpdate() {
-    if (_controller == null) return;
+    // Check if service or controller has been disposed
+    if (_isDisposed || _controller == null) return;
 
-    final value = _controller!.value;
+    // Additional safety check - don't access if state controller is closed
+    if (_stateController.isClosed) return;
 
-    // Update state based on controller changes
-    _updateState(_currentState.copyWith(
-      isPlaying: value.isPlaying,
-      isBuffering: value.isBuffering,
-      position: value.position,
-      duration: value.duration,
-      errorMessage: value.hasError ? value.errorDescription : null,
-    ));
+    try {
+      final value = _controller!.value;
+
+      // Update state based on controller changes
+      _updateState(_currentState.copyWith(
+        isPlaying: value.isPlaying,
+        isBuffering: value.isBuffering,
+        position: value.position,
+        duration: value.duration,
+        errorMessage: value.hasError ? value.errorDescription : null,
+      ));
+    } catch (e) {
+      // Silently catch errors from disposed controller
+      Logger.debug('VideoPlayerService: Ignoring controller update after disposal');
+    }
   }
 
   /// Update state and emit to stream

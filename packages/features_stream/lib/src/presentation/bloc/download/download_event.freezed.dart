@@ -12,8 +12,7 @@ part of 'download_event.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
-);
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$DownloadEvent {
@@ -21,12 +20,13 @@ mixin _$DownloadEvent {
   TResult when<TResult extends Object?>({
     required TResult Function() loadDownloads,
     required TResult Function(MediaItem mediaItem, String quality)
-    startDownload,
+        startDownload,
     required TResult Function(String taskId) pauseDownload,
     required TResult Function(String taskId) resumeDownload,
     required TResult Function(String taskId) cancelDownload,
     required TResult Function(String taskId) deleteDownload,
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loadDownloads,
@@ -35,7 +35,8 @@ mixin _$DownloadEvent {
     TResult? Function(String taskId)? resumeDownload,
     TResult? Function(String taskId)? cancelDownload,
     TResult? Function(String taskId)? deleteDownload,
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loadDownloads,
@@ -45,7 +46,8 @@ mixin _$DownloadEvent {
     TResult Function(String taskId)? cancelDownload,
     TResult Function(String taskId)? deleteDownload,
     required TResult orElse(),
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_LoadDownloads value) loadDownloads,
@@ -54,7 +56,8 @@ mixin _$DownloadEvent {
     required TResult Function(_ResumeDownload value) resumeDownload,
     required TResult Function(_CancelDownload value) cancelDownload,
     required TResult Function(_DeleteDownload value) deleteDownload,
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_LoadDownloads value)? loadDownloads,
@@ -63,7 +66,8 @@ mixin _$DownloadEvent {
     TResult? Function(_ResumeDownload value)? resumeDownload,
     TResult? Function(_CancelDownload value)? cancelDownload,
     TResult? Function(_DeleteDownload value)? deleteDownload,
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_LoadDownloads value)? loadDownloads,
@@ -73,15 +77,15 @@ mixin _$DownloadEvent {
     TResult Function(_CancelDownload value)? cancelDownload,
     TResult Function(_DeleteDownload value)? deleteDownload,
     required TResult orElse(),
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $DownloadEventCopyWith<$Res> {
   factory $DownloadEventCopyWith(
-    DownloadEvent value,
-    $Res Function(DownloadEvent) then,
-  ) = _$DownloadEventCopyWithImpl<$Res, DownloadEvent>;
+          DownloadEvent value, $Res Function(DownloadEvent) then) =
+      _$DownloadEventCopyWithImpl<$Res, DownloadEvent>;
 }
 
 /// @nodoc
@@ -93,17 +97,13 @@ class _$DownloadEventCopyWithImpl<$Res, $Val extends DownloadEvent>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
-
-  /// Create a copy of DownloadEvent
-  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
 abstract class _$$LoadDownloadsImplCopyWith<$Res> {
   factory _$$LoadDownloadsImplCopyWith(
-    _$LoadDownloadsImpl value,
-    $Res Function(_$LoadDownloadsImpl) then,
-  ) = __$$LoadDownloadsImplCopyWithImpl<$Res>;
+          _$LoadDownloadsImpl value, $Res Function(_$LoadDownloadsImpl) then) =
+      __$$LoadDownloadsImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
@@ -111,12 +111,8 @@ class __$$LoadDownloadsImplCopyWithImpl<$Res>
     extends _$DownloadEventCopyWithImpl<$Res, _$LoadDownloadsImpl>
     implements _$$LoadDownloadsImplCopyWith<$Res> {
   __$$LoadDownloadsImplCopyWithImpl(
-    _$LoadDownloadsImpl _value,
-    $Res Function(_$LoadDownloadsImpl) _then,
-  ) : super(_value, _then);
-
-  /// Create a copy of DownloadEvent
-  /// with the given fields replaced by the non-null parameter values.
+      _$LoadDownloadsImpl _value, $Res Function(_$LoadDownloadsImpl) _then)
+      : super(_value, _then);
 }
 
 /// @nodoc
@@ -143,7 +139,7 @@ class _$LoadDownloadsImpl implements _LoadDownloads {
   TResult when<TResult extends Object?>({
     required TResult Function() loadDownloads,
     required TResult Function(MediaItem mediaItem, String quality)
-    startDownload,
+        startDownload,
     required TResult Function(String taskId) pauseDownload,
     required TResult Function(String taskId) resumeDownload,
     required TResult Function(String taskId) cancelDownload,
@@ -233,9 +229,8 @@ abstract class _LoadDownloads implements DownloadEvent {
 /// @nodoc
 abstract class _$$StartDownloadImplCopyWith<$Res> {
   factory _$$StartDownloadImplCopyWith(
-    _$StartDownloadImpl value,
-    $Res Function(_$StartDownloadImpl) then,
-  ) = __$$StartDownloadImplCopyWithImpl<$Res>;
+          _$StartDownloadImpl value, $Res Function(_$StartDownloadImpl) then) =
+      __$$StartDownloadImplCopyWithImpl<$Res>;
   @useResult
   $Res call({MediaItem mediaItem, String quality});
 }
@@ -245,27 +240,25 @@ class __$$StartDownloadImplCopyWithImpl<$Res>
     extends _$DownloadEventCopyWithImpl<$Res, _$StartDownloadImpl>
     implements _$$StartDownloadImplCopyWith<$Res> {
   __$$StartDownloadImplCopyWithImpl(
-    _$StartDownloadImpl _value,
-    $Res Function(_$StartDownloadImpl) _then,
-  ) : super(_value, _then);
+      _$StartDownloadImpl _value, $Res Function(_$StartDownloadImpl) _then)
+      : super(_value, _then);
 
-  /// Create a copy of DownloadEvent
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? mediaItem = null, Object? quality = null}) {
-    return _then(
-      _$StartDownloadImpl(
-        mediaItem: null == mediaItem
-            ? _value.mediaItem
-            : mediaItem // ignore: cast_nullable_to_non_nullable
-                  as MediaItem,
-        quality: null == quality
-            ? _value.quality
-            : quality // ignore: cast_nullable_to_non_nullable
-                  as String,
-      ),
-    );
+  $Res call({
+    Object? mediaItem = null,
+    Object? quality = null,
+  }) {
+    return _then(_$StartDownloadImpl(
+      mediaItem: null == mediaItem
+          ? _value.mediaItem
+          : mediaItem // ignore: cast_nullable_to_non_nullable
+              as MediaItem,
+      quality: null == quality
+          ? _value.quality
+          : quality // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
   }
 }
 
@@ -297,9 +290,7 @@ class _$StartDownloadImpl implements _StartDownload {
   @override
   int get hashCode => Object.hash(runtimeType, mediaItem, quality);
 
-  /// Create a copy of DownloadEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$StartDownloadImplCopyWith<_$StartDownloadImpl> get copyWith =>
@@ -310,7 +301,7 @@ class _$StartDownloadImpl implements _StartDownload {
   TResult when<TResult extends Object?>({
     required TResult Function() loadDownloads,
     required TResult Function(MediaItem mediaItem, String quality)
-    startDownload,
+        startDownload,
     required TResult Function(String taskId) pauseDownload,
     required TResult Function(String taskId) resumeDownload,
     required TResult Function(String taskId) cancelDownload,
@@ -394,17 +385,13 @@ class _$StartDownloadImpl implements _StartDownload {
 }
 
 abstract class _StartDownload implements DownloadEvent {
-  const factory _StartDownload({
-    required final MediaItem mediaItem,
-    required final String quality,
-  }) = _$StartDownloadImpl;
+  const factory _StartDownload(
+      {required final MediaItem mediaItem,
+      required final String quality}) = _$StartDownloadImpl;
 
   MediaItem get mediaItem;
   String get quality;
-
-  /// Create a copy of DownloadEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$StartDownloadImplCopyWith<_$StartDownloadImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -412,9 +399,8 @@ abstract class _StartDownload implements DownloadEvent {
 /// @nodoc
 abstract class _$$PauseDownloadImplCopyWith<$Res> {
   factory _$$PauseDownloadImplCopyWith(
-    _$PauseDownloadImpl value,
-    $Res Function(_$PauseDownloadImpl) then,
-  ) = __$$PauseDownloadImplCopyWithImpl<$Res>;
+          _$PauseDownloadImpl value, $Res Function(_$PauseDownloadImpl) then) =
+      __$$PauseDownloadImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String taskId});
 }
@@ -424,23 +410,20 @@ class __$$PauseDownloadImplCopyWithImpl<$Res>
     extends _$DownloadEventCopyWithImpl<$Res, _$PauseDownloadImpl>
     implements _$$PauseDownloadImplCopyWith<$Res> {
   __$$PauseDownloadImplCopyWithImpl(
-    _$PauseDownloadImpl _value,
-    $Res Function(_$PauseDownloadImpl) _then,
-  ) : super(_value, _then);
+      _$PauseDownloadImpl _value, $Res Function(_$PauseDownloadImpl) _then)
+      : super(_value, _then);
 
-  /// Create a copy of DownloadEvent
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? taskId = null}) {
-    return _then(
-      _$PauseDownloadImpl(
-        null == taskId
-            ? _value.taskId
-            : taskId // ignore: cast_nullable_to_non_nullable
-                  as String,
-      ),
-    );
+  $Res call({
+    Object? taskId = null,
+  }) {
+    return _then(_$PauseDownloadImpl(
+      null == taskId
+          ? _value.taskId
+          : taskId // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
   }
 }
 
@@ -468,9 +451,7 @@ class _$PauseDownloadImpl implements _PauseDownload {
   @override
   int get hashCode => Object.hash(runtimeType, taskId);
 
-  /// Create a copy of DownloadEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$PauseDownloadImplCopyWith<_$PauseDownloadImpl> get copyWith =>
@@ -481,7 +462,7 @@ class _$PauseDownloadImpl implements _PauseDownload {
   TResult when<TResult extends Object?>({
     required TResult Function() loadDownloads,
     required TResult Function(MediaItem mediaItem, String quality)
-    startDownload,
+        startDownload,
     required TResult Function(String taskId) pauseDownload,
     required TResult Function(String taskId) resumeDownload,
     required TResult Function(String taskId) cancelDownload,
@@ -568,20 +549,16 @@ abstract class _PauseDownload implements DownloadEvent {
   const factory _PauseDownload(final String taskId) = _$PauseDownloadImpl;
 
   String get taskId;
-
-  /// Create a copy of DownloadEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$PauseDownloadImplCopyWith<_$PauseDownloadImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class _$$ResumeDownloadImplCopyWith<$Res> {
-  factory _$$ResumeDownloadImplCopyWith(
-    _$ResumeDownloadImpl value,
-    $Res Function(_$ResumeDownloadImpl) then,
-  ) = __$$ResumeDownloadImplCopyWithImpl<$Res>;
+  factory _$$ResumeDownloadImplCopyWith(_$ResumeDownloadImpl value,
+          $Res Function(_$ResumeDownloadImpl) then) =
+      __$$ResumeDownloadImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String taskId});
 }
@@ -591,23 +568,20 @@ class __$$ResumeDownloadImplCopyWithImpl<$Res>
     extends _$DownloadEventCopyWithImpl<$Res, _$ResumeDownloadImpl>
     implements _$$ResumeDownloadImplCopyWith<$Res> {
   __$$ResumeDownloadImplCopyWithImpl(
-    _$ResumeDownloadImpl _value,
-    $Res Function(_$ResumeDownloadImpl) _then,
-  ) : super(_value, _then);
+      _$ResumeDownloadImpl _value, $Res Function(_$ResumeDownloadImpl) _then)
+      : super(_value, _then);
 
-  /// Create a copy of DownloadEvent
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? taskId = null}) {
-    return _then(
-      _$ResumeDownloadImpl(
-        null == taskId
-            ? _value.taskId
-            : taskId // ignore: cast_nullable_to_non_nullable
-                  as String,
-      ),
-    );
+  $Res call({
+    Object? taskId = null,
+  }) {
+    return _then(_$ResumeDownloadImpl(
+      null == taskId
+          ? _value.taskId
+          : taskId // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
   }
 }
 
@@ -635,23 +609,19 @@ class _$ResumeDownloadImpl implements _ResumeDownload {
   @override
   int get hashCode => Object.hash(runtimeType, taskId);
 
-  /// Create a copy of DownloadEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$ResumeDownloadImplCopyWith<_$ResumeDownloadImpl> get copyWith =>
       __$$ResumeDownloadImplCopyWithImpl<_$ResumeDownloadImpl>(
-        this,
-        _$identity,
-      );
+          this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loadDownloads,
     required TResult Function(MediaItem mediaItem, String quality)
-    startDownload,
+        startDownload,
     required TResult Function(String taskId) pauseDownload,
     required TResult Function(String taskId) resumeDownload,
     required TResult Function(String taskId) cancelDownload,
@@ -738,20 +708,16 @@ abstract class _ResumeDownload implements DownloadEvent {
   const factory _ResumeDownload(final String taskId) = _$ResumeDownloadImpl;
 
   String get taskId;
-
-  /// Create a copy of DownloadEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$ResumeDownloadImplCopyWith<_$ResumeDownloadImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class _$$CancelDownloadImplCopyWith<$Res> {
-  factory _$$CancelDownloadImplCopyWith(
-    _$CancelDownloadImpl value,
-    $Res Function(_$CancelDownloadImpl) then,
-  ) = __$$CancelDownloadImplCopyWithImpl<$Res>;
+  factory _$$CancelDownloadImplCopyWith(_$CancelDownloadImpl value,
+          $Res Function(_$CancelDownloadImpl) then) =
+      __$$CancelDownloadImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String taskId});
 }
@@ -761,23 +727,20 @@ class __$$CancelDownloadImplCopyWithImpl<$Res>
     extends _$DownloadEventCopyWithImpl<$Res, _$CancelDownloadImpl>
     implements _$$CancelDownloadImplCopyWith<$Res> {
   __$$CancelDownloadImplCopyWithImpl(
-    _$CancelDownloadImpl _value,
-    $Res Function(_$CancelDownloadImpl) _then,
-  ) : super(_value, _then);
+      _$CancelDownloadImpl _value, $Res Function(_$CancelDownloadImpl) _then)
+      : super(_value, _then);
 
-  /// Create a copy of DownloadEvent
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? taskId = null}) {
-    return _then(
-      _$CancelDownloadImpl(
-        null == taskId
-            ? _value.taskId
-            : taskId // ignore: cast_nullable_to_non_nullable
-                  as String,
-      ),
-    );
+  $Res call({
+    Object? taskId = null,
+  }) {
+    return _then(_$CancelDownloadImpl(
+      null == taskId
+          ? _value.taskId
+          : taskId // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
   }
 }
 
@@ -805,23 +768,19 @@ class _$CancelDownloadImpl implements _CancelDownload {
   @override
   int get hashCode => Object.hash(runtimeType, taskId);
 
-  /// Create a copy of DownloadEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$CancelDownloadImplCopyWith<_$CancelDownloadImpl> get copyWith =>
       __$$CancelDownloadImplCopyWithImpl<_$CancelDownloadImpl>(
-        this,
-        _$identity,
-      );
+          this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loadDownloads,
     required TResult Function(MediaItem mediaItem, String quality)
-    startDownload,
+        startDownload,
     required TResult Function(String taskId) pauseDownload,
     required TResult Function(String taskId) resumeDownload,
     required TResult Function(String taskId) cancelDownload,
@@ -908,20 +867,16 @@ abstract class _CancelDownload implements DownloadEvent {
   const factory _CancelDownload(final String taskId) = _$CancelDownloadImpl;
 
   String get taskId;
-
-  /// Create a copy of DownloadEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$CancelDownloadImplCopyWith<_$CancelDownloadImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class _$$DeleteDownloadImplCopyWith<$Res> {
-  factory _$$DeleteDownloadImplCopyWith(
-    _$DeleteDownloadImpl value,
-    $Res Function(_$DeleteDownloadImpl) then,
-  ) = __$$DeleteDownloadImplCopyWithImpl<$Res>;
+  factory _$$DeleteDownloadImplCopyWith(_$DeleteDownloadImpl value,
+          $Res Function(_$DeleteDownloadImpl) then) =
+      __$$DeleteDownloadImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String taskId});
 }
@@ -931,23 +886,20 @@ class __$$DeleteDownloadImplCopyWithImpl<$Res>
     extends _$DownloadEventCopyWithImpl<$Res, _$DeleteDownloadImpl>
     implements _$$DeleteDownloadImplCopyWith<$Res> {
   __$$DeleteDownloadImplCopyWithImpl(
-    _$DeleteDownloadImpl _value,
-    $Res Function(_$DeleteDownloadImpl) _then,
-  ) : super(_value, _then);
+      _$DeleteDownloadImpl _value, $Res Function(_$DeleteDownloadImpl) _then)
+      : super(_value, _then);
 
-  /// Create a copy of DownloadEvent
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? taskId = null}) {
-    return _then(
-      _$DeleteDownloadImpl(
-        null == taskId
-            ? _value.taskId
-            : taskId // ignore: cast_nullable_to_non_nullable
-                  as String,
-      ),
-    );
+  $Res call({
+    Object? taskId = null,
+  }) {
+    return _then(_$DeleteDownloadImpl(
+      null == taskId
+          ? _value.taskId
+          : taskId // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
   }
 }
 
@@ -975,23 +927,19 @@ class _$DeleteDownloadImpl implements _DeleteDownload {
   @override
   int get hashCode => Object.hash(runtimeType, taskId);
 
-  /// Create a copy of DownloadEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$DeleteDownloadImplCopyWith<_$DeleteDownloadImpl> get copyWith =>
       __$$DeleteDownloadImplCopyWithImpl<_$DeleteDownloadImpl>(
-        this,
-        _$identity,
-      );
+          this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loadDownloads,
     required TResult Function(MediaItem mediaItem, String quality)
-    startDownload,
+        startDownload,
     required TResult Function(String taskId) pauseDownload,
     required TResult Function(String taskId) resumeDownload,
     required TResult Function(String taskId) cancelDownload,
@@ -1078,10 +1026,7 @@ abstract class _DeleteDownload implements DownloadEvent {
   const factory _DeleteDownload(final String taskId) = _$DeleteDownloadImpl;
 
   String get taskId;
-
-  /// Create a copy of DownloadEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$DeleteDownloadImplCopyWith<_$DeleteDownloadImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

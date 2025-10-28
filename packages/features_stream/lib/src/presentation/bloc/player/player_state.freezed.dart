@@ -12,8 +12,7 @@ part of 'player_state.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
-);
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$PlayerState {
@@ -22,31 +21,33 @@ mixin _$PlayerState {
     required TResult Function() initial,
     required TResult Function(MediaItem mediaItem) loading,
     required TResult Function(MediaItem mediaItem, PlaybackState playbackState)
-    ready,
+        ready,
     required TResult Function(MediaItem mediaItem, PlaybackState playbackState)
-    playing,
+        playing,
     required TResult Function(MediaItem mediaItem, PlaybackState playbackState)
-    paused,
+        paused,
     required TResult Function(MediaItem mediaItem, PlaybackState playbackState)
-    buffering,
+        buffering,
     required TResult Function(MediaItem mediaItem, PlaybackState playbackState)
-    completed,
+        completed,
     required TResult Function(String message) error,
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function(MediaItem mediaItem)? loading,
     TResult? Function(MediaItem mediaItem, PlaybackState playbackState)? ready,
     TResult? Function(MediaItem mediaItem, PlaybackState playbackState)?
-    playing,
+        playing,
     TResult? Function(MediaItem mediaItem, PlaybackState playbackState)? paused,
     TResult? Function(MediaItem mediaItem, PlaybackState playbackState)?
-    buffering,
+        buffering,
     TResult? Function(MediaItem mediaItem, PlaybackState playbackState)?
-    completed,
+        completed,
     TResult? Function(String message)? error,
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
@@ -55,12 +56,13 @@ mixin _$PlayerState {
     TResult Function(MediaItem mediaItem, PlaybackState playbackState)? playing,
     TResult Function(MediaItem mediaItem, PlaybackState playbackState)? paused,
     TResult Function(MediaItem mediaItem, PlaybackState playbackState)?
-    buffering,
+        buffering,
     TResult Function(MediaItem mediaItem, PlaybackState playbackState)?
-    completed,
+        completed,
     TResult Function(String message)? error,
     required TResult orElse(),
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
@@ -71,7 +73,8 @@ mixin _$PlayerState {
     required TResult Function(_Buffering value) buffering,
     required TResult Function(_Completed value) completed,
     required TResult Function(_Error value) error,
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
@@ -82,7 +85,8 @@ mixin _$PlayerState {
     TResult? Function(_Buffering value)? buffering,
     TResult? Function(_Completed value)? completed,
     TResult? Function(_Error value)? error,
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
@@ -94,15 +98,15 @@ mixin _$PlayerState {
     TResult Function(_Completed value)? completed,
     TResult Function(_Error value)? error,
     required TResult orElse(),
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $PlayerStateCopyWith<$Res> {
   factory $PlayerStateCopyWith(
-    PlayerState value,
-    $Res Function(PlayerState) then,
-  ) = _$PlayerStateCopyWithImpl<$Res, PlayerState>;
+          PlayerState value, $Res Function(PlayerState) then) =
+      _$PlayerStateCopyWithImpl<$Res, PlayerState>;
 }
 
 /// @nodoc
@@ -114,17 +118,13 @@ class _$PlayerStateCopyWithImpl<$Res, $Val extends PlayerState>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
-
-  /// Create a copy of PlayerState
-  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
 abstract class _$$InitialImplCopyWith<$Res> {
   factory _$$InitialImplCopyWith(
-    _$InitialImpl value,
-    $Res Function(_$InitialImpl) then,
-  ) = __$$InitialImplCopyWithImpl<$Res>;
+          _$InitialImpl value, $Res Function(_$InitialImpl) then) =
+      __$$InitialImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
@@ -132,12 +132,8 @@ class __$$InitialImplCopyWithImpl<$Res>
     extends _$PlayerStateCopyWithImpl<$Res, _$InitialImpl>
     implements _$$InitialImplCopyWith<$Res> {
   __$$InitialImplCopyWithImpl(
-    _$InitialImpl _value,
-    $Res Function(_$InitialImpl) _then,
-  ) : super(_value, _then);
-
-  /// Create a copy of PlayerState
-  /// with the given fields replaced by the non-null parameter values.
+      _$InitialImpl _value, $Res Function(_$InitialImpl) _then)
+      : super(_value, _then);
 }
 
 /// @nodoc
@@ -165,15 +161,15 @@ class _$InitialImpl implements _Initial {
     required TResult Function() initial,
     required TResult Function(MediaItem mediaItem) loading,
     required TResult Function(MediaItem mediaItem, PlaybackState playbackState)
-    ready,
+        ready,
     required TResult Function(MediaItem mediaItem, PlaybackState playbackState)
-    playing,
+        playing,
     required TResult Function(MediaItem mediaItem, PlaybackState playbackState)
-    paused,
+        paused,
     required TResult Function(MediaItem mediaItem, PlaybackState playbackState)
-    buffering,
+        buffering,
     required TResult Function(MediaItem mediaItem, PlaybackState playbackState)
-    completed,
+        completed,
     required TResult Function(String message) error,
   }) {
     return initial();
@@ -186,12 +182,12 @@ class _$InitialImpl implements _Initial {
     TResult? Function(MediaItem mediaItem)? loading,
     TResult? Function(MediaItem mediaItem, PlaybackState playbackState)? ready,
     TResult? Function(MediaItem mediaItem, PlaybackState playbackState)?
-    playing,
+        playing,
     TResult? Function(MediaItem mediaItem, PlaybackState playbackState)? paused,
     TResult? Function(MediaItem mediaItem, PlaybackState playbackState)?
-    buffering,
+        buffering,
     TResult? Function(MediaItem mediaItem, PlaybackState playbackState)?
-    completed,
+        completed,
     TResult? Function(String message)? error,
   }) {
     return initial?.call();
@@ -206,9 +202,9 @@ class _$InitialImpl implements _Initial {
     TResult Function(MediaItem mediaItem, PlaybackState playbackState)? playing,
     TResult Function(MediaItem mediaItem, PlaybackState playbackState)? paused,
     TResult Function(MediaItem mediaItem, PlaybackState playbackState)?
-    buffering,
+        buffering,
     TResult Function(MediaItem mediaItem, PlaybackState playbackState)?
-    completed,
+        completed,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -275,9 +271,8 @@ abstract class _Initial implements PlayerState {
 /// @nodoc
 abstract class _$$LoadingImplCopyWith<$Res> {
   factory _$$LoadingImplCopyWith(
-    _$LoadingImpl value,
-    $Res Function(_$LoadingImpl) then,
-  ) = __$$LoadingImplCopyWithImpl<$Res>;
+          _$LoadingImpl value, $Res Function(_$LoadingImpl) then) =
+      __$$LoadingImplCopyWithImpl<$Res>;
   @useResult
   $Res call({MediaItem mediaItem});
 }
@@ -287,23 +282,20 @@ class __$$LoadingImplCopyWithImpl<$Res>
     extends _$PlayerStateCopyWithImpl<$Res, _$LoadingImpl>
     implements _$$LoadingImplCopyWith<$Res> {
   __$$LoadingImplCopyWithImpl(
-    _$LoadingImpl _value,
-    $Res Function(_$LoadingImpl) _then,
-  ) : super(_value, _then);
+      _$LoadingImpl _value, $Res Function(_$LoadingImpl) _then)
+      : super(_value, _then);
 
-  /// Create a copy of PlayerState
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? mediaItem = null}) {
-    return _then(
-      _$LoadingImpl(
-        null == mediaItem
-            ? _value.mediaItem
-            : mediaItem // ignore: cast_nullable_to_non_nullable
-                  as MediaItem,
-      ),
-    );
+  $Res call({
+    Object? mediaItem = null,
+  }) {
+    return _then(_$LoadingImpl(
+      null == mediaItem
+          ? _value.mediaItem
+          : mediaItem // ignore: cast_nullable_to_non_nullable
+              as MediaItem,
+    ));
   }
 }
 
@@ -332,9 +324,7 @@ class _$LoadingImpl implements _Loading {
   @override
   int get hashCode => Object.hash(runtimeType, mediaItem);
 
-  /// Create a copy of PlayerState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$LoadingImplCopyWith<_$LoadingImpl> get copyWith =>
@@ -346,15 +336,15 @@ class _$LoadingImpl implements _Loading {
     required TResult Function() initial,
     required TResult Function(MediaItem mediaItem) loading,
     required TResult Function(MediaItem mediaItem, PlaybackState playbackState)
-    ready,
+        ready,
     required TResult Function(MediaItem mediaItem, PlaybackState playbackState)
-    playing,
+        playing,
     required TResult Function(MediaItem mediaItem, PlaybackState playbackState)
-    paused,
+        paused,
     required TResult Function(MediaItem mediaItem, PlaybackState playbackState)
-    buffering,
+        buffering,
     required TResult Function(MediaItem mediaItem, PlaybackState playbackState)
-    completed,
+        completed,
     required TResult Function(String message) error,
   }) {
     return loading(mediaItem);
@@ -367,12 +357,12 @@ class _$LoadingImpl implements _Loading {
     TResult? Function(MediaItem mediaItem)? loading,
     TResult? Function(MediaItem mediaItem, PlaybackState playbackState)? ready,
     TResult? Function(MediaItem mediaItem, PlaybackState playbackState)?
-    playing,
+        playing,
     TResult? Function(MediaItem mediaItem, PlaybackState playbackState)? paused,
     TResult? Function(MediaItem mediaItem, PlaybackState playbackState)?
-    buffering,
+        buffering,
     TResult? Function(MediaItem mediaItem, PlaybackState playbackState)?
-    completed,
+        completed,
     TResult? Function(String message)? error,
   }) {
     return loading?.call(mediaItem);
@@ -387,9 +377,9 @@ class _$LoadingImpl implements _Loading {
     TResult Function(MediaItem mediaItem, PlaybackState playbackState)? playing,
     TResult Function(MediaItem mediaItem, PlaybackState playbackState)? paused,
     TResult Function(MediaItem mediaItem, PlaybackState playbackState)?
-    buffering,
+        buffering,
     TResult Function(MediaItem mediaItem, PlaybackState playbackState)?
-    completed,
+        completed,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -453,10 +443,7 @@ abstract class _Loading implements PlayerState {
   const factory _Loading(final MediaItem mediaItem) = _$LoadingImpl;
 
   MediaItem get mediaItem;
-
-  /// Create a copy of PlayerState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$LoadingImplCopyWith<_$LoadingImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -464,9 +451,8 @@ abstract class _Loading implements PlayerState {
 /// @nodoc
 abstract class _$$ReadyImplCopyWith<$Res> {
   factory _$$ReadyImplCopyWith(
-    _$ReadyImpl value,
-    $Res Function(_$ReadyImpl) then,
-  ) = __$$ReadyImplCopyWithImpl<$Res>;
+          _$ReadyImpl value, $Res Function(_$ReadyImpl) then) =
+      __$$ReadyImplCopyWithImpl<$Res>;
   @useResult
   $Res call({MediaItem mediaItem, PlaybackState playbackState});
 }
@@ -476,27 +462,25 @@ class __$$ReadyImplCopyWithImpl<$Res>
     extends _$PlayerStateCopyWithImpl<$Res, _$ReadyImpl>
     implements _$$ReadyImplCopyWith<$Res> {
   __$$ReadyImplCopyWithImpl(
-    _$ReadyImpl _value,
-    $Res Function(_$ReadyImpl) _then,
-  ) : super(_value, _then);
+      _$ReadyImpl _value, $Res Function(_$ReadyImpl) _then)
+      : super(_value, _then);
 
-  /// Create a copy of PlayerState
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? mediaItem = null, Object? playbackState = null}) {
-    return _then(
-      _$ReadyImpl(
-        mediaItem: null == mediaItem
-            ? _value.mediaItem
-            : mediaItem // ignore: cast_nullable_to_non_nullable
-                  as MediaItem,
-        playbackState: null == playbackState
-            ? _value.playbackState
-            : playbackState // ignore: cast_nullable_to_non_nullable
-                  as PlaybackState,
-      ),
-    );
+  $Res call({
+    Object? mediaItem = null,
+    Object? playbackState = null,
+  }) {
+    return _then(_$ReadyImpl(
+      mediaItem: null == mediaItem
+          ? _value.mediaItem
+          : mediaItem // ignore: cast_nullable_to_non_nullable
+              as MediaItem,
+      playbackState: null == playbackState
+          ? _value.playbackState
+          : playbackState // ignore: cast_nullable_to_non_nullable
+              as PlaybackState,
+    ));
   }
 }
 
@@ -529,9 +513,7 @@ class _$ReadyImpl implements _Ready {
   @override
   int get hashCode => Object.hash(runtimeType, mediaItem, playbackState);
 
-  /// Create a copy of PlayerState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$ReadyImplCopyWith<_$ReadyImpl> get copyWith =>
@@ -543,15 +525,15 @@ class _$ReadyImpl implements _Ready {
     required TResult Function() initial,
     required TResult Function(MediaItem mediaItem) loading,
     required TResult Function(MediaItem mediaItem, PlaybackState playbackState)
-    ready,
+        ready,
     required TResult Function(MediaItem mediaItem, PlaybackState playbackState)
-    playing,
+        playing,
     required TResult Function(MediaItem mediaItem, PlaybackState playbackState)
-    paused,
+        paused,
     required TResult Function(MediaItem mediaItem, PlaybackState playbackState)
-    buffering,
+        buffering,
     required TResult Function(MediaItem mediaItem, PlaybackState playbackState)
-    completed,
+        completed,
     required TResult Function(String message) error,
   }) {
     return ready(mediaItem, playbackState);
@@ -564,12 +546,12 @@ class _$ReadyImpl implements _Ready {
     TResult? Function(MediaItem mediaItem)? loading,
     TResult? Function(MediaItem mediaItem, PlaybackState playbackState)? ready,
     TResult? Function(MediaItem mediaItem, PlaybackState playbackState)?
-    playing,
+        playing,
     TResult? Function(MediaItem mediaItem, PlaybackState playbackState)? paused,
     TResult? Function(MediaItem mediaItem, PlaybackState playbackState)?
-    buffering,
+        buffering,
     TResult? Function(MediaItem mediaItem, PlaybackState playbackState)?
-    completed,
+        completed,
     TResult? Function(String message)? error,
   }) {
     return ready?.call(mediaItem, playbackState);
@@ -584,9 +566,9 @@ class _$ReadyImpl implements _Ready {
     TResult Function(MediaItem mediaItem, PlaybackState playbackState)? playing,
     TResult Function(MediaItem mediaItem, PlaybackState playbackState)? paused,
     TResult Function(MediaItem mediaItem, PlaybackState playbackState)?
-    buffering,
+        buffering,
     TResult Function(MediaItem mediaItem, PlaybackState playbackState)?
-    completed,
+        completed,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -647,17 +629,13 @@ class _$ReadyImpl implements _Ready {
 }
 
 abstract class _Ready implements PlayerState {
-  const factory _Ready({
-    required final MediaItem mediaItem,
-    required final PlaybackState playbackState,
-  }) = _$ReadyImpl;
+  const factory _Ready(
+      {required final MediaItem mediaItem,
+      required final PlaybackState playbackState}) = _$ReadyImpl;
 
   MediaItem get mediaItem;
   PlaybackState get playbackState;
-
-  /// Create a copy of PlayerState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$ReadyImplCopyWith<_$ReadyImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -665,9 +643,8 @@ abstract class _Ready implements PlayerState {
 /// @nodoc
 abstract class _$$PlayingImplCopyWith<$Res> {
   factory _$$PlayingImplCopyWith(
-    _$PlayingImpl value,
-    $Res Function(_$PlayingImpl) then,
-  ) = __$$PlayingImplCopyWithImpl<$Res>;
+          _$PlayingImpl value, $Res Function(_$PlayingImpl) then) =
+      __$$PlayingImplCopyWithImpl<$Res>;
   @useResult
   $Res call({MediaItem mediaItem, PlaybackState playbackState});
 }
@@ -677,27 +654,25 @@ class __$$PlayingImplCopyWithImpl<$Res>
     extends _$PlayerStateCopyWithImpl<$Res, _$PlayingImpl>
     implements _$$PlayingImplCopyWith<$Res> {
   __$$PlayingImplCopyWithImpl(
-    _$PlayingImpl _value,
-    $Res Function(_$PlayingImpl) _then,
-  ) : super(_value, _then);
+      _$PlayingImpl _value, $Res Function(_$PlayingImpl) _then)
+      : super(_value, _then);
 
-  /// Create a copy of PlayerState
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? mediaItem = null, Object? playbackState = null}) {
-    return _then(
-      _$PlayingImpl(
-        mediaItem: null == mediaItem
-            ? _value.mediaItem
-            : mediaItem // ignore: cast_nullable_to_non_nullable
-                  as MediaItem,
-        playbackState: null == playbackState
-            ? _value.playbackState
-            : playbackState // ignore: cast_nullable_to_non_nullable
-                  as PlaybackState,
-      ),
-    );
+  $Res call({
+    Object? mediaItem = null,
+    Object? playbackState = null,
+  }) {
+    return _then(_$PlayingImpl(
+      mediaItem: null == mediaItem
+          ? _value.mediaItem
+          : mediaItem // ignore: cast_nullable_to_non_nullable
+              as MediaItem,
+      playbackState: null == playbackState
+          ? _value.playbackState
+          : playbackState // ignore: cast_nullable_to_non_nullable
+              as PlaybackState,
+    ));
   }
 }
 
@@ -730,9 +705,7 @@ class _$PlayingImpl implements _Playing {
   @override
   int get hashCode => Object.hash(runtimeType, mediaItem, playbackState);
 
-  /// Create a copy of PlayerState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$PlayingImplCopyWith<_$PlayingImpl> get copyWith =>
@@ -744,15 +717,15 @@ class _$PlayingImpl implements _Playing {
     required TResult Function() initial,
     required TResult Function(MediaItem mediaItem) loading,
     required TResult Function(MediaItem mediaItem, PlaybackState playbackState)
-    ready,
+        ready,
     required TResult Function(MediaItem mediaItem, PlaybackState playbackState)
-    playing,
+        playing,
     required TResult Function(MediaItem mediaItem, PlaybackState playbackState)
-    paused,
+        paused,
     required TResult Function(MediaItem mediaItem, PlaybackState playbackState)
-    buffering,
+        buffering,
     required TResult Function(MediaItem mediaItem, PlaybackState playbackState)
-    completed,
+        completed,
     required TResult Function(String message) error,
   }) {
     return playing(mediaItem, playbackState);
@@ -765,12 +738,12 @@ class _$PlayingImpl implements _Playing {
     TResult? Function(MediaItem mediaItem)? loading,
     TResult? Function(MediaItem mediaItem, PlaybackState playbackState)? ready,
     TResult? Function(MediaItem mediaItem, PlaybackState playbackState)?
-    playing,
+        playing,
     TResult? Function(MediaItem mediaItem, PlaybackState playbackState)? paused,
     TResult? Function(MediaItem mediaItem, PlaybackState playbackState)?
-    buffering,
+        buffering,
     TResult? Function(MediaItem mediaItem, PlaybackState playbackState)?
-    completed,
+        completed,
     TResult? Function(String message)? error,
   }) {
     return playing?.call(mediaItem, playbackState);
@@ -785,9 +758,9 @@ class _$PlayingImpl implements _Playing {
     TResult Function(MediaItem mediaItem, PlaybackState playbackState)? playing,
     TResult Function(MediaItem mediaItem, PlaybackState playbackState)? paused,
     TResult Function(MediaItem mediaItem, PlaybackState playbackState)?
-    buffering,
+        buffering,
     TResult Function(MediaItem mediaItem, PlaybackState playbackState)?
-    completed,
+        completed,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -848,17 +821,13 @@ class _$PlayingImpl implements _Playing {
 }
 
 abstract class _Playing implements PlayerState {
-  const factory _Playing({
-    required final MediaItem mediaItem,
-    required final PlaybackState playbackState,
-  }) = _$PlayingImpl;
+  const factory _Playing(
+      {required final MediaItem mediaItem,
+      required final PlaybackState playbackState}) = _$PlayingImpl;
 
   MediaItem get mediaItem;
   PlaybackState get playbackState;
-
-  /// Create a copy of PlayerState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$PlayingImplCopyWith<_$PlayingImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -866,9 +835,8 @@ abstract class _Playing implements PlayerState {
 /// @nodoc
 abstract class _$$PausedImplCopyWith<$Res> {
   factory _$$PausedImplCopyWith(
-    _$PausedImpl value,
-    $Res Function(_$PausedImpl) then,
-  ) = __$$PausedImplCopyWithImpl<$Res>;
+          _$PausedImpl value, $Res Function(_$PausedImpl) then) =
+      __$$PausedImplCopyWithImpl<$Res>;
   @useResult
   $Res call({MediaItem mediaItem, PlaybackState playbackState});
 }
@@ -878,27 +846,25 @@ class __$$PausedImplCopyWithImpl<$Res>
     extends _$PlayerStateCopyWithImpl<$Res, _$PausedImpl>
     implements _$$PausedImplCopyWith<$Res> {
   __$$PausedImplCopyWithImpl(
-    _$PausedImpl _value,
-    $Res Function(_$PausedImpl) _then,
-  ) : super(_value, _then);
+      _$PausedImpl _value, $Res Function(_$PausedImpl) _then)
+      : super(_value, _then);
 
-  /// Create a copy of PlayerState
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? mediaItem = null, Object? playbackState = null}) {
-    return _then(
-      _$PausedImpl(
-        mediaItem: null == mediaItem
-            ? _value.mediaItem
-            : mediaItem // ignore: cast_nullable_to_non_nullable
-                  as MediaItem,
-        playbackState: null == playbackState
-            ? _value.playbackState
-            : playbackState // ignore: cast_nullable_to_non_nullable
-                  as PlaybackState,
-      ),
-    );
+  $Res call({
+    Object? mediaItem = null,
+    Object? playbackState = null,
+  }) {
+    return _then(_$PausedImpl(
+      mediaItem: null == mediaItem
+          ? _value.mediaItem
+          : mediaItem // ignore: cast_nullable_to_non_nullable
+              as MediaItem,
+      playbackState: null == playbackState
+          ? _value.playbackState
+          : playbackState // ignore: cast_nullable_to_non_nullable
+              as PlaybackState,
+    ));
   }
 }
 
@@ -931,9 +897,7 @@ class _$PausedImpl implements _Paused {
   @override
   int get hashCode => Object.hash(runtimeType, mediaItem, playbackState);
 
-  /// Create a copy of PlayerState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$PausedImplCopyWith<_$PausedImpl> get copyWith =>
@@ -945,15 +909,15 @@ class _$PausedImpl implements _Paused {
     required TResult Function() initial,
     required TResult Function(MediaItem mediaItem) loading,
     required TResult Function(MediaItem mediaItem, PlaybackState playbackState)
-    ready,
+        ready,
     required TResult Function(MediaItem mediaItem, PlaybackState playbackState)
-    playing,
+        playing,
     required TResult Function(MediaItem mediaItem, PlaybackState playbackState)
-    paused,
+        paused,
     required TResult Function(MediaItem mediaItem, PlaybackState playbackState)
-    buffering,
+        buffering,
     required TResult Function(MediaItem mediaItem, PlaybackState playbackState)
-    completed,
+        completed,
     required TResult Function(String message) error,
   }) {
     return paused(mediaItem, playbackState);
@@ -966,12 +930,12 @@ class _$PausedImpl implements _Paused {
     TResult? Function(MediaItem mediaItem)? loading,
     TResult? Function(MediaItem mediaItem, PlaybackState playbackState)? ready,
     TResult? Function(MediaItem mediaItem, PlaybackState playbackState)?
-    playing,
+        playing,
     TResult? Function(MediaItem mediaItem, PlaybackState playbackState)? paused,
     TResult? Function(MediaItem mediaItem, PlaybackState playbackState)?
-    buffering,
+        buffering,
     TResult? Function(MediaItem mediaItem, PlaybackState playbackState)?
-    completed,
+        completed,
     TResult? Function(String message)? error,
   }) {
     return paused?.call(mediaItem, playbackState);
@@ -986,9 +950,9 @@ class _$PausedImpl implements _Paused {
     TResult Function(MediaItem mediaItem, PlaybackState playbackState)? playing,
     TResult Function(MediaItem mediaItem, PlaybackState playbackState)? paused,
     TResult Function(MediaItem mediaItem, PlaybackState playbackState)?
-    buffering,
+        buffering,
     TResult Function(MediaItem mediaItem, PlaybackState playbackState)?
-    completed,
+        completed,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -1049,17 +1013,13 @@ class _$PausedImpl implements _Paused {
 }
 
 abstract class _Paused implements PlayerState {
-  const factory _Paused({
-    required final MediaItem mediaItem,
-    required final PlaybackState playbackState,
-  }) = _$PausedImpl;
+  const factory _Paused(
+      {required final MediaItem mediaItem,
+      required final PlaybackState playbackState}) = _$PausedImpl;
 
   MediaItem get mediaItem;
   PlaybackState get playbackState;
-
-  /// Create a copy of PlayerState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$PausedImplCopyWith<_$PausedImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -1067,9 +1027,8 @@ abstract class _Paused implements PlayerState {
 /// @nodoc
 abstract class _$$BufferingImplCopyWith<$Res> {
   factory _$$BufferingImplCopyWith(
-    _$BufferingImpl value,
-    $Res Function(_$BufferingImpl) then,
-  ) = __$$BufferingImplCopyWithImpl<$Res>;
+          _$BufferingImpl value, $Res Function(_$BufferingImpl) then) =
+      __$$BufferingImplCopyWithImpl<$Res>;
   @useResult
   $Res call({MediaItem mediaItem, PlaybackState playbackState});
 }
@@ -1079,27 +1038,25 @@ class __$$BufferingImplCopyWithImpl<$Res>
     extends _$PlayerStateCopyWithImpl<$Res, _$BufferingImpl>
     implements _$$BufferingImplCopyWith<$Res> {
   __$$BufferingImplCopyWithImpl(
-    _$BufferingImpl _value,
-    $Res Function(_$BufferingImpl) _then,
-  ) : super(_value, _then);
+      _$BufferingImpl _value, $Res Function(_$BufferingImpl) _then)
+      : super(_value, _then);
 
-  /// Create a copy of PlayerState
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? mediaItem = null, Object? playbackState = null}) {
-    return _then(
-      _$BufferingImpl(
-        mediaItem: null == mediaItem
-            ? _value.mediaItem
-            : mediaItem // ignore: cast_nullable_to_non_nullable
-                  as MediaItem,
-        playbackState: null == playbackState
-            ? _value.playbackState
-            : playbackState // ignore: cast_nullable_to_non_nullable
-                  as PlaybackState,
-      ),
-    );
+  $Res call({
+    Object? mediaItem = null,
+    Object? playbackState = null,
+  }) {
+    return _then(_$BufferingImpl(
+      mediaItem: null == mediaItem
+          ? _value.mediaItem
+          : mediaItem // ignore: cast_nullable_to_non_nullable
+              as MediaItem,
+      playbackState: null == playbackState
+          ? _value.playbackState
+          : playbackState // ignore: cast_nullable_to_non_nullable
+              as PlaybackState,
+    ));
   }
 }
 
@@ -1132,9 +1089,7 @@ class _$BufferingImpl implements _Buffering {
   @override
   int get hashCode => Object.hash(runtimeType, mediaItem, playbackState);
 
-  /// Create a copy of PlayerState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$BufferingImplCopyWith<_$BufferingImpl> get copyWith =>
@@ -1146,15 +1101,15 @@ class _$BufferingImpl implements _Buffering {
     required TResult Function() initial,
     required TResult Function(MediaItem mediaItem) loading,
     required TResult Function(MediaItem mediaItem, PlaybackState playbackState)
-    ready,
+        ready,
     required TResult Function(MediaItem mediaItem, PlaybackState playbackState)
-    playing,
+        playing,
     required TResult Function(MediaItem mediaItem, PlaybackState playbackState)
-    paused,
+        paused,
     required TResult Function(MediaItem mediaItem, PlaybackState playbackState)
-    buffering,
+        buffering,
     required TResult Function(MediaItem mediaItem, PlaybackState playbackState)
-    completed,
+        completed,
     required TResult Function(String message) error,
   }) {
     return buffering(mediaItem, playbackState);
@@ -1167,12 +1122,12 @@ class _$BufferingImpl implements _Buffering {
     TResult? Function(MediaItem mediaItem)? loading,
     TResult? Function(MediaItem mediaItem, PlaybackState playbackState)? ready,
     TResult? Function(MediaItem mediaItem, PlaybackState playbackState)?
-    playing,
+        playing,
     TResult? Function(MediaItem mediaItem, PlaybackState playbackState)? paused,
     TResult? Function(MediaItem mediaItem, PlaybackState playbackState)?
-    buffering,
+        buffering,
     TResult? Function(MediaItem mediaItem, PlaybackState playbackState)?
-    completed,
+        completed,
     TResult? Function(String message)? error,
   }) {
     return buffering?.call(mediaItem, playbackState);
@@ -1187,9 +1142,9 @@ class _$BufferingImpl implements _Buffering {
     TResult Function(MediaItem mediaItem, PlaybackState playbackState)? playing,
     TResult Function(MediaItem mediaItem, PlaybackState playbackState)? paused,
     TResult Function(MediaItem mediaItem, PlaybackState playbackState)?
-    buffering,
+        buffering,
     TResult Function(MediaItem mediaItem, PlaybackState playbackState)?
-    completed,
+        completed,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -1250,17 +1205,13 @@ class _$BufferingImpl implements _Buffering {
 }
 
 abstract class _Buffering implements PlayerState {
-  const factory _Buffering({
-    required final MediaItem mediaItem,
-    required final PlaybackState playbackState,
-  }) = _$BufferingImpl;
+  const factory _Buffering(
+      {required final MediaItem mediaItem,
+      required final PlaybackState playbackState}) = _$BufferingImpl;
 
   MediaItem get mediaItem;
   PlaybackState get playbackState;
-
-  /// Create a copy of PlayerState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$BufferingImplCopyWith<_$BufferingImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -1268,9 +1219,8 @@ abstract class _Buffering implements PlayerState {
 /// @nodoc
 abstract class _$$CompletedImplCopyWith<$Res> {
   factory _$$CompletedImplCopyWith(
-    _$CompletedImpl value,
-    $Res Function(_$CompletedImpl) then,
-  ) = __$$CompletedImplCopyWithImpl<$Res>;
+          _$CompletedImpl value, $Res Function(_$CompletedImpl) then) =
+      __$$CompletedImplCopyWithImpl<$Res>;
   @useResult
   $Res call({MediaItem mediaItem, PlaybackState playbackState});
 }
@@ -1280,27 +1230,25 @@ class __$$CompletedImplCopyWithImpl<$Res>
     extends _$PlayerStateCopyWithImpl<$Res, _$CompletedImpl>
     implements _$$CompletedImplCopyWith<$Res> {
   __$$CompletedImplCopyWithImpl(
-    _$CompletedImpl _value,
-    $Res Function(_$CompletedImpl) _then,
-  ) : super(_value, _then);
+      _$CompletedImpl _value, $Res Function(_$CompletedImpl) _then)
+      : super(_value, _then);
 
-  /// Create a copy of PlayerState
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? mediaItem = null, Object? playbackState = null}) {
-    return _then(
-      _$CompletedImpl(
-        mediaItem: null == mediaItem
-            ? _value.mediaItem
-            : mediaItem // ignore: cast_nullable_to_non_nullable
-                  as MediaItem,
-        playbackState: null == playbackState
-            ? _value.playbackState
-            : playbackState // ignore: cast_nullable_to_non_nullable
-                  as PlaybackState,
-      ),
-    );
+  $Res call({
+    Object? mediaItem = null,
+    Object? playbackState = null,
+  }) {
+    return _then(_$CompletedImpl(
+      mediaItem: null == mediaItem
+          ? _value.mediaItem
+          : mediaItem // ignore: cast_nullable_to_non_nullable
+              as MediaItem,
+      playbackState: null == playbackState
+          ? _value.playbackState
+          : playbackState // ignore: cast_nullable_to_non_nullable
+              as PlaybackState,
+    ));
   }
 }
 
@@ -1333,9 +1281,7 @@ class _$CompletedImpl implements _Completed {
   @override
   int get hashCode => Object.hash(runtimeType, mediaItem, playbackState);
 
-  /// Create a copy of PlayerState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$CompletedImplCopyWith<_$CompletedImpl> get copyWith =>
@@ -1347,15 +1293,15 @@ class _$CompletedImpl implements _Completed {
     required TResult Function() initial,
     required TResult Function(MediaItem mediaItem) loading,
     required TResult Function(MediaItem mediaItem, PlaybackState playbackState)
-    ready,
+        ready,
     required TResult Function(MediaItem mediaItem, PlaybackState playbackState)
-    playing,
+        playing,
     required TResult Function(MediaItem mediaItem, PlaybackState playbackState)
-    paused,
+        paused,
     required TResult Function(MediaItem mediaItem, PlaybackState playbackState)
-    buffering,
+        buffering,
     required TResult Function(MediaItem mediaItem, PlaybackState playbackState)
-    completed,
+        completed,
     required TResult Function(String message) error,
   }) {
     return completed(mediaItem, playbackState);
@@ -1368,12 +1314,12 @@ class _$CompletedImpl implements _Completed {
     TResult? Function(MediaItem mediaItem)? loading,
     TResult? Function(MediaItem mediaItem, PlaybackState playbackState)? ready,
     TResult? Function(MediaItem mediaItem, PlaybackState playbackState)?
-    playing,
+        playing,
     TResult? Function(MediaItem mediaItem, PlaybackState playbackState)? paused,
     TResult? Function(MediaItem mediaItem, PlaybackState playbackState)?
-    buffering,
+        buffering,
     TResult? Function(MediaItem mediaItem, PlaybackState playbackState)?
-    completed,
+        completed,
     TResult? Function(String message)? error,
   }) {
     return completed?.call(mediaItem, playbackState);
@@ -1388,9 +1334,9 @@ class _$CompletedImpl implements _Completed {
     TResult Function(MediaItem mediaItem, PlaybackState playbackState)? playing,
     TResult Function(MediaItem mediaItem, PlaybackState playbackState)? paused,
     TResult Function(MediaItem mediaItem, PlaybackState playbackState)?
-    buffering,
+        buffering,
     TResult Function(MediaItem mediaItem, PlaybackState playbackState)?
-    completed,
+        completed,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -1451,17 +1397,13 @@ class _$CompletedImpl implements _Completed {
 }
 
 abstract class _Completed implements PlayerState {
-  const factory _Completed({
-    required final MediaItem mediaItem,
-    required final PlaybackState playbackState,
-  }) = _$CompletedImpl;
+  const factory _Completed(
+      {required final MediaItem mediaItem,
+      required final PlaybackState playbackState}) = _$CompletedImpl;
 
   MediaItem get mediaItem;
   PlaybackState get playbackState;
-
-  /// Create a copy of PlayerState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$CompletedImplCopyWith<_$CompletedImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -1469,9 +1411,8 @@ abstract class _Completed implements PlayerState {
 /// @nodoc
 abstract class _$$ErrorImplCopyWith<$Res> {
   factory _$$ErrorImplCopyWith(
-    _$ErrorImpl value,
-    $Res Function(_$ErrorImpl) then,
-  ) = __$$ErrorImplCopyWithImpl<$Res>;
+          _$ErrorImpl value, $Res Function(_$ErrorImpl) then) =
+      __$$ErrorImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String message});
 }
@@ -1481,23 +1422,20 @@ class __$$ErrorImplCopyWithImpl<$Res>
     extends _$PlayerStateCopyWithImpl<$Res, _$ErrorImpl>
     implements _$$ErrorImplCopyWith<$Res> {
   __$$ErrorImplCopyWithImpl(
-    _$ErrorImpl _value,
-    $Res Function(_$ErrorImpl) _then,
-  ) : super(_value, _then);
+      _$ErrorImpl _value, $Res Function(_$ErrorImpl) _then)
+      : super(_value, _then);
 
-  /// Create a copy of PlayerState
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? message = null}) {
-    return _then(
-      _$ErrorImpl(
-        null == message
-            ? _value.message
-            : message // ignore: cast_nullable_to_non_nullable
-                  as String,
-      ),
-    );
+  $Res call({
+    Object? message = null,
+  }) {
+    return _then(_$ErrorImpl(
+      null == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
   }
 }
 
@@ -1525,9 +1463,7 @@ class _$ErrorImpl implements _Error {
   @override
   int get hashCode => Object.hash(runtimeType, message);
 
-  /// Create a copy of PlayerState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$ErrorImplCopyWith<_$ErrorImpl> get copyWith =>
@@ -1539,15 +1475,15 @@ class _$ErrorImpl implements _Error {
     required TResult Function() initial,
     required TResult Function(MediaItem mediaItem) loading,
     required TResult Function(MediaItem mediaItem, PlaybackState playbackState)
-    ready,
+        ready,
     required TResult Function(MediaItem mediaItem, PlaybackState playbackState)
-    playing,
+        playing,
     required TResult Function(MediaItem mediaItem, PlaybackState playbackState)
-    paused,
+        paused,
     required TResult Function(MediaItem mediaItem, PlaybackState playbackState)
-    buffering,
+        buffering,
     required TResult Function(MediaItem mediaItem, PlaybackState playbackState)
-    completed,
+        completed,
     required TResult Function(String message) error,
   }) {
     return error(message);
@@ -1560,12 +1496,12 @@ class _$ErrorImpl implements _Error {
     TResult? Function(MediaItem mediaItem)? loading,
     TResult? Function(MediaItem mediaItem, PlaybackState playbackState)? ready,
     TResult? Function(MediaItem mediaItem, PlaybackState playbackState)?
-    playing,
+        playing,
     TResult? Function(MediaItem mediaItem, PlaybackState playbackState)? paused,
     TResult? Function(MediaItem mediaItem, PlaybackState playbackState)?
-    buffering,
+        buffering,
     TResult? Function(MediaItem mediaItem, PlaybackState playbackState)?
-    completed,
+        completed,
     TResult? Function(String message)? error,
   }) {
     return error?.call(message);
@@ -1580,9 +1516,9 @@ class _$ErrorImpl implements _Error {
     TResult Function(MediaItem mediaItem, PlaybackState playbackState)? playing,
     TResult Function(MediaItem mediaItem, PlaybackState playbackState)? paused,
     TResult Function(MediaItem mediaItem, PlaybackState playbackState)?
-    buffering,
+        buffering,
     TResult Function(MediaItem mediaItem, PlaybackState playbackState)?
-    completed,
+        completed,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -1646,10 +1582,7 @@ abstract class _Error implements PlayerState {
   const factory _Error(final String message) = _$ErrorImpl;
 
   String get message;
-
-  /// Create a copy of PlayerState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$ErrorImplCopyWith<_$ErrorImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

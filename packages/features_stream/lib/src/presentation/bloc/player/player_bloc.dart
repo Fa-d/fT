@@ -19,6 +19,7 @@ class PlayerBloc extends Bloc<PlayerEvent, PlayerState> {
   Timer? _positionTimer;
   Timer? _autoSaveTimer;
   bool _isSeeking = false;
+  bool _isDisposed = false;
   StreamSubscription<void>? _playerStateSubscription;
 
   PlayerBloc({
@@ -41,6 +42,7 @@ class PlayerBloc extends Bloc<PlayerEvent, PlayerState> {
       setQuality: (e) async => await _onSetQuality(e.quality, emit),
       setVolume: (e) async => await _onSetVolume(e.volume, emit),
       toggleMute: (_) async => await _onToggleMute(emit),
+      toggleFullscreen: (_) async => await _onToggleFullscreen(emit),
       updatePosition: (e) async => _onUpdatePosition(e.position, emit),
       updateBuffering: (e) async => _onUpdateBuffering(e.isBuffering, emit),
       videoCompleted: (_) async => _onVideoCompleted(emit),
@@ -332,6 +334,22 @@ class PlayerBloc extends Bloc<PlayerEvent, PlayerState> {
     }
   }
 
+  Future<void> _onToggleFullscreen(Emitter<PlayerState> emit) async {
+    try {
+      _emitPlaybackState(emit, (playbackState) {
+        final newFullscreenState = !playbackState.isFullscreen;
+        Logger.debug('PlayerBloc: Toggle fullscreen to $newFullscreenState');
+
+        return _copyPlaybackState(
+          playbackState,
+          isFullscreen: newFullscreenState,
+        );
+      });
+    } catch (e) {
+      Logger.error('PlayerBloc: Toggle fullscreen failed', e);
+    }
+  }
+
   void _onUpdatePosition(
     Duration position,
     Emitter<PlayerState> emit,
@@ -402,6 +420,7 @@ class PlayerBloc extends Bloc<PlayerEvent, PlayerState> {
     String? currentQuality,
     double? volume,
     bool? isMuted,
+    bool? isFullscreen,
   }) {
     return PlaybackState(
       mediaItemId: original.mediaItemId,
@@ -413,6 +432,7 @@ class PlayerBloc extends Bloc<PlayerEvent, PlayerState> {
       currentQuality: currentQuality ?? original.currentQuality,
       volume: volume ?? original.volume,
       isMuted: isMuted ?? original.isMuted,
+      isFullscreen: isFullscreen ?? original.isFullscreen,
       lastUpdated: DateTime.now(),
     );
   }
@@ -499,7 +519,14 @@ class PlayerBloc extends Bloc<PlayerEvent, PlayerState> {
   }
 
   void _cleanup() {
+    // Prevent double cleanup/disposal
+    if (_isDisposed) {
+      Logger.debug('PlayerBloc: Already disposed, skipping cleanup');
+      return;
+    }
+
     Logger.info('PlayerBloc: Cleaning up');
+    _isDisposed = true;
     _positionTimer?.cancel();
     _autoSaveTimer?.cancel();
     _playerStateSubscription?.cancel();

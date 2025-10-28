@@ -13,6 +13,7 @@ class PlayerEvent with _$PlayerEvent {
   const factory PlayerEvent.setQuality(String quality) = _SetQuality;
   const factory PlayerEvent.setVolume(double volume) = _SetVolume;
   const factory PlayerEvent.toggleMute() = _ToggleMute;
+  const factory PlayerEvent.toggleFullscreen() = _ToggleFullscreen;
   const factory PlayerEvent.updatePosition(Duration position) = _UpdatePosition;
   const factory PlayerEvent.updateBuffering(bool isBuffering) = _UpdateBuffering;
   const factory PlayerEvent.videoCompleted() = _VideoCompleted;
