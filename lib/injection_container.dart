@@ -1,14 +1,17 @@
-import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:connectivity_plus/connectivity_plus.dart';
 
 // Core
 import 'package:core/core.dart' as core;
-import 'core/network/api_client.dart';
 
 // Stream Feature
 import 'package:features_stream/features_stream.dart';
+
+// Dashboard Feature
+import 'features/dashboard/presentation/bloc/dashboard_bloc.dart';
+import 'features/dashboard/domain/usecases/get_system_stats.dart';
+import 'features/dashboard/domain/repositories/dashboard_repository.dart';
+import 'features/dashboard/data/repositories/dashboard_repository_impl.dart';
 
 /// Service Locator instance
 /// sl = Service Locator
@@ -18,12 +21,37 @@ final sl = GetIt.instance;
 /// This function should be called in main() before runApp()
 Future<void> init() async {
   // ========================================
+  // Features - Dashboard
+  // ========================================
+
+  // BLoC
+  sl.registerFactory(
+    () => DashboardBloc(
+      getSystemStats: sl(),
+    ),
+  );
+
+  // Use Cases
+  sl.registerLazySingleton(() => GetSystemStats(sl()));
+
+  // Repositories
+  sl.registerLazySingleton<DashboardRepository>(
+    () => DashboardRepositoryImpl(
+      eventStore: core.getIt.get<core.EventStore>(),
+      syncManager: core.getIt.get<core.SyncManager>(),
+    ),
+  );
+
+  // ========================================
   // Features - Stream
   // ========================================
 
   // BLoCs
   sl.registerFactory(
-    () => PlayerBloc(savePlaybackStateUseCase: sl()),
+    () => PlayerBloc(
+      savePlaybackStateUseCase: sl(),
+      videoPlayerService: VideoPlayerServiceImpl(),
+    ),
   );
 
   sl.registerFactory(
@@ -56,36 +84,28 @@ Future<void> init() async {
     () => StreamRemoteDataSourceImpl(apiClient: sl()),
   );
 
+  // Use Hive-based data source for better performance
   sl.registerLazySingleton<StreamLocalDataSource>(
-    () => StreamLocalDataSourceImpl(sharedPreferences: sl()),
+    () => StreamLocalDataSourceHive(),
   );
+
+  // For backward compatibility with SharedPreferences
+  // Uncomment this if you want to use SharedPreferences instead of Hive
+  // sl.registerLazySingleton<StreamLocalDataSource>(
+  //   () => StreamLocalDataSourceImpl(sharedPreferences: sl()),
+  // );
 
   // Services
   sl.registerLazySingleton(() => DownloadManager());
 
-  // ========================================
-  // Core
-  // ========================================
-
-  // API Client
-  sl.registerLazySingleton<ApiClient>(
-    () => ApiClient(dio: sl()),
-  );
-
-  // Network Info
-  sl.registerLazySingleton<core.NetworkInfo>(
-    () => core.NetworkInfoImpl(sl()),
-  );
+  // Video Player Service
+  sl.registerFactory<VideoPlayerService>(() => VideoPlayerServiceImpl());
 
   // ========================================
   // External Dependencies
   // ========================================
-
-  // Dio
-  sl.registerLazySingleton(() => Dio());
-
-  // Connectivity
-  sl.registerLazySingleton(() => Connectivity());
+  // Note: Dio, Connectivity, NetworkInfo, and ApiClient are already
+  // registered by core.initializeCore() in main.dart
 
   // SharedPreferences (async initialization)
   final sharedPreferences = await SharedPreferences.getInstance();

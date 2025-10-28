@@ -1,20 +1,29 @@
 import 'dart:async';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:video_player/video_player.dart';
 import '../../../domain/entities/playback_state.dart';
 import '../../../domain/usecases/save_playback_state.dart';
+import '../../../domain/services/video_player_service.dart';
+import '../../../core/constants/stream_constants.dart';
+import '../../../core/utils/logger.dart';
+import '../../../core/exceptions/stream_exceptions.dart';
 import 'player_event.dart';
 import 'player_state.dart';
 
 /// Player BLoC
-/// Manages video/audio playback state with event sourcing integration
+/// Manages video/audio playback state with clean architecture
+/// Uses VideoPlayerService abstraction instead of direct VideoPlayerController
 class PlayerBloc extends Bloc<PlayerEvent, PlayerState> {
   final SavePlaybackState savePlaybackStateUseCase;
-  VideoPlayerController? videoController;
+  final VideoPlayerService videoPlayerService;
+
   Timer? _positionTimer;
+  Timer? _autoSaveTimer;
+  bool _isSeeking = false;
+  StreamSubscription<void>? _playerStateSubscription;
 
   PlayerBloc({
     required this.savePlaybackStateUseCase,
+    required this.videoPlayerService,
   }) : super(const PlayerState.initial()) {
     on<PlayerEvent>(_onEvent);
   }
@@ -23,19 +32,19 @@ class PlayerBloc extends Bloc<PlayerEvent, PlayerState> {
     PlayerEvent event,
     Emitter<PlayerState> emit,
   ) async {
-    event.when(
-      initialize: (mediaItem) => _onInitialize(mediaItem, emit),
-      play: () => _onPlay(emit),
-      pause: () => _onPause(emit),
-      seekTo: (position) => _onSeekTo(position, emit),
-      setSpeed: (speed) => _onSetSpeed(speed, emit),
-      setQuality: (quality) => _onSetQuality(quality, emit),
-      setVolume: (volume) => _onSetVolume(volume, emit),
-      toggleMute: () => _onToggleMute(emit),
-      updatePosition: (position) => _onUpdatePosition(position, emit),
-      updateBuffering: (isBuffering) => _onUpdateBuffering(isBuffering, emit),
-      videoCompleted: () => _onVideoCompleted(emit),
-      dispose: () => _onDispose(emit),
+    await event.map(
+      initialize: (e) async => await _onInitialize(e.mediaItem, emit),
+      play: (_) async => await _onPlay(emit),
+      pause: (_) async => await _onPause(emit),
+      seekTo: (e) async => await _onSeekTo(e.position, emit),
+      setSpeed: (e) async => await _onSetSpeed(e.speed, emit),
+      setQuality: (e) async => await _onSetQuality(e.quality, emit),
+      setVolume: (e) async => await _onSetVolume(e.volume, emit),
+      toggleMute: (_) async => await _onToggleMute(emit),
+      updatePosition: (e) async => _onUpdatePosition(e.position, emit),
+      updateBuffering: (e) async => _onUpdateBuffering(e.isBuffering, emit),
+      videoCompleted: (_) async => _onVideoCompleted(emit),
+      dispose: (_) async => _onDispose(emit),
     );
   }
 
@@ -44,21 +53,34 @@ class PlayerBloc extends Bloc<PlayerEvent, PlayerState> {
     Emitter<PlayerState> emit,
   ) async {
     try {
+      Logger.info('PlayerBloc: Initializing player for media: ${mediaItem.id}');
       emit(PlayerState.loading(mediaItem));
 
-      // Initialize video controller
-      videoController = VideoPlayerController.networkUrl(
-        Uri.parse(mediaItem.streamUrl),
-      );
+      // Validate media item
+      _validateMediaItem(mediaItem);
 
-      await videoController!.initialize();
+      // Initialize video service
+      await videoPlayerService.initialize(mediaItem.streamUrl);
 
+      // Determine initial quality
+      String? initialQuality;
+      if (mediaItem.qualityOptions.isNotEmpty) {
+        initialQuality = mediaItem.qualityOptions.keys.contains(StreamConstants.defaultQuality)
+            ? StreamConstants.defaultQuality
+            : mediaItem.qualityOptions.keys.first;
+      }
+
+      // Create initial playback state
       final playbackState = PlaybackState(
         mediaItemId: mediaItem.id,
         position: Duration.zero,
-        duration: videoController!.value.duration,
+        duration: videoPlayerService.currentState.duration,
         isPlaying: false,
         isBuffering: false,
+        playbackSpeed: StreamConstants.defaultPlaybackSpeed,
+        currentQuality: initialQuality,
+        volume: StreamConstants.defaultVolume,
+        isMuted: StreamConstants.defaultMuteState,
         lastUpdated: DateTime.now(),
       );
 
@@ -67,208 +89,116 @@ class PlayerBloc extends Bloc<PlayerEvent, PlayerState> {
         playbackState: playbackState,
       ));
 
-      // Listen to video controller changes
-      videoController!.addListener(() => _onVideoControllerUpdate());
-
-      // Start position tracking timer
+      // Start timers
       _startPositionTimer();
+      _startAutoSaveTimer();
+
+      Logger.info('PlayerBloc: Player initialized successfully');
+    } on StreamException catch (e) {
+      Logger.error('PlayerBloc: Initialization failed', e);
+      emit(PlayerState.error(e.message));
     } catch (e) {
-      emit(PlayerState.error(e.toString()));
+      Logger.error('PlayerBloc: Unexpected initialization error', e);
+      emit(PlayerState.error('Failed to initialize player: ${e.toString()}'));
     }
-  }
-
-  void _onVideoControllerUpdate() {
-    if (videoController == null) return;
-
-    if (videoController!.value.isBuffering) {
-      add(const PlayerEvent.updateBuffering(true));
-    } else {
-      add(const PlayerEvent.updateBuffering(false));
-    }
-
-    if (videoController!.value.position >= videoController!.value.duration &&
-        videoController!.value.duration.inMilliseconds > 0) {
-      add(const PlayerEvent.videoCompleted());
-    }
-  }
-
-  void _startPositionTimer() {
-    _positionTimer?.cancel();
-    _positionTimer = Timer.periodic(const Duration(seconds: 1), (_) {
-      if (videoController != null && videoController!.value.isPlaying) {
-        add(PlayerEvent.updatePosition(videoController!.value.position));
-      }
-    });
   }
 
   Future<void> _onPlay(Emitter<PlayerState> emit) async {
-    if (videoController == null) return;
+    try {
+      Logger.debug('PlayerBloc: Play requested');
+      await videoPlayerService.play();
 
-    await videoController!.play();
-
-    state.maybeWhen(
-      ready: (mediaItem, playbackState) {
-        emit(PlayerState.playing(
-          mediaItem: mediaItem,
-          playbackState: playbackState,
-        ));
-      },
-      paused: (mediaItem, playbackState) {
-        final updatedState = PlaybackState(
-          mediaItemId: playbackState.mediaItemId,
-          position: playbackState.position,
-          duration: playbackState.duration,
+      _emitPlaybackState(emit, (playbackState) {
+        return _copyPlaybackState(
+          playbackState,
           isPlaying: true,
           isBuffering: false,
-          playbackSpeed: playbackState.playbackSpeed,
-          currentQuality: playbackState.currentQuality,
-          volume: playbackState.volume,
-          isMuted: playbackState.isMuted,
-          lastUpdated: DateTime.now(),
         );
-        emit(PlayerState.playing(
-          mediaItem: mediaItem,
-          playbackState: updatedState,
-        ));
-      },
-      buffering: (mediaItem, playbackState) {
-        emit(PlayerState.playing(
-          mediaItem: mediaItem,
-          playbackState: playbackState,
-        ));
-      },
-      orElse: () {},
-    );
+      }, playing: true);
+    } catch (e) {
+      Logger.error('PlayerBloc: Play failed', e);
+      emit(PlayerState.error('Failed to play: ${e.toString()}'));
+    }
   }
 
   Future<void> _onPause(Emitter<PlayerState> emit) async {
-    if (videoController == null) return;
+    try {
+      Logger.debug('PlayerBloc: Pause requested');
+      await videoPlayerService.pause();
 
-    await videoController!.pause();
-
-    state.maybeWhen(
-      playing: (mediaItem, playbackState) {
-        final updatedState = PlaybackState(
-          mediaItemId: playbackState.mediaItemId,
-          position: videoController!.value.position,
-          duration: playbackState.duration,
+      _emitPlaybackState(emit, (playbackState) {
+        final updatedState = _copyPlaybackState(
+          playbackState,
           isPlaying: false,
           isBuffering: false,
-          playbackSpeed: playbackState.playbackSpeed,
-          currentQuality: playbackState.currentQuality,
-          volume: playbackState.volume,
-          isMuted: playbackState.isMuted,
-          lastUpdated: DateTime.now(),
+          position: videoPlayerService.currentState.position,
         );
 
-        // Save playback state
+        // Save state on pause
         _savePlaybackState(updatedState);
 
-        emit(PlayerState.paused(
-          mediaItem: mediaItem,
-          playbackState: updatedState,
-        ));
-      },
-      orElse: () {},
-    );
+        return updatedState;
+      }, playing: false);
+    } catch (e) {
+      Logger.error('PlayerBloc: Pause failed', e);
+    }
   }
 
   Future<void> _onSeekTo(
     Duration position,
     Emitter<PlayerState> emit,
   ) async {
-    if (videoController == null) return;
+    try {
+      Logger.debug('PlayerBloc: Seek to $position requested');
+      _isSeeking = true;
+      await videoPlayerService.seekTo(position);
 
-    await videoController!.seekTo(position);
+      // Small delay for seek to complete
+      await Future.delayed(StreamConstants.seekCompleteDelay);
+      _isSeeking = false;
 
-    state.maybeWhen(
-      playing: (mediaItem, playbackState) {
-        final updatedState = PlaybackState(
-          mediaItemId: playbackState.mediaItemId,
+      _emitPlaybackState(emit, (playbackState) {
+        return _copyPlaybackState(
+          playbackState,
           position: position,
-          duration: playbackState.duration,
-          isPlaying: playbackState.isPlaying,
           isBuffering: false,
-          playbackSpeed: playbackState.playbackSpeed,
-          currentQuality: playbackState.currentQuality,
-          volume: playbackState.volume,
-          isMuted: playbackState.isMuted,
-          lastUpdated: DateTime.now(),
         );
-        emit(PlayerState.playing(
-          mediaItem: mediaItem,
-          playbackState: updatedState,
-        ));
-      },
-      paused: (mediaItem, playbackState) {
-        final updatedState = PlaybackState(
-          mediaItemId: playbackState.mediaItemId,
-          position: position,
-          duration: playbackState.duration,
-          isPlaying: false,
-          isBuffering: false,
-          playbackSpeed: playbackState.playbackSpeed,
-          currentQuality: playbackState.currentQuality,
-          volume: playbackState.volume,
-          isMuted: playbackState.isMuted,
-          lastUpdated: DateTime.now(),
-        );
-        emit(PlayerState.paused(
-          mediaItem: mediaItem,
-          playbackState: updatedState,
-        ));
-      },
-      orElse: () {},
-    );
+      });
+    } on SeekException catch (e) {
+      Logger.error('PlayerBloc: Seek failed', e);
+      _isSeeking = false;
+      emit(PlayerState.error(e.message));
+    } catch (e) {
+      Logger.error('PlayerBloc: Unexpected seek error', e);
+      _isSeeking = false;
+    }
   }
 
   Future<void> _onSetSpeed(
     double speed,
     Emitter<PlayerState> emit,
   ) async {
-    if (videoController == null) return;
+    try {
+      Logger.debug('PlayerBloc: Set speed to $speed requested');
 
-    await videoController!.setPlaybackSpeed(speed);
+      // Validate speed
+      if (!StreamConstants.availablePlaybackSpeeds.contains(speed)) {
+        Logger.warning('PlayerBloc: Invalid speed $speed, using default');
+        return;
+      }
 
-    state.maybeWhen(
-      playing: (mediaItem, playbackState) {
-        final updatedState = PlaybackState(
-          mediaItemId: playbackState.mediaItemId,
-          position: playbackState.position,
-          duration: playbackState.duration,
-          isPlaying: playbackState.isPlaying,
-          isBuffering: false,
+      await videoPlayerService.setPlaybackSpeed(speed);
+
+      _emitPlaybackState(emit, (playbackState) {
+        return _copyPlaybackState(
+          playbackState,
           playbackSpeed: speed,
-          currentQuality: playbackState.currentQuality,
-          volume: playbackState.volume,
-          isMuted: playbackState.isMuted,
-          lastUpdated: DateTime.now(),
-        );
-        emit(PlayerState.playing(
-          mediaItem: mediaItem,
-          playbackState: updatedState,
-        ));
-      },
-      paused: (mediaItem, playbackState) {
-        final updatedState = PlaybackState(
-          mediaItemId: playbackState.mediaItemId,
-          position: playbackState.position,
-          duration: playbackState.duration,
-          isPlaying: false,
           isBuffering: false,
-          playbackSpeed: speed,
-          currentQuality: playbackState.currentQuality,
-          volume: playbackState.volume,
-          isMuted: playbackState.isMuted,
-          lastUpdated: DateTime.now(),
         );
-        emit(PlayerState.paused(
-          mediaItem: mediaItem,
-          playbackState: updatedState,
-        ));
-      },
-      orElse: () {},
-    );
+      });
+    } catch (e) {
+      Logger.error('PlayerBloc: Set speed failed', e);
+    }
   }
 
   Future<void> _onSetQuality(
@@ -295,65 +225,51 @@ class PlayerBloc extends Bloc<PlayerEvent, PlayerState> {
     Emitter<PlayerState> emit, {
     required bool wasPlaying,
   }) async {
-    // Get the new quality URL
-    final newUrl = mediaItem.qualityOptions[quality];
-    if (newUrl == null || newUrl.isEmpty) return;
-
-    // Save current state
-    final currentPosition = videoController?.value.position ?? Duration.zero;
-
-    // Emit buffering state
-    final bufferingState = PlaybackState(
-      mediaItemId: playbackState.mediaItemId,
-      position: currentPosition,
-      duration: playbackState.duration,
-      isPlaying: false,
-      isBuffering: true,
-      playbackSpeed: playbackState.playbackSpeed,
-      currentQuality: quality,
-      volume: playbackState.volume,
-      isMuted: playbackState.isMuted,
-      lastUpdated: DateTime.now(),
-    );
-    emit(PlayerState.buffering(
-      mediaItem: mediaItem,
-      playbackState: bufferingState,
-    ));
-
     try {
-      // Dispose old controller
-      await videoController?.pause();
-      await videoController?.dispose();
+      Logger.info('PlayerBloc: Switching quality to $quality');
 
-      // Create new controller with new quality
-      videoController = VideoPlayerController.networkUrl(Uri.parse(newUrl));
-      await videoController!.initialize();
+      // Get the new quality URL
+      final newUrl = mediaItem.qualityOptions[quality];
+      if (newUrl == null || newUrl.isEmpty) {
+        throw QualitySwitchException(quality, 'Quality option not available');
+      }
 
-      // Listen to video controller changes
-      videoController!.addListener(() => _onVideoControllerUpdate());
+      // Save current position
+      final currentPosition = videoPlayerService.currentState.position;
+
+      // Emit buffering state
+      emit(PlayerState.buffering(
+        mediaItem: mediaItem,
+        playbackState: _copyPlaybackState(
+          playbackState,
+          position: currentPosition,
+          isPlaying: false,
+          isBuffering: true,
+          currentQuality: quality,
+        ),
+      ));
+
+      // Reinitialize with new URL
+      await videoPlayerService.initialize(newUrl);
 
       // Restore state
-      await videoController!.seekTo(currentPosition);
-      await videoController!.setPlaybackSpeed(playbackState.playbackSpeed);
-      await videoController!.setVolume(playbackState.isMuted ? 0 : playbackState.volume);
+      await videoPlayerService.seekTo(currentPosition);
+      await videoPlayerService.setPlaybackSpeed(playbackState.playbackSpeed);
+      await videoPlayerService.setVolume(playbackState.isMuted ? 0 : playbackState.volume);
 
       // Resume playback if it was playing
       if (wasPlaying) {
-        await videoController!.play();
+        await videoPlayerService.play();
       }
 
       // Emit updated state
-      final updatedState = PlaybackState(
-        mediaItemId: playbackState.mediaItemId,
+      final updatedState = _copyPlaybackState(
+        playbackState,
         position: currentPosition,
-        duration: videoController!.value.duration,
+        duration: videoPlayerService.currentState.duration,
         isPlaying: wasPlaying,
         isBuffering: false,
-        playbackSpeed: playbackState.playbackSpeed,
         currentQuality: quality,
-        volume: playbackState.volume,
-        isMuted: playbackState.isMuted,
-        lastUpdated: DateTime.now(),
       );
 
       if (wasPlaying) {
@@ -367,8 +283,14 @@ class PlayerBloc extends Bloc<PlayerEvent, PlayerState> {
           playbackState: updatedState,
         ));
       }
+
+      Logger.info('PlayerBloc: Quality switched successfully to $quality');
+    } on QualitySwitchException catch (e) {
+      Logger.error('PlayerBloc: Quality switch failed', e);
+      emit(PlayerState.error(e.message));
     } catch (e) {
-      emit(PlayerState.error('Failed to switch quality: $e'));
+      Logger.error('PlayerBloc: Unexpected quality switch error', e);
+      emit(PlayerState.error('Failed to switch quality: ${e.toString()}'));
     }
   }
 
@@ -376,143 +298,63 @@ class PlayerBloc extends Bloc<PlayerEvent, PlayerState> {
     double volume,
     Emitter<PlayerState> emit,
   ) async {
-    if (videoController == null) return;
+    try {
+      Logger.debug('PlayerBloc: Set volume to $volume requested');
+      await videoPlayerService.setVolume(volume);
 
-    await videoController!.setVolume(volume);
-
-    state.maybeWhen(
-      playing: (mediaItem, playbackState) {
-        final updatedState = PlaybackState(
-          mediaItemId: playbackState.mediaItemId,
-          position: playbackState.position,
-          duration: playbackState.duration,
-          isPlaying: playbackState.isPlaying,
-          isBuffering: false,
-          playbackSpeed: playbackState.playbackSpeed,
-          currentQuality: playbackState.currentQuality,
+      _emitPlaybackState(emit, (playbackState) {
+        return _copyPlaybackState(
+          playbackState,
           volume: volume,
-          isMuted: playbackState.isMuted,
-          lastUpdated: DateTime.now(),
-        );
-        emit(PlayerState.playing(
-          mediaItem: mediaItem,
-          playbackState: updatedState,
-        ));
-      },
-      paused: (mediaItem, playbackState) {
-        final updatedState = PlaybackState(
-          mediaItemId: playbackState.mediaItemId,
-          position: playbackState.position,
-          duration: playbackState.duration,
-          isPlaying: false,
           isBuffering: false,
-          playbackSpeed: playbackState.playbackSpeed,
-          currentQuality: playbackState.currentQuality,
-          volume: volume,
-          isMuted: playbackState.isMuted,
-          lastUpdated: DateTime.now(),
         );
-        emit(PlayerState.paused(
-          mediaItem: mediaItem,
-          playbackState: updatedState,
-        ));
-      },
-      orElse: () {},
-    );
+      });
+    } catch (e) {
+      Logger.error('PlayerBloc: Set volume failed', e);
+    }
   }
 
   Future<void> _onToggleMute(Emitter<PlayerState> emit) async {
-    if (videoController == null) return;
-
-    state.maybeWhen(
-      playing: (mediaItem, playbackState) {
+    try {
+      _emitPlaybackState(emit, (playbackState) {
         final newMuteState = !playbackState.isMuted;
-        videoController!.setVolume(newMuteState ? 0 : playbackState.volume);
+        Logger.debug('PlayerBloc: Toggle mute to $newMuteState');
 
-        final updatedState = PlaybackState(
-          mediaItemId: playbackState.mediaItemId,
-          position: playbackState.position,
-          duration: playbackState.duration,
-          isPlaying: playbackState.isPlaying,
-          isBuffering: false,
-          playbackSpeed: playbackState.playbackSpeed,
-          currentQuality: playbackState.currentQuality,
-          volume: playbackState.volume,
-          isMuted: newMuteState,
-          lastUpdated: DateTime.now(),
-        );
-        emit(PlayerState.playing(
-          mediaItem: mediaItem,
-          playbackState: updatedState,
-        ));
-      },
-      paused: (mediaItem, playbackState) {
-        final newMuteState = !playbackState.isMuted;
-        videoController!.setVolume(newMuteState ? 0 : playbackState.volume);
+        videoPlayerService.setVolume(newMuteState ? 0 : playbackState.volume);
 
-        final updatedState = PlaybackState(
-          mediaItemId: playbackState.mediaItemId,
-          position: playbackState.position,
-          duration: playbackState.duration,
-          isPlaying: false,
-          isBuffering: false,
-          playbackSpeed: playbackState.playbackSpeed,
-          currentQuality: playbackState.currentQuality,
-          volume: playbackState.volume,
+        return _copyPlaybackState(
+          playbackState,
           isMuted: newMuteState,
-          lastUpdated: DateTime.now(),
         );
-        emit(PlayerState.paused(
-          mediaItem: mediaItem,
-          playbackState: updatedState,
-        ));
-      },
-      orElse: () {},
-    );
+      });
+    } catch (e) {
+      Logger.error('PlayerBloc: Toggle mute failed', e);
+    }
   }
 
   void _onUpdatePosition(
     Duration position,
     Emitter<PlayerState> emit,
   ) {
-    state.maybeWhen(
-      playing: (mediaItem, playbackState) {
-        final updatedState = PlaybackState(
-          mediaItemId: playbackState.mediaItemId,
-          position: position,
-          duration: playbackState.duration,
-          isPlaying: true,
-          isBuffering: false,
-          playbackSpeed: playbackState.playbackSpeed,
-          currentQuality: playbackState.currentQuality,
-          volume: playbackState.volume,
-          isMuted: playbackState.isMuted,
-          lastUpdated: DateTime.now(),
-        );
-        emit(PlayerState.playing(
-          mediaItem: mediaItem,
-          playbackState: updatedState,
-        ));
-
-        // Save playback state periodically
-        if (position.inSeconds % 10 == 0) {
-          _savePlaybackState(updatedState);
-        }
-      },
-      orElse: () {},
-    );
+    _emitPlaybackState(emit, (playbackState) {
+      return _copyPlaybackState(
+        playbackState,
+        position: position,
+      );
+    });
   }
 
   void _onUpdateBuffering(
     bool isBuffering,
     Emitter<PlayerState> emit,
   ) {
-    if (isBuffering) {
+    // Don't show buffering state while seeking
+    if (isBuffering && !_isSeeking) {
       state.maybeWhen(
         playing: (mediaItem, playbackState) {
           emit(PlayerState.buffering(
             mediaItem: mediaItem,
-            playbackState: playbackState,
+            playbackState: _copyPlaybackState(playbackState, isBuffering: true),
           ));
         },
         orElse: () {},
@@ -523,17 +365,12 @@ class PlayerBloc extends Bloc<PlayerEvent, PlayerState> {
   void _onVideoCompleted(Emitter<PlayerState> emit) {
     state.maybeWhen(
       playing: (mediaItem, playbackState) {
-        final updatedState = PlaybackState(
-          mediaItemId: playbackState.mediaItemId,
+        Logger.info('PlayerBloc: Video completed');
+        final updatedState = _copyPlaybackState(
+          playbackState,
           position: playbackState.duration,
-          duration: playbackState.duration,
           isPlaying: false,
           isBuffering: false,
-          playbackSpeed: playbackState.playbackSpeed,
-          currentQuality: playbackState.currentQuality,
-          volume: playbackState.volume,
-          isMuted: playbackState.isMuted,
-          lastUpdated: DateTime.now(),
         );
 
         _savePlaybackState(updatedState);
@@ -551,14 +388,122 @@ class PlayerBloc extends Bloc<PlayerEvent, PlayerState> {
     _cleanup();
   }
 
+  // Helper Methods
+
+  /// Copy playback state with optional updates
+  /// Reduces duplication in state updates
+  PlaybackState _copyPlaybackState(
+    PlaybackState original, {
+    Duration? position,
+    Duration? duration,
+    bool? isPlaying,
+    bool? isBuffering,
+    double? playbackSpeed,
+    String? currentQuality,
+    double? volume,
+    bool? isMuted,
+  }) {
+    return PlaybackState(
+      mediaItemId: original.mediaItemId,
+      position: position ?? original.position,
+      duration: duration ?? original.duration,
+      isPlaying: isPlaying ?? original.isPlaying,
+      isBuffering: isBuffering ?? original.isBuffering,
+      playbackSpeed: playbackSpeed ?? original.playbackSpeed,
+      currentQuality: currentQuality ?? original.currentQuality,
+      volume: volume ?? original.volume,
+      isMuted: isMuted ?? original.isMuted,
+      lastUpdated: DateTime.now(),
+    );
+  }
+
+  /// Emit playback state based on current player state
+  /// Automatically determines which state variant to emit
+  void _emitPlaybackState(
+    Emitter<PlayerState> emit,
+    PlaybackState Function(PlaybackState) updater, {
+    bool? playing,
+  }) {
+    state.maybeWhen(
+      ready: (mediaItem, playbackState) {
+        final updated = updater(playbackState);
+        emit(PlayerState.ready(mediaItem: mediaItem, playbackState: updated));
+      },
+      playing: (mediaItem, playbackState) {
+        final updated = updater(playbackState);
+        final isPlaying = playing ?? updated.isPlaying;
+        if (isPlaying) {
+          emit(PlayerState.playing(mediaItem: mediaItem, playbackState: updated));
+        } else {
+          emit(PlayerState.paused(mediaItem: mediaItem, playbackState: updated));
+        }
+      },
+      paused: (mediaItem, playbackState) {
+        final updated = updater(playbackState);
+        final isPlaying = playing ?? updated.isPlaying;
+        if (isPlaying) {
+          emit(PlayerState.playing(mediaItem: mediaItem, playbackState: updated));
+        } else {
+          emit(PlayerState.paused(mediaItem: mediaItem, playbackState: updated));
+        }
+      },
+      buffering: (mediaItem, playbackState) {
+        final updated = updater(playbackState);
+        if (updated.isBuffering) {
+          emit(PlayerState.buffering(mediaItem: mediaItem, playbackState: updated));
+        } else if (updated.isPlaying) {
+          emit(PlayerState.playing(mediaItem: mediaItem, playbackState: updated));
+        } else {
+          emit(PlayerState.paused(mediaItem: mediaItem, playbackState: updated));
+        }
+      },
+      orElse: () {},
+    );
+  }
+
+  void _startPositionTimer() {
+    _positionTimer?.cancel();
+    _positionTimer = Timer.periodic(StreamConstants.positionUpdateInterval, (_) {
+      if (videoPlayerService.isInitialized && videoPlayerService.currentState.isPlaying) {
+        add(PlayerEvent.updatePosition(videoPlayerService.currentState.position));
+      }
+    });
+  }
+
+  void _startAutoSaveTimer() {
+    _autoSaveTimer?.cancel();
+    _autoSaveTimer = Timer.periodic(StreamConstants.playbackStateSaveInterval, (_) {
+      state.maybeWhen(
+        playing: (_, playbackState) => _savePlaybackState(playbackState),
+        orElse: () {},
+      );
+    });
+  }
+
   void _savePlaybackState(PlaybackState state) {
+    Logger.debug('PlayerBloc: Saving playback state');
     savePlaybackStateUseCase(SavePlaybackStateParams(state: state));
   }
 
+  void _validateMediaItem(dynamic mediaItem) {
+    if (mediaItem.streamUrl.isEmpty) {
+      throw const InvalidMediaItemException('streamUrl', 'Stream URL cannot be empty');
+    }
+
+    if (mediaItem.title.isEmpty || mediaItem.title.length > StreamConstants.maxTitleLength) {
+      throw InvalidMediaItemException(
+        'title',
+        'Title must be between ${StreamConstants.minTitleLength} and ${StreamConstants.maxTitleLength} characters',
+      );
+    }
+  }
+
   void _cleanup() {
+    Logger.info('PlayerBloc: Cleaning up');
     _positionTimer?.cancel();
-    videoController?.dispose();
-    videoController = null;
+    _autoSaveTimer?.cancel();
+    _playerStateSubscription?.cancel();
+    videoPlayerService.dispose();
   }
 
   @override

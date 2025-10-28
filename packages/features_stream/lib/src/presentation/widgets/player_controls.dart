@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import '../../domain/entities/playback_state.dart';
+import 'quality_selector.dart';
+import 'speed_selector.dart';
+import 'progress_bar.dart';
 
 /// Player controls widget
-/// Provides playback controls for video/audio player
+/// Provides playback controls using extracted reusable widgets
 class PlayerControls extends StatelessWidget {
   final PlaybackState playbackState;
   final VoidCallback onPlayPause;
@@ -14,7 +17,7 @@ class PlayerControls extends StatelessWidget {
   final Map<String, String> qualityOptions;
 
   const PlayerControls({
-    Key? key,
+    super.key,
     required this.playbackState,
     required this.onPlayPause,
     required this.onSeek,
@@ -23,7 +26,7 @@ class PlayerControls extends StatelessWidget {
     required this.onVolumeChanged,
     required this.onMuteToggle,
     required this.qualityOptions,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -34,32 +37,9 @@ class PlayerControls extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           // Progress bar
-          Row(
-            children: [
-              Text(
-                _formatDuration(playbackState.position),
-                style: const TextStyle(color: Colors.white, fontSize: 12),
-              ),
-              Expanded(
-                child: Slider(
-                  value: playbackState.progress.clamp(0.0, 1.0),
-                  onChanged: (value) {
-                    final newPosition = Duration(
-                      milliseconds:
-                          (value * playbackState.duration.inMilliseconds)
-                              .toInt(),
-                    );
-                    onSeek(newPosition);
-                  },
-                  activeColor: Colors.red,
-                  inactiveColor: Colors.white30,
-                ),
-              ),
-              Text(
-                _formatDuration(playbackState.duration),
-                style: const TextStyle(color: Colors.white, fontSize: 12),
-              ),
-            ],
+          ProgressBar(
+            playbackState: playbackState,
+            onSeek: onSeek,
           ),
 
           const SizedBox(height: 8),
@@ -69,110 +49,181 @@ class PlayerControls extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               // Quality control
-              if (qualityOptions.isNotEmpty)
-                PopupMenuButton<String>(
-                  icon: const Icon(Icons.settings, color: Colors.white),
-                  onSelected: onQualityChanged,
-                  tooltip: 'Quality',
-                  itemBuilder: (context) => qualityOptions.keys
-                      .map((quality) => PopupMenuItem(
-                            value: quality,
-                            child: Row(
-                              children: [
-                                Text(quality),
-                                if (playbackState.currentQuality == quality)
-                                  const Padding(
-                                    padding: EdgeInsets.only(left: 8),
-                                    child: Icon(Icons.check, size: 16),
-                                  ),
-                              ],
-                            ),
-                          ))
-                      .toList(),
-                ),
+              QualitySelector(
+                currentQuality: playbackState.currentQuality,
+                qualityOptions: qualityOptions,
+                onQualityChanged: onQualityChanged,
+              ),
 
               // Speed control
-              PopupMenuButton<double>(
-                icon: const Icon(Icons.speed, color: Colors.white),
-                onSelected: onSpeedChanged,
-                tooltip: 'Playback speed',
-                itemBuilder: (context) => [
-                  const PopupMenuItem(value: 0.5, child: Text('0.5x')),
-                  const PopupMenuItem(value: 0.75, child: Text('0.75x')),
-                  const PopupMenuItem(value: 1.0, child: Text('1.0x')),
-                  const PopupMenuItem(value: 1.25, child: Text('1.25x')),
-                  const PopupMenuItem(value: 1.5, child: Text('1.5x')),
-                  const PopupMenuItem(value: 2.0, child: Text('2.0x')),
-                ],
+              SpeedSelector(
+                currentSpeed: playbackState.playbackSpeed,
+                onSpeedChanged: onSpeedChanged,
               ),
 
-              // Rewind 10 seconds
-              IconButton(
-                icon: const Icon(Icons.replay_10, color: Colors.white),
-                onPressed: () {
-                  final newPosition = playbackState.position -
-                      const Duration(seconds: 10);
-                  onSeek(newPosition < Duration.zero
-                      ? Duration.zero
-                      : newPosition);
-                },
-              ),
+              // Seek buttons and play/pause
+              Expanded(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    // Rewind
+                    IconButton(
+                      icon: const Icon(Icons.replay_10, color: Colors.white),
+                      onPressed: () {
+                        final newPosition =
+                            playbackState.position - const Duration(seconds: 10);
+                        onSeek(newPosition < Duration.zero
+                            ? Duration.zero
+                            : newPosition);
+                      },
+                    ),
 
-              // Play/Pause
-              IconButton(
-                icon: Icon(
-                  playbackState.isPlaying ? Icons.pause : Icons.play_arrow,
-                  color: Colors.white,
-                  size: 48,
+                    // Play/Pause
+                    IconButton(
+                      icon: Icon(
+                        playbackState.isPlaying
+                            ? Icons.pause
+                            : Icons.play_arrow,
+                        color: Colors.white,
+                        size: 48,
+                      ),
+                      onPressed: onPlayPause,
+                    ),
+
+                    // Forward
+                    IconButton(
+                      icon: const Icon(Icons.forward_10, color: Colors.white),
+                      onPressed: () {
+                        final newPosition =
+                            playbackState.position + const Duration(seconds: 10);
+                        onSeek(newPosition > playbackState.duration
+                            ? playbackState.duration
+                            : newPosition);
+                      },
+                    ),
+                  ],
                 ),
-                onPressed: onPlayPause,
               ),
 
-              // Forward 10 seconds
-              IconButton(
-                icon: const Icon(Icons.forward_10, color: Colors.white),
-                onPressed: () {
-                  final newPosition = playbackState.position +
-                      const Duration(seconds: 10);
-                  onSeek(newPosition > playbackState.duration
-                      ? playbackState.duration
-                      : newPosition);
-                },
-              ),
-
-              // Mute toggle
-              IconButton(
-                icon: Icon(
-                  playbackState.isMuted ? Icons.volume_off : Icons.volume_up,
-                  color: Colors.white,
-                ),
-                onPressed: onMuteToggle,
+              // Volume control
+              _VolumeControl(
+                playbackState: playbackState,
+                onVolumeChanged: onVolumeChanged,
+                onMuteToggle: onMuteToggle,
               ),
             ],
-          ),
-
-          const SizedBox(height: 8),
-
-          // Speed indicator
-          Text(
-            '${playbackState.playbackSpeed}x',
-            style: const TextStyle(color: Colors.white70, fontSize: 12),
           ),
         ],
       ),
     );
   }
+}
 
-  String _formatDuration(Duration duration) {
-    String twoDigits(int n) => n.toString().padLeft(2, '0');
-    final hours = duration.inHours;
-    final minutes = duration.inMinutes.remainder(60);
-    final seconds = duration.inSeconds.remainder(60);
+/// Volume control widget with slider
+/// Uses ValueNotifier for reactive UI updates without setState
+/// Follows Flutter best practices for UI-level reactive state
+class _VolumeControl extends StatelessWidget {
+  final PlaybackState playbackState;
+  final Function(double) onVolumeChanged;
+  final VoidCallback onMuteToggle;
 
-    if (hours > 0) {
-      return '$hours:${twoDigits(minutes)}:${twoDigits(seconds)}';
-    } else {
-      return '${twoDigits(minutes)}:${twoDigits(seconds)}';
-    }
+  const _VolumeControl({
+    required this.playbackState,
+    required this.onVolumeChanged,
+    required this.onMuteToggle,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    // Use ValueNotifier for reactive UI updates during drag
+    final dragValueNotifier = ValueNotifier<double?>(null);
+
+    return PopupMenuButton(
+      icon: Icon(
+        playbackState.isMuted
+            ? Icons.volume_off
+            : playbackState.volume > 0.5
+                ? Icons.volume_up
+                : Icons.volume_down,
+        color: Colors.white,
+      ),
+      tooltip: 'Volume',
+      offset: const Offset(0, -160),
+      itemBuilder: (context) => [
+        PopupMenuItem(
+          enabled: false,
+          child: SizedBox(
+            width: 200,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                ValueListenableBuilder<double?>(
+                  valueListenable: dragValueNotifier,
+                  builder: (context, dragValue, _) {
+                    final currentVolume = dragValue ?? playbackState.volume;
+                    final displayVolume =
+                        playbackState.isMuted ? 0.0 : currentVolume;
+
+                    return Row(
+                      children: [
+                        const Icon(Icons.volume_down, size: 20),
+                        Expanded(
+                          child: SliderTheme(
+                            data: SliderTheme.of(context).copyWith(
+                              trackHeight: 3,
+                              thumbShape: const RoundSliderThumbShape(
+                                enabledThumbRadius: 6,
+                              ),
+                            ),
+                            child: Slider(
+                              value: displayVolume.clamp(0.0, 1.0),
+                              min: 0,
+                              max: 1,
+                              onChangeStart: (value) {
+                                dragValueNotifier.value = value;
+                              },
+                              onChanged: (value) {
+                                // Update reactive UI
+                                dragValueNotifier.value = value;
+
+                                // Unmute if increasing from 0
+                                if (value > 0 && playbackState.isMuted) {
+                                  onMuteToggle();
+                                }
+
+                                // Send to BLoC
+                                onVolumeChanged(value);
+                              },
+                              onChangeEnd: (value) {
+                                // Clear drag state, return to BLoC control
+                                dragValueNotifier.value = null;
+                              },
+                              activeColor: Colors.red,
+                              inactiveColor: Colors.grey,
+                            ),
+                          ),
+                        ),
+                        const Icon(Icons.volume_up, size: 20),
+                      ],
+                    );
+                  },
+                ),
+                const SizedBox(height: 8),
+                TextButton.icon(
+                  onPressed: onMuteToggle,
+                  icon: Icon(
+                    playbackState.isMuted ? Icons.volume_off : Icons.volume_up,
+                    size: 16,
+                  ),
+                  label: Text(
+                    playbackState.isMuted ? 'Unmute' : 'Mute',
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ],
+    );
   }
 }

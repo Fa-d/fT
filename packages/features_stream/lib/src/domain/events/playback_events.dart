@@ -14,11 +14,10 @@ class VideoPlaybackStartedEvent extends DomainEvent {
     required this.mediaTitle,
     required this.position,
     String? aggregateId,
-    int aggregateVersion = 1,
+    super.aggregateVersion = 1,
   }) : super(
           aggregateId: aggregateId ?? mediaItemId,
           eventType: 'VideoPlaybackStarted',
-          aggregateVersion: aggregateVersion,
           timestamp: DateTime.now(),
         );
 
@@ -46,11 +45,10 @@ class VideoPlaybackPausedEvent extends DomainEvent {
     required this.position,
     required this.duration,
     String? aggregateId,
-    int aggregateVersion = 1,
+    super.aggregateVersion = 1,
   }) : super(
           aggregateId: aggregateId ?? mediaItemId,
           eventType: 'VideoPlaybackPaused',
-          aggregateVersion: aggregateVersion,
           timestamp: DateTime.now(),
         );
 
@@ -79,11 +77,10 @@ class VideoPlaybackCompletedEvent extends DomainEvent {
     required this.mediaTitle,
     required this.duration,
     String? aggregateId,
-    int aggregateVersion = 1,
+    super.aggregateVersion = 1,
   }) : super(
           aggregateId: aggregateId ?? mediaItemId,
           eventType: 'VideoPlaybackCompleted',
-          aggregateVersion: aggregateVersion,
           timestamp: DateTime.now(),
         );
 
@@ -113,11 +110,10 @@ class VideoDownloadStartedEvent extends DomainEvent {
     required this.mediaTitle,
     required this.quality,
     String? aggregateId,
-    int aggregateVersion = 1,
+    super.aggregateVersion = 1,
   }) : super(
           aggregateId: aggregateId ?? downloadTaskId,
           eventType: 'VideoDownloadStarted',
-          aggregateVersion: aggregateVersion,
           timestamp: DateTime.now(),
         );
 
@@ -146,11 +142,10 @@ class VideoDownloadCompletedEvent extends DomainEvent {
     required this.mediaItemId,
     required this.localPath,
     String? aggregateId,
-    int aggregateVersion = 1,
+    super.aggregateVersion = 1,
   }) : super(
           aggregateId: aggregateId ?? downloadTaskId,
           eventType: 'VideoDownloadCompleted',
-          aggregateVersion: aggregateVersion,
           timestamp: DateTime.now(),
         );
 
@@ -178,11 +173,10 @@ class PlaybackSpeedChangedEvent extends DomainEvent {
     required this.oldSpeed,
     required this.newSpeed,
     String? aggregateId,
-    int aggregateVersion = 1,
+    super.aggregateVersion = 1,
   }) : super(
           aggregateId: aggregateId ?? mediaItemId,
           eventType: 'PlaybackSpeedChanged',
-          aggregateVersion: aggregateVersion,
           timestamp: DateTime.now(),
         );
 

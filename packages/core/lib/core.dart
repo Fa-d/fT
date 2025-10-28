@@ -1,4 +1,4 @@
-library core;
+library;
 
 // Error Handling
 export 'src/error/exceptions.dart';

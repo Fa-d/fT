@@ -1,4 +1,4 @@
-library design_system;
+library;
 
 // Theme
 export 'src/theme/app_theme.dart';

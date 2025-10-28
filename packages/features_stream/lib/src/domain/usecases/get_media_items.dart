@@ -13,6 +13,15 @@ class GetMediaItems implements UseCase<List<MediaItem>, GetMediaItemsParams> {
   @override
   Future<Either<Failure, List<MediaItem>>> call(
       GetMediaItemsParams params) async {
+    // Validate input
+    if (params.page < 1) {
+      return const Left(ValidationFailure('Page number must be at least 1'));
+    }
+
+    if (params.limit < 1 || params.limit > 100) {
+      return const Left(ValidationFailure('Limit must be between 1 and 100'));
+    }
+
     return repository.getMediaItems(
       page: params.page,
       limit: params.limit,

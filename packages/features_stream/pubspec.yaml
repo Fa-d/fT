@@ -28,6 +28,8 @@ dependencies:
   flutter_downloader: ^1.11.6
   path_provider: ^2.1.2
   shared_preferences: ^2.2.2
+  hive: ^2.2.3
+  hive_flutter: ^1.1.0
 
   # Utilities
   dartz: ^0.10.1
@@ -46,6 +48,7 @@ dev_dependencies:
   json_serializable: ^6.7.1
   mocktail: ^1.0.3
   bloc_test: ^9.1.7
+  hive_generator: ^2.0.1
 
 flutter:
   uses-material-design: true

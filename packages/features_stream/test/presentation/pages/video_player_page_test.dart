@@ -8,9 +8,12 @@ import 'package:features_stream/src/presentation/bloc/player/player_event.dart';
 import 'package:features_stream/src/presentation/bloc/player/player_state.dart';
 import 'package:features_stream/src/domain/entities/media_item.dart';
 import 'package:features_stream/src/domain/entities/playback_state.dart';
+import 'package:features_stream/src/domain/services/video_player_service.dart';
 
 // Mock classes
 class MockPlayerBloc extends Mock implements PlayerBloc {}
+
+class _MockVideoPlayerService extends Mock implements VideoPlayerService {}
 
 // Fake classes for fallback values
 class FakePlayerEvent extends Fake implements PlayerEvent {}
@@ -52,8 +55,8 @@ void main() {
         (_) => const Stream.empty(),
       );
 
-      // Setup default videoController
-      when(() => mockPlayerBloc.videoController).thenReturn(null);
+      // Setup default videoPlayerService
+      when(() => mockPlayerBloc.videoPlayerService).thenReturn(_MockVideoPlayerService());
     });
 
     Widget createTestWidget() {

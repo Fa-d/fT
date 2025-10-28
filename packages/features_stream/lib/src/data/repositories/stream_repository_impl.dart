@@ -10,6 +10,7 @@ import '../datasources/stream_local_data_source.dart';
 import '../datasources/stream_remote_data_source.dart';
 import '../models/download_task_model.dart';
 import '../models/playback_state_model.dart';
+import '../../core/utils/logger.dart';
 
 /// Implementation of StreamRepository
 /// Demonstrates clean architecture repository pattern with offline-first approach
@@ -20,6 +21,8 @@ class StreamRepositoryImpl implements StreamRepository {
 
   final StreamController<DownloadTask> _downloadProgressController =
       StreamController<DownloadTask>.broadcast();
+
+  bool _isDisposed = false;
 
   StreamRepositoryImpl({
     required this.remoteDataSource,
@@ -305,7 +308,21 @@ class StreamRepositoryImpl implements StreamRepository {
     }
   }
 
-  void dispose() {
-    _downloadProgressController.close();
+  /// Dispose repository resources
+  /// This should be called when the repository is no longer needed
+  /// to prevent memory leaks
+  Future<void> dispose() async {
+    if (_isDisposed) {
+      Logger.warning('StreamRepository: Already disposed');
+      return;
+    }
+
+    Logger.info('StreamRepository: Disposing');
+    _isDisposed = true;
+
+    await _downloadProgressController.close();
   }
+
+  /// Check if repository is disposed
+  bool get isDisposed => _isDisposed;
 }

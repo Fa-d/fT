@@ -2,18 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:features_stream/features_stream.dart';
 import 'package:design_system/design_system.dart';
+import 'package:go_router/go_router.dart';
 import '../../../../injection_container.dart';
 
 /// Media list page
 /// Demonstrates integration with features_stream package
 class MediaListPage extends StatelessWidget {
-  const MediaListPage({Key? key}) : super(key: key);
+  const MediaListPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Media Library'),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () => context.go('/'),
+        ),
       ),
       body: BlocProvider(
         create: (_) => _MediaListBloc()..add(const _LoadMediaItems()),

@@ -9,6 +9,7 @@ import 'package:features_stream/src/presentation/bloc/player/player_bloc.dart';
 import 'package:features_stream/src/presentation/pages/video_player_page.dart';
 import 'package:features_stream/src/domain/entities/media_item.dart';
 import 'package:features_stream/src/domain/usecases/save_playback_state.dart';
+import 'package:features_stream/src/data/services/video_player_service_impl.dart';
 
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
@@ -42,6 +43,7 @@ void main() {
           home: BlocProvider(
             create: (_) => PlayerBloc(
               savePlaybackStateUseCase: _MockSavePlaybackState(),
+              videoPlayerService: VideoPlayerServiceImpl(),
             ),
             child: VideoPlayerPage(mediaItem: testMediaItem),
           ),
@@ -144,6 +146,7 @@ void main() {
           home: BlocProvider(
             create: (_) => PlayerBloc(
               savePlaybackStateUseCase: _MockSavePlaybackState(),
+              videoPlayerService: VideoPlayerServiceImpl(),
             ),
             child: VideoPlayerPage(mediaItem: invalidMediaItem),
           ),
@@ -165,6 +168,7 @@ void main() {
           home: BlocProvider(
             create: (_) => PlayerBloc(
               savePlaybackStateUseCase: _MockSavePlaybackState(),
+              videoPlayerService: VideoPlayerServiceImpl(),
             ),
             child: VideoPlayerPage(mediaItem: testMediaItem),
           ),

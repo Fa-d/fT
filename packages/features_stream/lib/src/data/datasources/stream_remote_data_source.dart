@@ -108,22 +108,29 @@ class StreamRemoteDataSourceImpl implements StreamRemoteDataSource {
 
   // Mock data generators for demonstration
   MediaItemModel _getMockMediaItem(String id) {
+    // Using HLS adaptive streaming test URLs with actual different quality variants
+    // These are reliable test streams with multiple bitrates/resolutions
     return MediaItemModel(
       id: id,
-      title: 'Sample Video $id',
-      description: 'This is a sample video for demonstration purposes',
+      title: 'Sample Video $id - Adaptive Quality',
+      description: 'HLS adaptive streaming video with multiple quality options',
       thumbnailUrl: 'https://picsum.photos/seed/$id/400/300',
-      durationInSeconds: 600,
-      streamUrl: 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8',
+      durationInSeconds: 634, // Apple's test stream duration
+      // Default stream - Full HLS with adaptive bitrate
+      streamUrl: 'https://devstreaming-cdn.apple.com/videos/streaming/examples/img_bipbop_adv_example_fmp4/master.m3u8',
       type: 'video',
       qualityOptions: {
-        '1080p': 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8',
+        // Apple's official HLS test streams - these are reliable and widely used
+        // Each URL points to a different variant/rendition
+        'Auto': 'https://devstreaming-cdn.apple.com/videos/streaming/examples/img_bipbop_adv_example_fmp4/master.m3u8',
+        '1080p': 'https://devstreaming-cdn.apple.com/videos/streaming/examples/bipbop_16x9/bipbop_16x9_variant.m3u8',
         '720p': 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8',
-        '480p': 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8',
+        '480p': 'https://devstreaming-cdn.apple.com/videos/streaming/examples/img_bipbop_adv_example_ts/master.m3u8',
+        '360p': 'https://devstreaming-cdn.apple.com/videos/streaming/examples/bipbop_4x3/bipbop_4x3_variant.m3u8',
       },
       publishedAt: DateTime.now().subtract(Duration(days: 7)).toIso8601String(),
-      author: 'Content Creator',
-      viewCount: 1000,
+      author: 'Apple Test Stream',
+      viewCount: 1000 + (int.parse(id) * 100),
     );
   }
 

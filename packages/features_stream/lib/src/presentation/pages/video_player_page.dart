@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:video_player/video_player.dart';
@@ -14,9 +15,9 @@ class VideoPlayerPage extends StatefulWidget {
   final MediaItem mediaItem;
 
   const VideoPlayerPage({
-    Key? key,
+    super.key,
     required this.mediaItem,
-  }) : super(key: key);
+  });
 
   @override
   State<VideoPlayerPage> createState() => _VideoPlayerPageState();
@@ -25,6 +26,8 @@ class VideoPlayerPage extends StatefulWidget {
 class _VideoPlayerPageState extends State<VideoPlayerPage> {
   late PlayerBloc _playerBloc;
   bool _isInitialized = false;
+  bool _showControls = true;
+  Timer? _hideControlsTimer;
 
   @override
   void didChangeDependencies() {
@@ -38,8 +41,34 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
 
   @override
   void dispose() {
+    _hideControlsTimer?.cancel();
     _playerBloc.add(const PlayerEvent.dispose());
     super.dispose();
+  }
+
+  void _toggleControls() {
+    setState(() {
+      _showControls = !_showControls;
+    });
+
+    if (_showControls) {
+      _startHideControlsTimer();
+    }
+  }
+
+  void _startHideControlsTimer() {
+    _hideControlsTimer?.cancel();
+    _hideControlsTimer = Timer(const Duration(seconds: 3), () {
+      if (mounted) {
+        setState(() {
+          _showControls = false;
+        });
+      }
+    });
+  }
+
+  void _onControlInteraction() {
+    _startHideControlsTimer();
   }
 
   @override
@@ -94,50 +123,68 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
       children: [
         // Video player
         Expanded(
-          child: Center(
-            child: AspectRatio(
-              aspectRatio: 16 / 9,
-              child: Stack(
-                children: [
-                  if (bloc.videoController != null &&
-                      bloc.videoController!.value.isInitialized)
-                    VideoPlayer(bloc.videoController!),
-                  if (showBuffering)
-                    const Center(
-                      child: LoadingIndicator(),
-                    ),
-                ],
+          child: GestureDetector(
+            onTap: _toggleControls,
+            child: Container(
+              color: Colors.black,
+              child: Center(
+                child: AspectRatio(
+                  aspectRatio: 16 / 9,
+                  child: Stack(
+                    children: [
+                      if (bloc.videoPlayerService.nativeController != null &&
+                          bloc.videoPlayerService.isInitialized)
+                        VideoPlayer(bloc.videoPlayerService.nativeController),
+                      if (showBuffering)
+                        const Center(
+                          child: LoadingIndicator(),
+                        ),
+                    ],
+                  ),
+                ),
               ),
             ),
           ),
         ),
 
-        // Player controls
-        PlayerControls(
-          playbackState: playbackState,
-          qualityOptions: widget.mediaItem.qualityOptions,
-          onPlayPause: () {
-            if (playbackState.isPlaying) {
-              context.read<PlayerBloc>().add(const PlayerEvent.pause());
-            } else {
-              context.read<PlayerBloc>().add(const PlayerEvent.play());
-            }
-          },
-          onSeek: (position) {
-            context.read<PlayerBloc>().add(PlayerEvent.seekTo(position));
-          },
-          onSpeedChanged: (speed) {
-            context.read<PlayerBloc>().add(PlayerEvent.setSpeed(speed));
-          },
-          onQualityChanged: (quality) {
-            context.read<PlayerBloc>().add(PlayerEvent.setQuality(quality));
-          },
-          onVolumeChanged: (volume) {
-            context.read<PlayerBloc>().add(PlayerEvent.setVolume(volume));
-          },
-          onMuteToggle: () {
-            context.read<PlayerBloc>().add(const PlayerEvent.toggleMute());
-          },
+        // Player controls (with animation)
+        AnimatedOpacity(
+          opacity: _showControls ? 1.0 : 0.0,
+          duration: const Duration(milliseconds: 300),
+          child: _showControls
+              ? PlayerControls(
+                  playbackState: playbackState,
+                  qualityOptions: widget.mediaItem.qualityOptions,
+                  onPlayPause: () {
+                    _onControlInteraction();
+                    if (playbackState.isPlaying) {
+                      context.read<PlayerBloc>().add(const PlayerEvent.pause());
+                    } else {
+                      context.read<PlayerBloc>().add(const PlayerEvent.play());
+                    }
+                  },
+                  onSeek: (position) {
+                    _onControlInteraction();
+                    context.read<PlayerBloc>().add(PlayerEvent.seekTo(position));
+                  },
+                  onSpeedChanged: (speed) {
+                    _onControlInteraction();
+                    context.read<PlayerBloc>().add(PlayerEvent.setSpeed(speed));
+                  },
+                  onQualityChanged: (quality) {
+                    _onControlInteraction();
+                    context.read<PlayerBloc>().add(PlayerEvent.setQuality(quality));
+                  },
+                  onVolumeChanged: (volume) {
+                    _onControlInteraction();
+                    context.read<PlayerBloc>().add(PlayerEvent.setVolume(volume));
+                  },
+                  onMuteToggle: () {
+                    _onControlInteraction();
+                    context.read<PlayerBloc>().add(const PlayerEvent.toggleMute());
+                  },
+                )
+              : const SizedBox.shrink(),
         ),
 
         // Media info

@@ -12,6 +12,11 @@ class GetMediaItem implements UseCase<MediaItem, GetMediaItemParams> {
 
   @override
   Future<Either<Failure, MediaItem>> call(GetMediaItemParams params) async {
+    // Validate input
+    if (params.id.isEmpty) {
+      return const Left(ValidationFailure('Media item ID cannot be empty'));
+    }
+
     return repository.getMediaItem(params.id);
   }
 }
