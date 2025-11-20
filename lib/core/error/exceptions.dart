@@ -18,3 +18,17 @@ class NetworkException implements Exception {
 
   NetworkException(this.message);
 }
+
+/// Exception for sync-related errors
+class SyncException implements Exception {
+  final String message;
+
+  SyncException(this.message);
+}
+
+/// Exception when cached data is stale
+class StaleDataException implements Exception {
+  final String message;
+
+  StaleDataException(this.message);
+}

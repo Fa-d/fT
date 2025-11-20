@@ -35,7 +35,7 @@ dependencies:
   cupertino_icons: ^1.0.8
 
   # State Management
-  flutter_bloc: ^8.1.6
+  flutter_bloc: ^9.0.0
   equatable: ^2.0.5
 
   # Dependency Injection
@@ -46,6 +46,16 @@ dependencies:
 
   # Local Storage
   shared_preferences: ^2.2.2
+
+  # Database
+  isar: ^3.1.0+1
+  isar_flutter_libs: ^3.1.0+1
+
+  # Connectivity
+  connectivity_plus: ^5.0.2
+
+  # Path for database location
+  path_provider: ^2.1.1
 
   # Routing
   go_router: ^13.0.1
@@ -59,9 +69,14 @@ dev_dependencies:
 
   flutter_lints: ^5.0.0
 
+  # Code Generation
+  isar_generator: ^3.1.0+1
+  build_runner: ^2.4.7
+
   # Testing
-  bloc_test: ^9.1.7
   mocktail: ^1.0.3
+  # Note: bloc_test temporarily removed due to analyzer version conflict with isar_generator
+  # Can be added back later or tests can use mocktail directly
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

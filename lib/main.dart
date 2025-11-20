@@ -8,11 +8,32 @@ void main() async {
   // Ensure Flutter binding is initialized
   WidgetsFlutterBinding.ensureInitialized();
 
-  // Initialize dependency injection
-  await di.init();
+  try {
+    // Initialize dependency injection
+    await di.init();
 
-  // Run the app
-  runApp(const MyApp());
+    // Run the app
+    runApp(const MyApp());
+  } catch (e, stackTrace) {
+    // Catch and log any initialization errors
+    debugPrint('❌ INITIALIZATION ERROR: $e');
+    debugPrint('Stack trace: $stackTrace');
+
+    // Show error screen
+    runApp(MaterialApp(
+      home: Scaffold(
+        body: Center(
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Text(
+              'Initialization Error:\n\n$e',
+              style: const TextStyle(color: Colors.red),
+            ),
+          ),
+        ),
+      ),
+    ));
+  }
 }
 
 /// Root widget of the application

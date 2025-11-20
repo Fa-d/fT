@@ -30,3 +30,13 @@ class NetworkFailure extends Failure {
 class ValidationFailure extends Failure {
   const ValidationFailure(super.message);
 }
+
+/// Sync-related failures (synchronization errors)
+class SyncFailure extends Failure {
+  const SyncFailure(super.message);
+}
+
+/// Stale data failures (cached data is too old)
+class StaleDataFailure extends Failure {
+  const StaleDataFailure(super.message);
+}

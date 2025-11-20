@@ -1,11 +1,10 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../../core/usecases/usecase.dart';
 import '../../domain/usecases/get_users.dart';
 import 'user_event.dart';
 import 'user_state.dart';
 
-/// BLoC for User feature
-/// Handles fetching users from API
+/// BLoC for User feature with offline-first support
+/// Handles fetching users from cache/network
 class UserBloc extends Bloc<UserEvent, UserState> {
   final GetUsers getUsers;
 
@@ -14,14 +13,15 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     on<RefreshUsersEvent>(_onRefreshUsers);
   }
 
-  /// Handle FetchUsersEvent
+  /// Handle FetchUsersEvent (cache-first, then network)
   Future<void> _onFetchUsers(
     FetchUsersEvent event,
     Emitter<UserState> emit,
   ) async {
     emit(UserLoading());
 
-    final result = await getUsers(NoParams());
+    // Use cache-first strategy (forceRefresh: false)
+    final result = await getUsers(const GetUsersParams(forceRefresh: false));
 
     result.fold(
       (failure) => emit(UserError(message: failure.message)),
@@ -29,13 +29,14 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     );
   }
 
-  /// Handle RefreshUsersEvent
+  /// Handle RefreshUsersEvent (force network fetch)
   Future<void> _onRefreshUsers(
     RefreshUsersEvent event,
     Emitter<UserState> emit,
   ) async {
     // Don't show loading for refresh, keep current data visible
-    final result = await getUsers(NoParams());
+    // Force refresh from network (forceRefresh: true)
+    final result = await getUsers(const GetUsersParams(forceRefresh: true));
 
     result.fold(
       (failure) => emit(UserError(message: failure.message)),

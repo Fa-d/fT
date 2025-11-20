@@ -1,9 +1,14 @@
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
+import 'package:isar/isar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 // Core
+import 'core/bloc/connectivity_bloc.dart';
+import 'core/database/database_service.dart';
 import 'core/network/api_client.dart';
+import 'core/network/network_info.dart';
 
 // Counter Feature
 import 'features/counter/data/datasources/counter_local_datasource.dart';
@@ -16,6 +21,7 @@ import 'features/counter/domain/usecases/reset_counter.dart';
 import 'features/counter/presentation/bloc/counter_bloc.dart';
 
 // User Feature
+import 'features/user/data/datasources/user_local_datasource.dart';
 import 'features/user/data/datasources/user_remote_datasource.dart';
 import 'features/user/data/repositories/user_repository_impl.dart';
 import 'features/user/domain/repositories/user_repository.dart';
@@ -73,7 +79,11 @@ Future<void> init() async {
 
   // Repository
   sl.registerLazySingleton<UserRepository>(
-    () => UserRepositoryImpl(remoteDataSource: sl()),
+    () => UserRepositoryImpl(
+      remoteDataSource: sl(),
+      localDataSource: sl(),
+      networkInfo: sl(),
+    ),
   );
 
   // Data Sources
@@ -81,9 +91,27 @@ Future<void> init() async {
     () => UserRemoteDataSourceImpl(apiClient: sl()),
   );
 
+  sl.registerLazySingleton<UserLocalDataSource>(
+    () => UserLocalDataSourceImpl(isar: sl()),
+  );
+
   // ========================================
   // Core
   // ========================================
+
+  // Database
+  final isar = await DatabaseService.initialize();
+  sl.registerLazySingleton<Isar>(() => isar);
+
+  // Network Info
+  sl.registerLazySingleton<NetworkInfo>(
+    () => NetworkInfoImpl(sl()),
+  );
+
+  // Connectivity BLoC (global)
+  sl.registerLazySingleton(
+    () => ConnectivityBloc(networkInfo: sl()),
+  );
 
   // API Client
   sl.registerLazySingleton<ApiClient>(
@@ -93,6 +121,9 @@ Future<void> init() async {
   // ========================================
   // External Dependencies
   // ========================================
+
+  // Connectivity
+  sl.registerLazySingleton(() => Connectivity());
 
   // Dio
   sl.registerLazySingleton(() => Dio());

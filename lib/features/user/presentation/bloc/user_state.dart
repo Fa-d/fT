@@ -18,19 +18,29 @@ class UserLoading extends UserState {}
 /// Successfully loaded users
 class UserLoaded extends UserState {
   final List<UserEntity> users;
+  final bool isFromCache;
+  final bool isStale;
 
-  const UserLoaded({required this.users});
+  const UserLoaded({
+    required this.users,
+    this.isFromCache = false,
+    this.isStale = false,
+  });
 
   @override
-  List<Object?> get props => [users];
+  List<Object?> get props => [users, isFromCache, isStale];
 }
 
 /// Error state
 class UserError extends UserState {
   final String message;
+  final bool hasOfflineData;
 
-  const UserError({required this.message});
+  const UserError({
+    required this.message,
+    this.hasOfflineData = false,
+  });
 
   @override
-  List<Object?> get props => [message];
+  List<Object?> get props => [message, hasOfflineData];
 }
