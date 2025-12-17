@@ -1,12 +1,9 @@
-import 'package:equatable/equatable.dart';
+part of 'counter_bloc.dart';
 
 /// Base class for Counter Events
 /// Events represent user actions or triggers
-abstract class CounterEvent extends Equatable {
+abstract class CounterEvent {
   const CounterEvent();
-
-  @override
-  List<Object?> get props => [];
 }
 
 /// Event: Load the counter value

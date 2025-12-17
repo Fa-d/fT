@@ -3,8 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import '../../../../injection_container.dart';
 import '../bloc/counter_bloc.dart';
-import '../bloc/counter_event.dart';
-import '../bloc/counter_state.dart';
 import '../widgets/counter_controls.dart';
 import '../widgets/counter_display.dart';
 

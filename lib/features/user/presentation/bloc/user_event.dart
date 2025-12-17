@@ -1,11 +1,8 @@
-import 'package:equatable/equatable.dart';
+part of 'user_bloc.dart';
 
 /// Base class for User Events
-abstract class UserEvent extends Equatable {
+abstract class UserEvent {
   const UserEvent();
-
-  @override
-  List<Object?> get props => [];
 }
 
 /// Event: Fetch all users from API

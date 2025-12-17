@@ -1,7 +1,8 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../domain/usecases/get_users.dart';
-import 'user_event.dart';
-import 'user_state.dart';
+
+part 'user_event.dart';
+part 'user_state.dart';
 
 /// BLoC for User feature with offline-first support
 /// Handles fetching users from cache/network

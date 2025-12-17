@@ -4,8 +4,9 @@ import '../../domain/usecases/decrement_counter.dart';
 import '../../domain/usecases/get_counter.dart';
 import '../../domain/usecases/increment_counter.dart';
 import '../../domain/usecases/reset_counter.dart';
-import 'counter_event.dart';
-import 'counter_state.dart';
+
+part 'counter_event.dart';
+part 'counter_state.dart';
 
 /// BLoC: Business Logic Component
 /// Handles business logic and state management

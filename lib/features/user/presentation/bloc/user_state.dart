@@ -1,12 +1,8 @@
-import 'package:equatable/equatable.dart';
-import '../../domain/entities/user_entity.dart';
+part of 'user_bloc.dart';
 
 /// Base class for User States
-abstract class UserState extends Equatable {
+abstract class UserState {
   const UserState();
-
-  @override
-  List<Object?> get props => [];
 }
 
 /// Initial state
@@ -17,7 +13,7 @@ class UserLoading extends UserState {}
 
 /// Successfully loaded users
 class UserLoaded extends UserState {
-  final List<UserEntity> users;
+  final List<dynamic> users;
   final bool isFromCache;
   final bool isStale;
 
@@ -26,9 +22,6 @@ class UserLoaded extends UserState {
     this.isFromCache = false,
     this.isStale = false,
   });
-
-  @override
-  List<Object?> get props => [users, isFromCache, isStale];
 }
 
 /// Error state
@@ -40,7 +33,4 @@ class UserError extends UserState {
     required this.message,
     this.hasOfflineData = false,
   });
-
-  @override
-  List<Object?> get props => [message, hasOfflineData];
 }
