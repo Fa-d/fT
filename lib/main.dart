@@ -7,44 +7,20 @@ import 'injection_container.dart' as di;
 
 /// Main entry point of the application
 /// Initializes dependencies and starts the app
-void main() async {
+Future<void> main() async {
   debugPrint('🚀 App starting...');
 
-  // Ensure Flutter binding is initialized
+  // Ensure Flutter binding is initialized before async operations
   WidgetsFlutterBinding.ensureInitialized();
 
-  try {
-    debugPrint('⚙️ Initializing dependencies...');
+  // Initialize dependency injection container
+  // This registers all BLoCs, repositories, data sources, etc.
+  await di.init();
 
-    // Initialize dependency injection
-    await di.init();
+  // Run the app
+  runApp(const MyApp());
 
-    debugPrint('✅ Dependencies initialized successfully');
-
-    // Run the app with providers
-    runApp(const MyApp());
-
-    debugPrint('✅ App launched successfully');
-  } catch (e, stackTrace) {
-    // Catch and log any initialization errors
-    debugPrint('❌ INITIALIZATION ERROR: $e');
-    debugPrint('Stack trace: $stackTrace');
-
-    // Show error screen
-    runApp(MaterialApp(
-      home: Scaffold(
-        body: Center(
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Text(
-              'Initialization Error:\n\n$e',
-              style: const TextStyle(color: Colors.red),
-            ),
-          ),
-        ),
-      ),
-    ));
-  }
+  debugPrint('✅ App launched successfully');
 }
 
 /// Root widget of the application

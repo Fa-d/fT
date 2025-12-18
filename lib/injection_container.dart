@@ -85,21 +85,18 @@ Future<void> init() async {
   // Network information service
   sl.registerLazySingleton<NetworkInfo>(
     () => NetworkInfoImpl(sl()),
-    instanceName: 'NetworkInfo',
   );
   debugPrint('✓ NetworkInfo initialized');
 
   // API client with error handling and logging
   sl.registerLazySingleton<ApiClient>(
     () => ApiClient(dio: sl()),
-    instanceName: 'ApiClient',
   );
   debugPrint('✓ ApiClient initialized');
 
   // Global connectivity BLoC for app-wide network status
   sl.registerLazySingleton<ConnectivityBloc>(
     () => ConnectivityBloc(networkInfo: sl()),
-    instanceName: 'ConnectivityBloc',
   );
   debugPrint('✓ ConnectivityBloc initialized');
 
@@ -134,30 +131,24 @@ void _initCounterFeature() {
   // Data layer
   sl.registerLazySingleton<CounterLocalDataSource>(
     () => CounterLocalDataSourceImpl(sharedPreferences: sl()),
-    instanceName: 'CounterLocalDataSource',
   );
 
   sl.registerLazySingleton<CounterRepository>(
     () => CounterRepositoryImpl(localDataSource: sl()),
-    instanceName: 'CounterRepository',
   );
 
   // Domain layer - Use Cases
   sl.registerLazySingleton<GetCounter>(
     () => GetCounter(sl()),
-    instanceName: 'GetCounter',
   );
   sl.registerLazySingleton<IncrementCounter>(
     () => IncrementCounter(sl()),
-    instanceName: 'IncrementCounter',
   );
   sl.registerLazySingleton<DecrementCounter>(
     () => DecrementCounter(sl()),
-    instanceName: 'DecrementCounter',
   );
   sl.registerLazySingleton<ResetCounter>(
     () => ResetCounter(sl()),
-    instanceName: 'ResetCounter',
   );
 
   // Presentation layer - BLoC (Factory for new instances)
@@ -168,7 +159,6 @@ void _initCounterFeature() {
       decrementCounter: sl(),
       resetCounter: sl(),
     ),
-    instanceName: 'CounterBloc',
   );
 
   debugPrint('  ✓ Counter feature initialized');
@@ -181,12 +171,10 @@ void _initUserFeature() {
   // Data layer - Data Sources
   sl.registerLazySingleton<UserRemoteDataSource>(
     () => UserRemoteDataSourceImpl(apiClient: sl()),
-    instanceName: 'UserRemoteDataSource',
   );
 
   sl.registerLazySingleton<UserLocalDataSource>(
     () => UserLocalDataSourceImpl(isar: sl()),
-    instanceName: 'UserLocalDataSource',
   );
 
   // Data layer - Repository
@@ -196,19 +184,16 @@ void _initUserFeature() {
       localDataSource: sl(),
       networkInfo: sl(),
     ),
-    instanceName: 'UserRepository',
   );
 
   // Domain layer - Use Cases
   sl.registerLazySingleton<GetUsers>(
     () => GetUsers(sl()),
-    instanceName: 'GetUsers',
   );
 
   // Presentation layer - BLoC (Factory for new instances)
   sl.registerFactory<UserBloc>(
     () => UserBloc(getUsers: sl()),
-    instanceName: 'UserBloc',
   );
 
   debugPrint('  ✓ User feature initialized');
@@ -219,27 +204,9 @@ void _initUserFeature() {
 void _initGlobalState() {
   debugPrint('  Initializing global state management...');
 
-  // Register global ValueNotifier instances
-  // These can be injected or accessed directly
-  sl.registerLazySingleton<ValueNotifier<dynamic>>(
-    () => currentUser,
-    instanceName: 'CurrentUser',
-  );
-
-  sl.registerLazySingleton<ValueNotifier<bool>>(
-    () => isDarkMode,
-    instanceName: 'IsDarkMode',
-  );
-
-  sl.registerLazySingleton<ValueNotifier<bool>>(
-    () => isLoading,
-    instanceName: 'IsLoading',
-  );
-
-  sl.registerLazySingleton<ValueNotifier<bool>>(
-    () => isNetworkConnected,
-    instanceName: 'IsNetworkConnected',
-  );
+  // Note: Global ValueNotifier instances are already created in constants.dart
+  // and used directly via MultiProvider in main.dart
+  // No need to register them in the service locator
 
   debugPrint('  ✓ Global state management initialized');
 }
