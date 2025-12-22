@@ -10,7 +10,6 @@ import 'core/bloc/connectivity_bloc.dart';
 import 'core/database/database_service.dart';
 import 'core/network/api_client.dart';
 import 'core/network/network_info.dart';
-import 'core/utils/constants.dart';
 
 // Feature: Counter
 import 'features/counter/data/datasources/counter_local_datasource.dart';
@@ -28,7 +27,15 @@ import 'features/user/data/datasources/user_remote_datasource.dart';
 import 'features/user/data/repositories/user_repository_impl.dart';
 import 'features/user/domain/repositories/user_repository.dart';
 import 'features/user/domain/usecases/get_users.dart';
+import 'features/user/domain/usecases/get_users_paginated.dart';
 import 'features/user/presentation/bloc/user_bloc.dart';
+
+// Feature: Character (Rick and Morty)
+import 'features/character/data/datasources/character_remote_datasource.dart';
+import 'features/character/data/repositories/character_repository_impl.dart';
+import 'features/character/domain/repositories/character_repository.dart';
+import 'features/character/domain/usecases/get_characters_paginated.dart';
+import 'features/character/presentation/bloc/character_bloc.dart';
 
 /// Service Locator instance (CT/mobile-app pattern)
 /// sl = Service Locator
@@ -115,6 +122,13 @@ Future<void> init() async {
   _initUserFeature();
 
   // ============================================
+  // FEATURE: CHARACTER (Layer 2)
+  // Rick and Morty characters with pagination (826 characters)
+  // ============================================
+
+  _initCharacterFeature();
+
+  // ============================================
   // GLOBAL STATE MANAGEMENT (CT/mobile-app pattern)
   // Initialize ValueNotifier instances for global state
   // ============================================
@@ -191,12 +205,46 @@ void _initUserFeature() {
     () => GetUsers(sl()),
   );
 
+  sl.registerLazySingleton<GetUsersPaginated>(
+    () => GetUsersPaginated(sl()),
+  );
+
   // Presentation layer - BLoC (Factory for new instances)
   sl.registerFactory<UserBloc>(
-    () => UserBloc(getUsers: sl()),
+    () => UserBloc(
+      getUsers: sl(),
+      getUsersPaginated: sl(),
+    ),
   );
 
   debugPrint('  ✓ User feature initialized');
+}
+
+/// Initialize Character feature dependencies (Rick and Morty API)
+void _initCharacterFeature() {
+  debugPrint('  Initializing Character feature...');
+
+  // Data layer - Data Sources
+  sl.registerLazySingleton<CharacterRemoteDataSource>(
+    () => CharacterRemoteDataSourceImpl(dio: sl()),
+  );
+
+  // Data layer - Repository
+  sl.registerLazySingleton<CharacterRepository>(
+    () => CharacterRepositoryImpl(remoteDataSource: sl()),
+  );
+
+  // Domain layer - Use Cases
+  sl.registerLazySingleton<GetCharactersPaginated>(
+    () => GetCharactersPaginated(sl()),
+  );
+
+  // Presentation layer - BLoC (Factory for new instances)
+  sl.registerFactory<CharacterBloc>(
+    () => CharacterBloc(getCharactersPaginated: sl()),
+  );
+
+  debugPrint('  ✓ Character feature initialized');
 }
 
 /// Initialize global state management (CT/mobile-app pattern)

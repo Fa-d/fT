@@ -69,6 +69,22 @@ class _CounterPageState extends State<CounterPage> {
                   ),
                 ),
               ),
+              const SizedBox(height: 16),
+              // Navigation button for Rick and Morty characters
+              OutlinedButton.icon(
+                onPressed: () {
+                  // Navigate to characters page using go_router
+                  context.go('/characters');
+                },
+                icon: const Icon(Icons.movie),
+                label: const Text('View Rick & Morty Characters'),
+                style: OutlinedButton.styleFrom(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 24,
+                    vertical: 12,
+                  ),
+                ),
+              ),
             ],
           ),
         ),

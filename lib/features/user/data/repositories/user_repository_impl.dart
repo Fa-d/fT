@@ -2,6 +2,8 @@ import 'package:dartz/dartz.dart';
 import '../../../../core/error/exceptions.dart';
 import '../../../../core/error/failures.dart';
 import '../../../../core/network/network_info.dart';
+import '../../../../core/pagination/pagination_params.dart';
+import '../../../../core/pagination/paginated_response.dart';
 import '../../domain/entities/user_entity.dart';
 import '../../domain/repositories/user_repository.dart';
 import '../datasources/user_local_datasource.dart';
@@ -88,6 +90,40 @@ class UserRepositoryImpl implements UserRepository {
 
       // 4. Return cached data (already handled above, but safety check)
       return Right(cachedUsers);
+    } catch (e) {
+      return Left(CacheFailure('Unexpected error: $e'));
+    }
+  }
+
+  @override
+  Future<Either<Failure, PaginatedResponse<UserEntity>>> getUsersPaginated({
+    required PaginationParams params,
+    bool forceRefresh = false,
+  }) async {
+    try {
+      final isConnected = await networkInfo.isConnected;
+
+      // For pagination, we always try to fetch from network when connected
+      // Caching paginated data is complex, so we keep it simple for now
+      if (isConnected) {
+        try {
+          final paginatedResponse =
+              await remoteDataSource.getUsersPaginated(params);
+
+          return Right(paginatedResponse);
+        } on ServerException catch (e) {
+          return Left(ServerFailure(e.message));
+        } on NetworkException catch (e) {
+          return Left(NetworkFailure(e.message));
+        }
+      }
+
+      // If offline, return failure
+      return const Left(
+        NetworkFailure(
+          'No internet connection. Pagination requires network access.',
+        ),
+      );
     } catch (e) {
       return Left(CacheFailure('Unexpected error: $e'));
     }

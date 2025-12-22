@@ -8,6 +8,10 @@ class AppConstants {
   // API Endpoints
   static const String usersEndpoint = '/users';
 
+  // Rick and Morty API
+  static const String rickAndMortyBaseUrl = 'https://rickandmortyapi.com/api';
+  static const String charactersEndpoint = '/character';
+
   // Error Messages
   static const String serverErrorMessage = 'Server error occurred';
   static const String cacheErrorMessage = 'Failed to access local storage';

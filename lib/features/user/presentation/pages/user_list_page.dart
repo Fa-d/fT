@@ -5,24 +5,61 @@ import '../../../../injection_container.dart';
 import '../bloc/user_bloc.dart';
 import '../widgets/user_card.dart';
 
-/// User List Page - Displays list of users from API
-/// Demonstrates API integration, ListView, and pull-to-refresh
-class UserListPage extends StatelessWidget {
+/// User List Page - Displays paginated list of users from API
+/// Demonstrates API integration, infinite scroll pagination, and pull-to-refresh
+class UserListPage extends StatefulWidget {
   const UserListPage({super.key});
+
+  @override
+  State<UserListPage> createState() => _UserListPageState();
+}
+
+class _UserListPageState extends State<UserListPage> {
+  final ScrollController _scrollController = ScrollController();
+  UserBloc? _userBloc;
+
+  @override
+  void initState() {
+    super.initState();
+    _scrollController.addListener(_onScroll);
+  }
+
+  @override
+  void dispose() {
+    _scrollController
+      ..removeListener(_onScroll)
+      ..dispose();
+    super.dispose();
+  }
+
+  void _onScroll() {
+    if (_isBottom && _userBloc != null) {
+      _userBloc!.add(LoadMoreUsersEvent());
+    }
+  }
+
+  bool get _isBottom {
+    if (!_scrollController.hasClients) return false;
+    final maxScroll = _scrollController.position.maxScrollExtent;
+    final currentScroll = _scrollController.offset;
+    return currentScroll >= (maxScroll * 0.9); // Trigger at 90% scroll
+  }
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => sl<UserBloc>()..add(FetchUsersEvent()),
+      create: (context) {
+        _userBloc = sl<UserBloc>()..add(FetchUsersPaginatedEvent());
+        return _userBloc!;
+      },
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Users from API'),
+          title: const Text('Users from API (Paginated)'),
           backgroundColor: Theme.of(context).colorScheme.inversePrimary,
           actions: [
             IconButton(
               icon: const Icon(Icons.home),
               onPressed: () {
-                // Use go_router navigation instead of Navigator.pop()
                 context.go('/');
               },
               tooltip: 'Back to Counter',
@@ -42,11 +79,39 @@ class UserListPage extends StatelessWidget {
                   ],
                 ),
               );
+            } else if (state is UserPaginatedLoaded) {
+              return RefreshIndicator(
+                onRefresh: () async {
+                  context.read<UserBloc>().add(RefreshUsersPaginatedEvent());
+                  await Future.delayed(const Duration(seconds: 1));
+                },
+                child: ListView.builder(
+                  controller: _scrollController,
+                  physics: const AlwaysScrollableScrollPhysics(),
+                  itemCount: state.hasReachedMax
+                      ? state.users.length
+                      : state.users.length + 1, // +1 for loading indicator
+                  itemBuilder: (context, index) {
+                    if (index >= state.users.length) {
+                      // Show loading indicator at the bottom
+                      return state.isLoadingMore
+                          ? const Padding(
+                              padding: EdgeInsets.all(16.0),
+                              child: Center(
+                                child: CircularProgressIndicator(),
+                              ),
+                            )
+                          : const SizedBox.shrink();
+                    }
+                    return UserCard(user: state.users[index]);
+                  },
+                ),
+              );
             } else if (state is UserLoaded) {
+              // Legacy non-paginated state
               return RefreshIndicator(
                 onRefresh: () async {
                   context.read<UserBloc>().add(RefreshUsersEvent());
-                  // Wait for the refresh to complete
                   await Future.delayed(const Duration(seconds: 1));
                 },
                 child: ListView.builder(
@@ -83,7 +148,9 @@ class UserListPage extends StatelessWidget {
                       const SizedBox(height: 24),
                       ElevatedButton.icon(
                         onPressed: () {
-                          context.read<UserBloc>().add(FetchUsersEvent());
+                          context
+                              .read<UserBloc>()
+                              .add(FetchUsersPaginatedEvent());
                         },
                         icon: const Icon(Icons.refresh),
                         label: const Text('Retry'),

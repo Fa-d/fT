@@ -4,6 +4,9 @@ import '../../features/counter/presentation/pages/counter_page.dart';
 import '../../features/user/domain/entities/user_entity.dart';
 import '../../features/user/presentation/pages/user_detail_page.dart';
 import '../../features/user/presentation/pages/user_list_page.dart';
+import '../../features/character/domain/entities/character_entity.dart';
+import '../../features/character/presentation/pages/character_list_page.dart';
+import '../../features/character/presentation/pages/character_detail_page.dart';
 
 /// App Router using go_router
 /// Centralized routing configuration
@@ -34,6 +37,21 @@ class AppRouter {
             },
           ),
         ],
+      ),
+      // Character list page route (Rick and Morty)
+      GoRoute(
+        path: '/characters',
+        name: 'characters',
+        builder: (context, state) => const CharacterListPage(),
+      ),
+      // Character detail page route
+      GoRoute(
+        path: '/character/:id',
+        name: 'character-detail',
+        builder: (context, state) {
+          final character = state.extra as CharacterEntity;
+          return CharacterDetailPage(character: character);
+        },
       ),
     ],
     // Error page
